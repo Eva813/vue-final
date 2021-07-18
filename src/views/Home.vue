@@ -132,17 +132,21 @@
         </div>
       </div>
     </nav>
+    <div class="banner">
+      <Carousel></Carousel>
+    </div>
   </header>
 </template>
 
 <script>
 // @ is an alias to /src
-//import HelloWorld from '@/components/HelloWorld.vue'
+import HelloWorld from "@/components/HelloWorld.vue";
+import Carousel from "@/components/Carousel.vue";
 
-// export default {
-//   name: 'Home',
-//   components: {
-//     HelloWorld
-//   }
-// }
+export default {
+  // name: 'Carousel',
+  components: {
+    Carousel,
+  },
+};
 </script>

@@ -9,6 +9,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { faShoppingCart, faUser, faComments, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
 const app = createApp(App);
 library.add(faUserSecret, faShoppingCart, faUser, faComments, faSearch);
 

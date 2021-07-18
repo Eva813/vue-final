@@ -27,6 +27,7 @@
       display: block;
       &:placeholder-shown {
         opacity: 0;
+        transition: opacity 270ms ease-in-out;
       }
     }
     &:hover .input::after {
@@ -147,17 +148,31 @@
       <img src="@/assets/img/sale-pic.png" alt="刷卡優惠活動" />
     </a>
   </div>
+  <div class="container food-card"><ProductCard /></div>
 </template>
 
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
 import Carousel from "@/components/Carousel.vue";
+import ProductCard from "@/components/ProductCard.vue";
 
 export default {
   // name: 'Carousel',
   components: {
     Carousel,
+    ProductCard,
+  },
+  data() {
+    return {
+      food: [
+        {
+          title: "酵素旅行包(20入/盒)",
+          price: 1680,
+          src: require("@/assets/img/food/food1-1.png"),
+        },
+      ],
+    };
   },
 };
 </script>

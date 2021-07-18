@@ -38,6 +38,11 @@
     }
   }
 }
+.sale-pic {
+  img {
+    margin: 0 auto;
+  }
+}
 </style>
 
 <template>
@@ -132,10 +137,16 @@
         </div>
       </div>
     </nav>
-    <div class="banner">
+    <div class="banner mb-5">
       <Carousel></Carousel>
     </div>
   </header>
+
+  <div class="container sale-pic">
+    <a href="#" target="_blank">
+      <img src="@/assets/img/sale-pic.png" alt="刷卡優惠活動" />
+    </a>
+  </div>
 </template>
 
 <script>

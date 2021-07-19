@@ -148,7 +148,12 @@
       <img src="@/assets/img/sale-pic.png" alt="刷卡優惠活動" />
     </a>
   </div>
-  <div class="container food-card"><ProductCard /></div>
+  <div>{{ msg }}</div>
+
+  <div class="container food-card">
+    <!-- //:food="food" 綁定傳入的props -->
+    <ProductCard :in-food="food"> </ProductCard>
+  </div>
 </template>
 
 <script>
@@ -158,18 +163,34 @@ import Carousel from "@/components/Carousel.vue";
 import ProductCard from "@/components/ProductCard.vue";
 
 export default {
-  // name: 'Carousel',
+  name: "Home",
   components: {
     Carousel,
     ProductCard,
   },
   data() {
     return {
+      msg: "1345",
       food: [
         {
           title: "酵素旅行包(20入/盒)",
           price: 1680,
-          src: require("@/assets/img/food/food1-1.png"),
+          src: "@/assets/img/food/food1-1.png",
+        },
+        {
+          title: "旅行包(20入/盒)",
+          price: 1380,
+          src: require("@/assets/img/food/food2-1.png"),
+        },
+        {
+          title: "旅包(20入/盒)",
+          price: 1550,
+          src: require("@/assets/img/food/food2-1.png"),
+        },
+        {
+          title: "酵素(10入/盒)",
+          price: 1000,
+          src: "@/assets/img/food/food1-1.png",
         },
       ],
     };

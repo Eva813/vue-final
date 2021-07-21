@@ -148,12 +148,13 @@
       <img src="@/assets/img/sale-pic.png" alt="刷卡優惠活動" />
     </a>
   </div>
-  <div>{{ msg }}</div>
+  <div class="text-primary">{{ msg }}</div>
 
-  <div class="container food-card">
+  <section class="food-card">
     <!-- //:food="food" 綁定傳入的props -->
-    <ProductCard :in-food="food"> </ProductCard>
-  </div>
+    <ProductCard :ifood="food"> </ProductCard>
+    <Pagination></Pagination>
+  </section>
 </template>
 
 <script>
@@ -161,12 +162,14 @@
 import HelloWorld from "@/components/HelloWorld.vue";
 import Carousel from "@/components/Carousel.vue";
 import ProductCard from "@/components/ProductCard.vue";
+import Pagination from "@/components/Pagination.vue";
 
 export default {
   name: "Home",
   components: {
     Carousel,
     ProductCard,
+    Pagination,
   },
   data() {
     return {
@@ -174,23 +177,28 @@ export default {
       food: [
         {
           title: "酵素旅行包(20入/盒)",
-          price: 1680,
-          src: "@/assets/img/food/food1-1.png",
-        },
-        {
-          title: "旅行包(20入/盒)",
           price: 1380,
+          src: require("@/assets/img/food/food1-1.png"),
+        },
+        {
+          title: "圓圓母湯 (20瓶/箱)",
+          price: 1560,
           src: require("@/assets/img/food/food2-1.png"),
         },
         {
-          title: "旅包(20入/盒)",
+          title: "POPOLAの酵",
           price: 1550,
-          src: require("@/assets/img/food/food2-1.png"),
+          src: require("@/assets/img/food/food3-1.png"),
         },
         {
-          title: "酵素(10入/盒)",
-          price: 1000,
-          src: "@/assets/img/food/food1-1.png",
+          title: "吶吶的桃花朵朵紅茶包",
+          price: 168,
+          src: require("@/assets/img/food/food4-1.png"),
+        },
+        {
+          title: "酵素旅行包(5入/盒)",
+          price: 1688,
+          src: require("@/assets/img/food/food1-2.png"),
         },
       ],
     };

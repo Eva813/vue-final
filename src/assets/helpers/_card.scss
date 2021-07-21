@@ -1,7 +1,9 @@
 //替圖片增加淺黑色https://blog.csdn.net/fxjzzyo/article/details/79263324
+.card {
+  border: 0px;
+}
 
 .card {
-  border: 0;
   .card-top {
     position: relative;
     background-color: #000;

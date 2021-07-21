@@ -1,0 +1,35 @@
+.page__link {
+  border: 0;
+  display: block;
+  text-decoration: none;
+
+  color: #333;
+  padding: 0 10px;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out,
+    box-shadow 0.15s ease-in-out;
+  padding: 6px 12px;
+  transition: all 250ms ease-in-out;
+  &:hover {
+    color: darken(#faaf48, 10%);
+  }
+}
+.page-item:after {
+  display: block;
+  content: "";
+  border-bottom: solid 2px darken(#faaf48, 10%);
+  transform: scaleX(0);
+  transition: transform 250ms ease-in-out;
+}
+.page-item:hover:after {
+  transform: scaleX(1);
+}
+
+//   .page-link {
+//     position: relative;
+//     display: block;
+//     color: #0d6efd;
+//     text-decoration: none;
+//     background-color: #fff;
+//     border: 1px solid #dee2e6;
+
+// }

@@ -10,7 +10,6 @@
 @import "~bootstrap/scss/containers";
 @import "~bootstrap/scss/grid";
 
-
-@import "./helpers/base";
-@import "./helpers/card";
-
+@import "./helpers/base.scss";
+@import "./helpers/card.scss";
+@import "./helpers/pagination.scss";

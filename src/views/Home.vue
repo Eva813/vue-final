@@ -44,6 +44,32 @@
     margin: 0 auto;
   }
 }
+.section-video {
+  width: calc(100% - 1px);
+  height: 650px;
+  .player {
+    width: 100%;
+    height: 100%;
+  }
+}
+.title {
+  color: #666;
+}
+.section-title {
+  font-size: 22px;
+  position: relative;
+  margin-bottom: 28px;
+  &:after {
+    position: absolute;
+    display: block;
+    content: "";
+    height: 5px;
+    width: 25px;
+    top: 88%;
+
+    background: #faaf48;
+  }
+}
 </style>
 
 <template>
@@ -143,17 +169,41 @@
     </div>
   </header>
 
-  <div class="container sale-pic">
+  <div class="container sale-pic mb-5">
     <a href="#" target="_blank">
       <img src="@/assets/img/sale-pic.png" alt="刷卡優惠活動" />
     </a>
   </div>
-  <div class="text-primary">{{ msg }}</div>
+  <!-- <div class="text-primary">{{ msg }}</div> -->
 
-  <section class="food-card">
+  <section class="food-card mb-5">
+    <div class="container section-title d-flex justify-content-center">
+      <h1 class="title mb-4 fw-normal">美食生活</h1>
+    </div>
     <!-- //:food="food" 綁定傳入的props -->
     <ProductCard :ifood="food"> </ProductCard>
     <Pagination></Pagination>
+  </section>
+  <section class="container section-video d-flex justify-content-center mb-5">
+    <iframe
+      class="player"
+      src="https://www.youtube.com/embed/EuEguYzDlL0"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+    ></iframe>
+  </section>
+  <section class="food-card mb-5">
+    <div class="container section-title d-flex justify-content-center">
+      <h1 class="title mb-4 fw-normal">美裝保養</h1>
+    </div>
+    <!-- //:food="food" 綁定傳入的props -->
+    <ProductCard :ifood="food"> </ProductCard>
+    <Pagination></Pagination>
+  </section>
+  <section class="fan-page">
+    <Flipcard></Flipcard>
   </section>
 </template>
 
@@ -163,6 +213,7 @@ import HelloWorld from "@/components/HelloWorld.vue";
 import Carousel from "@/components/Carousel.vue";
 import ProductCard from "@/components/ProductCard.vue";
 import Pagination from "@/components/Pagination.vue";
+import Flipcard from "@/components/Flipcard";
 
 export default {
   name: "Home",
@@ -170,6 +221,7 @@ export default {
     Carousel,
     ProductCard,
     Pagination,
+    Flipcard,
   },
   data() {
     return {
@@ -195,10 +247,17 @@ export default {
           price: 168,
           src: require("@/assets/img/food/food4-1.png"),
         },
+        // {
+        //   title: "酵素旅行包(5入/盒)",
+        //   price: 1688,
+        //   src: require("@/assets/img/food/food1-2.png"),
+        // },
+      ],
+      ProductPage: [
         {
-          title: "酵素旅行包(5入/盒)",
-          price: 1688,
-          src: require("@/assets/img/food/food1-2.png"),
+          title: "FB 粉絲團",
+          subTitle: "Join us",
+          img: require("@/assets/img/food/food4-1.png"),
         },
       ],
     };

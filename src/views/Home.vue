@@ -202,8 +202,8 @@
     <ProductCard :ifood="food"> </ProductCard>
     <Pagination></Pagination>
   </section>
-  <section class="fan-page">
-    <Flipcard></Flipcard>
+  <section class="product-link mb-5">
+    <Flipcard :productlink="ProductPage"></Flipcard>
   </section>
 </template>
 
@@ -257,7 +257,26 @@ export default {
         {
           title: "FB 粉絲團",
           subTitle: "Join us",
-          img: require("@/assets/img/food/food4-1.png"),
+          img: require("@/assets/img/img-link/fbpic.png"),
+          frontImg: require("@/assets/img/img-link/u-social.jpg"),
+        },
+        {
+          title: "寵物商品",
+          subTitle: "小寶貝的最愛",
+          img: require("@/assets/img/img-link/petspic.png"),
+          frontImg: require("@/assets/img/img-link/u-pets.jpg"),
+        },
+        {
+          title: "美食佳餚",
+          subTitle: "快速加熱",
+          img: require("@/assets/img/img-link/foodpic.png"),
+          frontImg: require("@/assets/img/img-link/u-food.jpg"),
+        },
+        {
+          title: "美妝保養",
+          subTitle: "好好愛自己",
+          img: require("@/assets/img/img-link/beautypic.png"),
+          frontImg: require("@/assets/img/img-link/u-beauty.jpg"),
         },
       ],
     };

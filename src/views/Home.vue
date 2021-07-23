@@ -205,6 +205,10 @@
   <section class="product-link mb-5">
     <Flipcard :productlink="ProductPage"></Flipcard>
   </section>
+
+  <footer>
+    <Footer></Footer>
+  </footer>
 </template>
 
 <script>
@@ -214,6 +218,7 @@ import Carousel from "@/components/Carousel.vue";
 import ProductCard from "@/components/ProductCard.vue";
 import Pagination from "@/components/Pagination.vue";
 import Flipcard from "@/components/Flipcard";
+import Footer from "@/components/Footer";
 
 export default {
   name: "Home",
@@ -222,6 +227,7 @@ export default {
     ProductCard,
     Pagination,
     Flipcard,
+    Footer,
   },
   data() {
     return {
@@ -256,25 +262,25 @@ export default {
       ProductPage: [
         {
           title: "FB 粉絲團",
-          subTitle: "Join us",
+          subTitle: "最新消息都在這裡",
           img: require("@/assets/img/img-link/fbpic.png"),
           frontImg: require("@/assets/img/img-link/u-social.jpg"),
         },
         {
           title: "寵物商品",
-          subTitle: "小寶貝的最愛",
+          subTitle: "寵愛毛小孩無極限",
           img: require("@/assets/img/img-link/petspic.png"),
           frontImg: require("@/assets/img/img-link/u-pets.jpg"),
         },
         {
           title: "美食佳餚",
-          subTitle: "快速加熱",
+          subTitle: "甜鹹都有喔～",
           img: require("@/assets/img/img-link/foodpic.png"),
-          frontImg: require("@/assets/img/img-link/u-food.jpg"),
+          frontImg: require("@/assets/img/img-link/u-food2.jpg"),
         },
         {
           title: "美妝保養",
-          subTitle: "好好愛自己",
+          subTitle: "再忙也別忘了好好愛自己",
           img: require("@/assets/img/img-link/beautypic.png"),
           frontImg: require("@/assets/img/img-link/u-beauty.jpg"),
         },

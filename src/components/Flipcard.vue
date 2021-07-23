@@ -1,4 +1,5 @@
 <style lang="scss" scoped>
+@import "~@/assets/all.scss";
 //https://codepen.io/nicolaspavlotsky/pen/wqGgLO
 .flip-card {
   -webkit-transform-style: preserve-3d;
@@ -6,6 +7,7 @@
   -webkit-perspective: 1000px;
   perspective: 1000px;
 }
+
 .flip-card-front,
 .flip-card-back {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
@@ -29,11 +31,21 @@
   background: hsla(0, 0%, 100%, 0.8);
   color: #fff;
   min-height: 190px;
-
+  font-size: 10px;
   img {
     border-radius: 10px;
     height: 190px;
     width: 100%;
+  }
+  .inner {
+    h1 {
+      font-size: 28px;
+    }
+    p {
+      font-size: 1rem;
+      //margin-bottom: 2rem;
+      position: relative;
+    }
   }
 }
 
@@ -102,12 +114,6 @@
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
 }
-
-.flip-card-front .inner p {
-  font-size: 2rem;
-  //margin-bottom: 2rem;
-  position: relative;
-}
 </style>
 
 <template>
@@ -120,7 +126,7 @@
               <img :src="item.frontImg" alt="frontImg" />
               <div class="inner">
                 <h1>{{ item.title }}</h1>
-                <p>Join us</p>
+                <p>{{ item.subTitle }}</p>
               </div>
             </div>
             <div class="flip-card-back">

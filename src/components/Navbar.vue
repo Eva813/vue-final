@@ -40,37 +40,6 @@
     }
   }
 }
-.sale-pic {
-  img {
-    margin: 0 auto;
-  }
-}
-.section-video {
-  width: calc(100% - 1px);
-  height: 650px;
-  .player {
-    width: 100%;
-    height: 100%;
-  }
-}
-.title {
-  color: #666;
-}
-.section-title {
-  font-size: 22px;
-  position: relative;
-  margin-bottom: 28px;
-  &:after {
-    position: absolute;
-    display: block;
-    content: "";
-    height: 5px;
-    width: 25px;
-    top: 88%;
-
-    background: #faaf48;
-  }
-}
 </style>
 
 <template>

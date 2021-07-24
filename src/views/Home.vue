@@ -1,12 +1,46 @@
 <style lang="scss">
+.sale-pic {
+  img {
+    margin: 0 auto;
+  }
+}
+.section-video {
+  width: calc(100% - 1px);
+  height: 650px;
+  .player {
+    width: 100%;
+    height: 100%;
+  }
+}
+.title {
+  color: #666;
+}
+.section-title {
+  font-size: 22px;
+  position: relative;
+  margin-bottom: 28px;
+  &:after {
+    position: absolute;
+    display: block;
+    content: "";
+    height: 5px;
+    width: 25px;
+    top: 88%;
+
+    background: #faaf48;
+  }
+}
 </style>
 
 <template>
   <header>
     <Navbar></Navbar>
 
+    <!-- <Carousel></Carousel> -->
+
     <div class="banner mb-5">
-      <Carousel></Carousel>
+      <!-- <Swiper></Swiper> -->
+      <Agile></Agile>
     </div>
   </header>
 
@@ -46,7 +80,8 @@
   <section class="product-link mb-5">
     <Flipcard :productlink="ProductPage"></Flipcard>
   </section>
-  <div class="msg text-primary">{{ msg }}</div>
+
+  <div class="msg">{{ msg }}</div>
 
   <footer>
     <Footer></Footer>
@@ -57,21 +92,23 @@
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
 import Navbar from "@/components/Navbar.vue";
-import Carousel from "@/components/Carousel.vue";
+// import Carousel from "@/components/Carousel.vue";
 import ProductCard from "@/components/ProductCard.vue";
 import Pagination from "@/components/Pagination.vue";
 import Flipcard from "@/components/Flipcard";
 import Footer from "@/components/Footer";
+import Agile from "@/components/Agile";
 
 export default {
   name: "Home",
   components: {
     Navbar,
-    Carousel,
+    //Carousel,
     ProductCard,
     Pagination,
     Flipcard,
     Footer,
+    Agile,
   },
   data() {
     return {

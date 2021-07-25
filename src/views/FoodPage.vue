@@ -1,41 +1,126 @@
+<style lang="scss" scoped>
+@import "~@/assets/all.scss";
+.aside-menu {
+  width: 300px;
+  height: 100%;
+  //background: #1b1b1b;
+  ul {
+    height: 100%;
+    width: 100%;
+  }
+  li {
+    line-height: 60px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  a {
+    position: relative;
+    width: 100%;
+    color: #333;
+    font-size: 16px;
+    padding-left: 20px;
+    font-weight: 500;
+    border-left: 3px solid transparent;
+    transition: transform 0.4s;
+
+    &:hover {
+      color: $primary;
+      background: rgba(245, 243, 243, 0.8);
+      border-left-color: $primary;
+    }
+    span {
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      font-size: 20px;
+    }
+    &:hover .icon {
+      transform: rotate(-180deg);
+    }
+  }
+}
+.inner-catagory {
+  position: static;
+  display: none;
+  li {
+    line-height: 40px;
+    border-bottom: none;
+  }
+  a {
+    font-size: 15px;
+    color: #888;
+    padding-left: 40px;
+  }
+}
+</style>
+
+
 <template>
   <header>
     <Navbar></Navbar>
 
     <Breadcrumb></Breadcrumb>
   </header>
-  <div class="aside-menu">
-    <ul class="catagory">
-      <li>
-        <a href="#">🐷 開鍋祭，開鍋囉~</a>
-      </li>
-      <li>
-        <a href="#">美食生活</a>
-        <ul>
-          <li><a href="#">冷凍食品</a></li>
-          <li><a href="#">POPOLA BAKE</a></li>
-          <li><a href="#">廚房用品</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">美妝保養</a>
-        <ul>
-          <li><a href="#">保養系列</a></li>
-          <li><a href="#">美妝系列</a></li>
-          <li><a href="#">日程生活</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">毛孩愛用</a>
-        <ul>
-          <li><a href="#">狗狗食品</a></li>
-          <li><a href="#">狗狗用品</a></li>
-          <li><a href="#">老犬照護</a></li>
-          <li><a href="#">貓貓食品</a></li>
-          <li><a href="#">貓貓用品</a></li>
-        </ul>
-      </li>
-    </ul>
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <div class="aside-menu">
+          <ul class="catagory">
+            <li>
+              <a href="#">🐷 開鍋祭，開鍋囉~ </a>
+            </li>
+            <li>
+              <a href="#"
+                >美食生活
+                <span>
+                  <font-awesome-icon
+                    class="icon"
+                    :icon="['fas', 'angle-down']"
+                  /> </span
+              ></a>
+              <ul class="inner-catagory">
+                <li><a href="#">冷凍食品</a></li>
+                <li><a href="#">POPOLA BAKE</a></li>
+                <li><a href="#">廚房用品</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#"
+                >美妝保養
+                <span>
+                  <font-awesome-icon
+                    class="icon"
+                    :icon="['fas', 'angle-down']"
+                  /> </span
+              ></a>
+              <ul class="inner-catagory">
+                <li><a href="#">保養系列</a></li>
+                <li><a href="#">美妝系列</a></li>
+                <li><a href="#">日程生活</a></li>
+              </ul>
+            </li>
+            <li>
+              <a href="#"
+                >毛孩愛用
+                <span>
+                  <font-awesome-icon
+                    class="icon"
+                    :icon="['fas', 'angle-down']"
+                  /> </span
+              ></a>
+              <ul class="inner-catagory">
+                <li><a href="#">狗狗食品</a></li>
+                <li><a href="#">狗狗用品</a></li>
+                <li><a href="#">老犬照護</a></li>
+                <li><a href="#">貓貓食品</a></li>
+                <li><a href="#">貓貓用品</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -52,5 +137,3 @@ export default {
 };
 </script>
 
-<style>
-</style>

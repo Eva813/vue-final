@@ -6,7 +6,7 @@
       :key="index + slide.name"
       :class="`slide--${index}`"
     >
-      <img :src="slide.img" />
+      <img class="main-img" :src="slide.img" />
     </div>
   </agile>
   <agile
@@ -22,7 +22,7 @@
       :class="`slide--${index}`"
       @click="$refs.thumbnails.goTo(index)"
     >
-      <img :src="slide.img" />
+      <img class="thumbnail-img" :src="slide.img" />
     </div>
     <!-- <template slot="prevButton"
       ><font-awesome-icon :icon="['fas', 'chevron-left']"
@@ -34,7 +34,11 @@
 </template>
 
 <script>
+import { VueAgile } from "vue-agile";
 export default {
+  components: {
+    agile: VueAgile,
+  },
   data() {
     return {
       asNavFor1: [],
@@ -101,8 +105,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "~@/assets/all.scss";
 .main {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .thumbnails {
@@ -159,7 +164,7 @@ export default {
   box-sizing: border-box;
   color: #fff;
   display: flex;
-  height: 450px;
+  height: 540px;
   justify-content: center;
 }
 .slide--thumbniail {

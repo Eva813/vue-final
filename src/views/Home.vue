@@ -81,8 +81,6 @@
     <Flipcard :productlink="ProductPage"></Flipcard>
   </section>
 
-  <div class="msg">{{ msg }}</div>
-
   <footer>
     <Footer></Footer>
   </footer>
@@ -95,9 +93,9 @@ import Navbar from "@/components/Navbar.vue";
 // import Carousel from "@/components/Carousel.vue";
 import ProductCard from "@/components/ProductCard.vue";
 import Pagination from "@/components/Pagination.vue";
-import Flipcard from "@/components/Flipcard";
-import Footer from "@/components/Footer";
-import Agile from "@/components/Agile";
+import Flipcard from "@/components/Flipcard.vue";
+import Footer from "@/components/Footer.vue";
+import Agile from "@/components/Agile.vue";
 
 export default {
   name: "Home",

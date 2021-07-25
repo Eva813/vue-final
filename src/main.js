@@ -8,13 +8,13 @@ import "bootstrap"
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
-import { faShoppingCart, faUser, faComments, faSearch, faChevronRight, faChevronLeft } from '@fortawesome/free-solid-svg-icons'
+import { faShoppingCart, faUser, faComments, faSearch, faChevronRight, faChevronLeft, faAngleDown, faAngleUp, faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import VueAgile from 'vue-agile'
 
 const app = createApp(App);
-library.add(faUserSecret, faShoppingCart, faUser, faComments, faSearch, faChevronRight, faChevronLeft);
+library.add(faUserSecret, faShoppingCart, faUser, faComments, faSearch, faChevronRight, faChevronLeft, faAngleDown, faAngleUp, faArrowDown);
 
 app.component('font-awesome-icon', FontAwesomeIcon);
 app.use(VueAgile)

@@ -2,6 +2,7 @@
 @import "~@/assets/all.scss";
 .aside-menu {
   padding: 15px 0;
+  margin-right: 16px;
   width: 300px;
   height: 100%;
   //background: #1b1b1b;
@@ -66,6 +67,15 @@
     font-size: 15px;
     color: #888;
     padding-left: 40px;
+  }
+}
+
+.product-list-section {
+  padding: 15px 0;
+  h2 {
+    font-size: 20px;
+    padding: 15px 0 25px;
+    color: #333;
   }
 }
 </style>
@@ -147,20 +157,23 @@
         </div>
       </div>
     </div>
-    <div class="row row-cols-md-4">
-      <div class="col gap-4" v-for="item in food" :key="item.title">
-        <div class="card product-card">
-          <div class="card-top">
-            <a class="card-img-link" href="#">
-              <img :src="item.src" class="card-img-top" alt="product-img" />
-            </a>
-            <a href="#" class="btn card-btn">加入購物車</a>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title text-center fw-normal">{{ item.title }}</h5>
-            <p class="card-text text-center fw-bold">
-              <span>NT$</span> {{ item.price }}
-            </p>
+    <div class="product-list-section">
+      <h2>美食生活</h2>
+      <div class="row row-cols-md-3">
+        <div class="col gap-4" v-for="item in food" :key="item.title">
+          <div class="card product-card">
+            <div class="card-top">
+              <a class="card-img-link" href="#">
+                <img :src="item.src" class="card-img-top" alt="product-img" />
+              </a>
+              <a href="#" class="btn card-btn">加入購物車</a>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title text-center fw-normal">{{ item.title }}</h5>
+              <p class="card-text text-center fw-bold">
+                <span>NT$</span> {{ item.price }}
+              </p>
+            </div>
           </div>
         </div>
       </div>

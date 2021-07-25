@@ -11,22 +11,12 @@
   li {
     line-height: 60px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  }
-  a {
-    position: relative;
-    width: 100%;
-    color: #333;
-    font-size: 16px;
-    padding-left: 20px;
-    font-weight: 500;
-    border-left: 3px solid transparent;
-    transition: transform 0.4s;
 
-    &:hover {
-      color: $primary;
-      background: rgba(245, 243, 243, 0.8);
-      border-left-color: $primary;
-    }
+    cursor: pointer;
+  }
+  .first {
+    position: relative;
+    transition: transform 0.4s;
     span {
       display: inline-block;
       position: absolute;
@@ -37,12 +27,27 @@
     }
     &:hover .icon {
       transform: rotate(-180deg);
+      color: $primary;
+    }
+  }
+  a {
+    width: 90%;
+    color: #333;
+    font-size: 16px;
+    padding-left: 20px;
+    font-weight: 500;
+    border-left: 3px solid transparent;
+    transition: transform 0.4s;
+    &:hover {
+      color: $primary;
+
+      border-left-color: $primary;
     }
   }
 }
 .inner-catagory {
   position: static;
-  display: none;
+  //display: none;
   li {
     line-height: 40px;
     border-bottom: none;
@@ -71,29 +76,31 @@
               <a href="#">🐷 開鍋祭，開鍋囉~ </a>
             </li>
             <li>
-              <a href="#"
-                >美食生活
-                <span>
+              <div class="first d-flex">
+                <a href="#">美食生活 </a>
+                <span @click="handDomShow">
                   <font-awesome-icon
                     class="icon"
                     :icon="['fas', 'angle-down']"
-                  /> </span
-              ></a>
-              <ul class="inner-catagory">
+                  />
+                </span>
+              </div>
+              <ul v-show="isShow" class="inner-catagory">
                 <li><a href="#">冷凍食品</a></li>
                 <li><a href="#">POPOLA BAKE</a></li>
                 <li><a href="#">廚房用品</a></li>
               </ul>
             </li>
             <li>
-              <a href="#"
-                >美妝保養
-                <span>
-                  <font-awesome-icon
+              <div class="first d-flex">
+                <a href="#">美妝保養 </a>
+                <span
+                  ><font-awesome-icon
                     class="icon"
                     :icon="['fas', 'angle-down']"
-                  /> </span
-              ></a>
+                  />
+                </span>
+              </div>
               <ul class="inner-catagory">
                 <li><a href="#">保養系列</a></li>
                 <li><a href="#">美妝系列</a></li>
@@ -101,14 +108,15 @@
               </ul>
             </li>
             <li>
-              <a href="#"
-                >毛孩愛用
+              <div class="first d-flex">
+                <a href="#">毛孩愛用 </a>
                 <span>
                   <font-awesome-icon
                     class="icon"
                     :icon="['fas', 'angle-down']"
-                  /> </span
-              ></a>
+                  />
+                </span>
+              </div>
               <ul class="inner-catagory">
                 <li><a href="#">狗狗食品</a></li>
                 <li><a href="#">狗狗用品</a></li>
@@ -134,6 +142,14 @@ export default {
     Navbar,
     Breadcrumb,
   },
+  // data() {
+  //   isShow : false;
+  // },
+  // methods: {
+  //   handDomShow() {
+  //     isShow.value = !isShow.value;
+  //   },
+  // },
 };
 </script>
 

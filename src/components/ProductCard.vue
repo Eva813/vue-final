@@ -11,9 +11,9 @@
         <div class="card product-card">
           <div class="card-top">
             <a class="card-img-link" href="#">
-              <img :src="item.src" class="card-img-top" alt="..." />
+              <img :src="item.src" class="card-img-top" alt="product-img" />
             </a>
-            <a href="#" class="btn card-btn">Go somewhere</a>
+            <a href="#" class="btn card-btn">加入購物車</a>
           </div>
           <div class="card-body">
             <h5 class="card-title text-center fw-normal">{{ item.title }}</h5>

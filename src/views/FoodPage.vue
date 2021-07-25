@@ -26,8 +26,15 @@
       font-size: 20px;
     }
     &:hover .icon {
-      transform: rotate(-180deg);
+      // transform: rotate(-180deg);
       color: $primary;
+    }
+    &:hover a {
+      color: $primary;
+      border-left-color: $primary;
+    }
+    .icon.rotate {
+      transform: rotate(-180deg);
     }
   }
   a {
@@ -38,11 +45,6 @@
     font-weight: 500;
     border-left: 3px solid transparent;
     transition: transform 0.4s;
-    &:hover {
-      color: $primary;
-
-      border-left-color: $primary;
-    }
   }
 }
 .inner-catagory {
@@ -78,14 +80,16 @@
             <li>
               <div class="first d-flex">
                 <a href="#">美食生活 </a>
-                <span @click="handDomShow">
+                <span @click="handDomShow('isShowFood')">
                   <font-awesome-icon
                     class="icon"
                     :icon="['fas', 'angle-down']"
+                    :class="{ rotate: isTransform }"
+                    @click="handDomShow('isTransform')"
                   />
                 </span>
               </div>
-              <ul v-show="isShow" class="inner-catagory">
+              <ul v-show="isShowFood" class="inner-catagory">
                 <li><a href="#">冷凍食品</a></li>
                 <li><a href="#">POPOLA BAKE</a></li>
                 <li><a href="#">廚房用品</a></li>
@@ -94,14 +98,16 @@
             <li>
               <div class="first d-flex">
                 <a href="#">美妝保養 </a>
-                <span
+                <span @click="handDomShow('isShowBeauty')"
                   ><font-awesome-icon
                     class="icon"
                     :icon="['fas', 'angle-down']"
+                    :class="{ rotate: isTransform }"
+                    @click="handDomShow('isTransform')"
                   />
                 </span>
               </div>
-              <ul class="inner-catagory">
+              <ul v-show="isShowBeauty" class="inner-catagory">
                 <li><a href="#">保養系列</a></li>
                 <li><a href="#">美妝系列</a></li>
                 <li><a href="#">日程生活</a></li>
@@ -110,14 +116,16 @@
             <li>
               <div class="first d-flex">
                 <a href="#">毛孩愛用 </a>
-                <span>
+                <span @click="handDomShow('isShowPet')">
                   <font-awesome-icon
                     class="icon"
                     :icon="['fas', 'angle-down']"
+                    :class="{ rotate: isTransform }"
+                    @click="handDomShow('isTransform')"
                   />
                 </span>
               </div>
-              <ul class="inner-catagory">
+              <ul v-show="isShowPet" class="inner-catagory">
                 <li><a href="#">狗狗食品</a></li>
                 <li><a href="#">狗狗用品</a></li>
                 <li><a href="#">老犬照護</a></li>
@@ -142,14 +150,20 @@ export default {
     Navbar,
     Breadcrumb,
   },
-  // data() {
-  //   isShow : false;
-  // },
-  // methods: {
-  //   handDomShow() {
-  //     isShow.value = !isShow.value;
-  //   },
-  // },
+  data() {
+    return {
+      isShow: false,
+      isTransform: false,
+      isShowBeauty: false,
+      isShowFood: false,
+      isShowPet: false,
+    };
+  },
+  methods: {
+    handDomShow(key) {
+      this[key] = !this[key];
+    },
+  },
 };
 </script>
 

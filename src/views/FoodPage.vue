@@ -78,6 +78,81 @@
     color: #333;
   }
 }
+
+.product-list-select {
+  position: absolute;
+  float: right;
+  width: 350px;
+  right: 218px;
+  z-index: 999;
+  width: 200px;
+
+  .first {
+    position: relative;
+    transition: transform 0.4s;
+    border-bottom: 1px solid #333;
+
+    .title-span {
+      display: block;
+      width: 100px;
+    }
+    .icon-sapn {
+      display: inline-block;
+      position: absolute;
+
+      top: 50%;
+      right: 7px;
+      transform: translateY(-50%);
+      font-size: 10px;
+      cursor: pointer;
+    }
+
+    .icon.rotate {
+      transform: rotate(-180deg);
+    }
+  }
+  a {
+    width: 90%;
+    color: #333;
+    font-size: 16px;
+    padding-left: 20px;
+
+    border-left: 3px solid transparent;
+    transition: transform 0.4s;
+    &:hover {
+      background-color: $primary;
+    }
+  }
+  .inner-catagory {
+    background: #fff;
+    border-left: 1px solid #888;
+    border-right: 1px solid #888;
+    border-bottom: 1px solid #888;
+
+    position: static;
+    //display: none;
+    li {
+      line-height: 35px;
+      border-bottom: none;
+    }
+    a {
+      width: 100%;
+      font-size: 15px;
+      color: #888;
+      padding-left: 40px;
+    }
+  }
+}
+
+.sort-section-list,
+.limit-section-list {
+  margin-left: 10px;
+  width: 170px;
+}
+.product-section {
+  z-index: -1;
+}
+//////
 </style>
 
 
@@ -158,8 +233,62 @@
       </div>
     </div>
     <div class="product-list-section">
-      <h2>美食生活</h2>
-      <div class="row row-cols-md-3">
+      <div class="title-part d-flex justify-content-between">
+        <h2>美食生活</h2>
+        <div class="product-list-select d-flex">
+          <div class="custom-select" style="width: 200px">
+            <select>
+              <option value="ee">ee</option>
+              <option value="aa">eaa</option>
+            </select>
+          </div>
+          <div class="sort-section">
+            <ul class="sort-section-list">
+              <li>
+                <div class="first d-flex">
+                  <span class="title-span">商品排序</span>
+                  <span class="icon-sapn" @click="handDomShow('isShowOrder')">
+                    <font-awesome-icon
+                      class="icon"
+                      :icon="['fas', 'chevron-down']"
+                      :class="{ rotate: isTransformOrder }"
+                      @click="handDomShow('isTransformOrder')"
+                    />
+                  </span>
+                </div>
+                <ul v-show="isShowOrder" class="inner-catagory">
+                  <li v-for="car in cars">
+                    <a href="#">{{ car }}</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div class="limit-section">
+            <ul class="limit-section-list">
+              <li>
+                <div class="first d-flex">
+                  <span class="title-span">每頁顯示</span>
+                  <span class="icon-sapn" @click="handDomShow('isShowLimit')">
+                    <font-awesome-icon
+                      class="icon"
+                      :icon="['fas', 'chevron-down']"
+                      :class="{ rotate: isTransformLimit }"
+                      @click="handDomShow('isTransformLimit')"
+                    />
+                  </span>
+                </div>
+                <ul v-show="isShowLimit" class="inner-catagory">
+                  <li v-for="car in cars">
+                    <a href="#">{{ car }}</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row product-section row-cols-md-3">
         <div class="col gap-4" v-for="item in food" :key="item.title">
           <div class="card product-card">
             <div class="card-top">
@@ -198,10 +327,14 @@ export default {
       isTransformFood: false,
       isTransformBeauty: false,
       isTransformPet: false,
+      isTransformOrder: false,
+      isTransformLimit: false,
 
       isShowBeauty: false,
       isShowFood: false,
       isShowPet: false,
+      isShowOrder: false,
+      isShowLimit: false,
       food: [
         {
           title: "酵素旅行包(20入/盒)",
@@ -229,6 +362,9 @@ export default {
         //   src: require("@/assets/img/food/food1-2.png"),
         // },
       ],
+
+      cars: ["Audi", "BMW", "Mercedes"],
+      selected: "",
     };
   },
   methods: {

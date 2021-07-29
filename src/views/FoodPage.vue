@@ -95,6 +95,7 @@
     .title-span {
       display: block;
       width: 100px;
+      padding-left: 10px;
     }
     .icon-sapn {
       display: inline-block;
@@ -115,12 +116,12 @@
     width: 90%;
     color: #333;
     font-size: 16px;
-    padding-left: 20px;
+    padding-left: 10px;
 
     border-left: 3px solid transparent;
     transition: transform 0.4s;
     &:hover {
-      background-color: $primary;
+      background-color: lighten($primary, 20%);
     }
   }
   .inner-catagory {
@@ -138,8 +139,7 @@
     a {
       width: 100%;
       font-size: 15px;
-      color: #888;
-      padding-left: 40px;
+      color: rgb(85, 82, 82);
     }
   }
 }
@@ -236,12 +236,6 @@
       <div class="title-part d-flex justify-content-between">
         <h2>美食生活</h2>
         <div class="product-list-select d-flex">
-          <div class="custom-select" style="width: 200px">
-            <select>
-              <option value="ee">ee</option>
-              <option value="aa">eaa</option>
-            </select>
-          </div>
           <div class="sort-section">
             <ul class="sort-section-list">
               <li>
@@ -257,8 +251,8 @@
                   </span>
                 </div>
                 <ul v-show="isShowOrder" class="inner-catagory">
-                  <li v-for="car in cars">
-                    <a href="#">{{ car }}</a>
+                  <li v-for="item in sortProduct">
+                    <a href="#">{{ item }}</a>
                   </li>
                 </ul>
               </li>
@@ -279,8 +273,8 @@
                   </span>
                 </div>
                 <ul v-show="isShowLimit" class="inner-catagory">
-                  <li v-for="car in cars">
-                    <a href="#">{{ car }}</a>
+                  <li v-for="item in limitProduct">
+                    <a href="#">{{ item }}</a>
                   </li>
                 </ul>
               </li>
@@ -308,17 +302,25 @@
       </div>
     </div>
   </div>
+  <Pagination></Pagination>
+  <footer>
+    <Footer></Footer>
+  </footer>
 </template>
 
 
 <script>
 import Navbar from "@/components/Navbar.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
+import Pagination from "@/components/Pagination.vue";
+import Footer from "@/components/Footer.vue";
 export default {
   name: "FoodPage",
   components: {
     Navbar,
     Breadcrumb,
+    Pagination,
+    Footer,
   },
   props: ["ifood"],
   data() {
@@ -363,7 +365,13 @@ export default {
         // },
       ],
 
-      cars: ["Audi", "BMW", "Mercedes"],
+      sortProduct: [
+        "上架時間：由新到舊",
+        "上架時間：由舊到新",
+        "價格：由高至低",
+        "價格：由低至高",
+      ],
+      limitProduct: ["每頁顯示24個", "每頁顯示48個", "每頁顯示72個"],
       selected: "",
     };
   },

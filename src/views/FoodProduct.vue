@@ -28,12 +28,14 @@
 ///右側產品
 .product-info {
   color: #333333;
+  padding: 0 15px 20px 20px;
+  width: 435px;
   .product-title {
     font-size: 28px;
     padding-bottom: 20px;
   }
   .promotion-text {
-    padding: 10px 0;
+    padding: 20px 0;
   }
   .promotion-text-tag {
     border-left-width: 3px;
@@ -45,6 +47,64 @@
     text-align: left;
     line-height: 25px;
     max-width: 400px;
+  }
+  .price {
+    font-size: 20px;
+  }
+  .action-title {
+    font-size: 13px;
+    text-transform: capitalize;
+    color: #aaa;
+    margin-bottom: 0;
+  }
+  .counter-form {
+    display: table-cell;
+    input {
+      border: 1px solid #ccc;
+      line-height: 24px;
+      width: 100%;
+      border-left: none;
+      border-right: none;
+    }
+    input[type="text"] {
+      padding: 0px;
+    }
+    button {
+      border: 1px solid #ccc;
+    }
+
+    .input-group-btn {
+      width: 34px;
+    }
+    .btn {
+      background-color: transparent;
+      border: 1px solid #ccc; /* Remove borders */
+      color: #000; /* White text */
+      padding: 6px 12px; /* Some padding */
+      line-height: 24px;
+      font-size: 14px;
+      cursor: pointer;
+      &:hover .btn-icon {
+        color: darken($primary, 20%);
+      }
+    }
+  }
+}
+
+.input-group-btn:first-child > .btn,
+.input-group-btn:first-child > .btn-group {
+  border-radius: 3px 0 0 3px;
+  margin-right: -1px;
+  border-right: none;
+}
+.input-group-btn:last-child > .btn,
+.input-group-btn:last-child > .btn-group {
+  border-radius: 0px 3px 3px 0px;
+  margin-left: -2px;
+}
+.btn-active {
+  .btn-icon {
+    color: darken($primary, 20%);
   }
 }
 </style>
@@ -58,7 +118,7 @@
   <div class="container">
     <div class="row justify-content-center pt-3">
       <div class="col-md-6">
-        <div class="product d-flex justify-content-center">
+        <div class="product d-flex justify-content-end">
           <div class="thumbnail-section">
             <div
               v-for="(product, index) in productImg"
@@ -87,12 +147,22 @@
             </p>
           </div>
           <div class="price-box">
-            <p class="price">NT$158</p>
+            <p class="price fw-bold">NT$158</p>
           </div>
           <div class="rating-box">stars</div>
-          <span>數量</span>
-          <div class="counter-form">
+          <span class="action-title">數量</span>
+          <div class="counter-form d-flex">
+            <span class="input-group-btn">
+              <button type="button" class="btn">
+                <font-awesome-icon class="btn-icon" :icon="['fas', 'minus']" />
+              </button>
+            </span>
             <input type="text" />
+            <span class="input-group-btn">
+              <button type="button" class="btn">
+                <font-awesome-icon class="btn-icon" :icon="['fas', 'plus']" />
+              </button>
+            </span>
           </div>
 
           <div class="button">

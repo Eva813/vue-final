@@ -1,7 +1,7 @@
 
 <style lang="scss" scoped>
 @import "~@/assets/all.scss";
-
+//左側圖片
 .thumbnail-section {
   img {
     height: 92px;
@@ -24,6 +24,29 @@
     height: 415px;
   }
 }
+
+///右側產品
+.product-info {
+  color: #333333;
+  .product-title {
+    font-size: 28px;
+    padding-bottom: 20px;
+  }
+  .promotion-text {
+    padding: 10px 0;
+  }
+  .promotion-text-tag {
+    border-left-width: 3px;
+    border-left-style: solid;
+    border-left-color: $primary;
+    padding: 0 8px;
+    margin: 0;
+    font-size: 14px;
+    text-align: left;
+    line-height: 25px;
+    max-width: 400px;
+  }
+}
 </style>
 
 <template>
@@ -33,7 +56,7 @@
     <Breadcrumb></Breadcrumb>
   </header>
   <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center pt-3">
       <div class="col-md-6">
         <div class="product d-flex justify-content-center">
           <div class="thumbnail-section">
@@ -55,8 +78,28 @@
           </div>
         </div>
       </div>
-      <div class="col-5">
-        <h1>銷魂麵食</h1>
+      <div class="col-md-6">
+        <div class="product-info">
+          <h1 class="product-title">七分卡-番茄紅燒牛肉湯麵</h1>
+          <div class="promotion-text">
+            <p class="promotion-text-tag">
+              [會員限定] 全店，POPOLA會員 無限次數 全館冷凍滿3600元 免運
+            </p>
+          </div>
+          <div class="price-box">
+            <p class="price">NT$158</p>
+          </div>
+          <div class="rating-box">stars</div>
+          <span>數量</span>
+          <div class="counter-form">
+            <input type="text" />
+          </div>
+
+          <div class="button">
+            <button type="submit"></button>
+            <div class="wishListBtn"></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

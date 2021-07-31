@@ -419,6 +419,26 @@
     line-height: 20px;
   }
 }
+///相關產品 卡片區
+.relevant-products {
+  .section-title {
+    position: relative;
+    margin-bottom: 28px;
+    &:after {
+      position: absolute;
+      display: block;
+      content: "";
+      height: 5px;
+      width: 25px;
+      top: 88%;
+      background: $primary;
+    }
+  }
+  .title {
+    color: #333;
+    font-size: 22px;
+  }
+}
 </style>
 
 <template>
@@ -470,13 +490,13 @@
           <span class="action-title">數量</span>
           <div class="counter-form d-flex">
             <span class="input-group-btn">
-              <button type="button" class="btn">
+              <button type="button" class="btn" @click="minusBtn()">
                 <font-awesome-icon class="btn-icon" :icon="['fas', 'minus']" />
               </button>
             </span>
-            <input type="text" />
+            <input type="number" v-model.number="quantity" />
             <span class="input-group-btn">
-              <button type="button" class="btn">
+              <button type="button" class="btn" @click="addBtn()">
                 <font-awesome-icon class="btn-icon" :icon="['fas', 'plus']" />
               </button>
             </span>
@@ -745,16 +765,29 @@
       </div>
     </div>
   </section>
+  <section class="relevant-products">
+    <div class="container section-title d-flex justify-content-center">
+      <h1 class="title mb-4 fw-normal">相關產品</h1>
+    </div>
+    <ProductCard :ifood="food"> </ProductCard>
+  </section>
+  <footer>
+    <Footer></Footer>
+  </footer>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
+import ProductCard from "@/components/ProductCard.vue";
+import Footer from "@/components/Footer.vue";
 export default {
   name: "FoodProduct",
   components: {
     Navbar,
     Breadcrumb,
+    ProductCard,
+    Footer,
   },
   data() {
     return {
@@ -774,13 +807,50 @@ export default {
       ],
       //點擊圖片的index
       activeImage: 0,
-      isActive: false, //出現
-      hasError: false, //不出現
+      isActive: false,
+      quantity: 0,
+      food: [
+        {
+          title: "酵素旅行包(20入/盒)",
+          price: 1380,
+          src: require("@/assets/img/food/food1-1.png"),
+        },
+        {
+          title: "圓圓母湯 (20瓶/箱)",
+          price: 1560,
+          src: require("@/assets/img/food/food2-1.png"),
+        },
+        {
+          title: "POPOLAの酵",
+          price: 1550,
+          src: require("@/assets/img/food/food3-1.png"),
+        },
+        {
+          title: "吶吶的桃花朵朵紅茶包",
+          price: 168,
+          src: require("@/assets/img/food/food4-1.png"),
+        },
+        // {
+        //   title: "酵素旅行包(5入/盒)",
+        //   price: 1688,
+        //   src: require("@/assets/img/food/food1-2.png"),
+        // },
+      ],
     };
   },
   methods: {
     changeImg(smallImg) {
       this.activeImage = smallImg;
+    },
+    addBtn() {
+      this.quantity++;
+    },
+    minusBtn() {
+      if (this.quantity <= 0) {
+        this.quantity = 0;
+      } else {
+        this.quantity--;
+      }
     },
   },
   computed: {

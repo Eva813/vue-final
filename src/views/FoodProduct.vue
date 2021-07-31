@@ -393,6 +393,32 @@
     }
   }
 }
+///商品描述
+.product-intro {
+  text-align: center;
+  .text-x-large {
+    font-size: x-large;
+  }
+  .text-large {
+    color: rgb(100, 100, 100);
+    font-size: large;
+    font-weight: 700;
+  }
+  .img-section > img {
+    margin: 0 auto;
+  }
+}
+.product-deliver-way,
+.product-payment-way {
+  h3 {
+    font-size: 18px;
+  }
+  li {
+    color: #333;
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
 </style>
 
 <template>
@@ -541,9 +567,9 @@
               <li class="nav-item" role="presentation">
                 <button
                   class="tab-btn"
-                  id="qa-tab"
+                  id="delivery-tab"
                   data-bs-toggle="tab"
-                  data-bs-target="#project-qa"
+                  data-bs-target="#product-delivery"
                   type="button"
                   role="tab"
                   aria-controls="qa"
@@ -572,7 +598,7 @@
           <div class="tab-content" id="myTabContent">
             <!-- 產品描述 -->
             <div
-              class="tab-pane fade show active project-intro mt-5"
+              class="tab-pane fade show active product-intro mt-5"
               id="project-intro"
               role="tabpanel"
               aria-labelledby="intro-tab"
@@ -587,14 +613,75 @@
               >
                 <h2 class="tab-intro-title mb-4 fw-normal">商品描述</h2>
               </div>
+              <div class="text text-center">
+                牛肉麵家族『最新』生力軍，番茄紅燒牛肉麵來襲
+              </div>
+              <div class="text-detaile mb-3">
+                <h4>
+                  <span class="text-x-large"
+                    >🍜POPOLA研發-番茄紅燒牛肉麵湯頭:</span
+                  >
+                </h4>
+                <div>
+                  <span class="text-large"
+                    >選用番茄、蒜頭、薑、豆瓣醬…等燉火熬煮🧄</span
+                  >
+                </div>
+                <div>
+                  <span class="text-large"
+                    >湯頭清爽順口並帶點特有的紅燒香味</span
+                  >
+                </div>
+                <div>
+                  <span class="text-large"
+                    >搭配紐西蘭進口牛肉，每口肉質都是厚實飽滿🥩</span
+                  >
+                </div>
+                <div class="mb-3">
+                  <span class="text-large"
+                    >麵條Q彈帶勁，還能吃的到整塊的番茄🍅</span
+                  >
+                </div>
+                <div class="mb-3">
+                  <h4>
+                    <span class="text-x-large">邵庭社長-品嘗後誠心推薦</span>
+                  </h4>
+                </div>
+                <div class="text-large">
+                  <span
+                    >番茄紅燒牛肉麵更特別的是，古早味的紅燒中帶著番茄酸香提味</span
+                  >
+                </div>
+                <div>
+                  <span class="text-large"
+                    >並使用多次工序去掉過度的油脂，湯頭才能這樣濃郁中又清甜回甘，實在是讚不絕口</span
+                  >
+                </div>
+              </div>
+
+              <div class="video-section">
+                <iframe
+                  width="854"
+                  height="480"
+                  src="https://www.youtube.com/embed/iYBbOSZN4hQ?rel=0"
+                  frameborder="0"
+                  allowfullscreen=""
+                ></iframe>
+              </div>
+              <div class="img-section">
+                <img
+                  src="https://shoplineimg.com/5a2773a04926783c0d00030c/external-bc1abde25fb743aedff30db06f40f277/original?image_url=https%3A%2F%2Fimgur.com%2FD1aIkos.jpg"
+                  alt="POPOLA七分卡-番茄紅燒牛肉湯麵"
+                />
+              </div>
             </div>
 
             <!-- 送貨及付款方式 -->
             <div
               class="tab-pane fade project-qa mt-5"
-              id="project-qa"
+              id="product-delivery"
               role="tabpanel"
-              aria-labelledby="qa-tab"
+              aria-labelledby="delivery-tab"
             >
               <div
                 class="
@@ -606,9 +693,36 @@
               >
                 <h2 class="tab-intro-title mb-4 fw-normal">送貨及付款方式</h2>
               </div>
+              <div class="container d-flex justify-content-center mb-5">
+                <div class="row">
+                  <div
+                    class="product-deliver-way col-md-6 col-xs-12 text-center"
+                  >
+                    <h3>送貨方式</h3>
+                    <ul>
+                      <li>冷凍黑貓宅配 (限本島)</li>
+                    </ul>
+                  </div>
+                  <div
+                    class="product-payment-way col-md-6 col-xs-12 text-center"
+                  >
+                    <h3>付款方式</h3>
+                    <ul>
+                      <li>LINE Pay</li>
+                      <li>信用卡（支援銀聯卡）</li>
+                      <li>
+                        ATM虛擬代碼繳費（限台灣帳戶，須持結帳畫面中的代碼於訂購日次日到實體ATM或網路銀行繳費，第一銀行在ATM操作選擇繳費）
+                      </li>
+                      <li>
+                        信用卡3期分期付款（支援台灣的銀行發行的信用卡，除台銀/土銀信用卡）
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <!-- 目前進度 -->
+            <!-- 顧客評價 -->
             <div
               class="tab-pane fade project-schedule mt-5"
               id="project-schedule"

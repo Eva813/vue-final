@@ -104,7 +104,7 @@
     }
   }
 }
-
+///右側產品-2
 .input-group-btn:first-child > .btn,
 .input-group-btn:first-child > .btn-group {
   border-radius: 3px 0 0 3px;
@@ -348,6 +348,51 @@
     }
   }
 }
+///tab區域
+.tab-section {
+  .nav-item {
+    padding: 13px 5px 0 5px;
+    // &:after {
+    //   display: block;
+    //   content: "";
+    //   border-bottom: 3px solid $primary;
+    //   margin-top: 13px;
+    // }
+  }
+  .tab-btn {
+    font-size: 18px;
+    color: #888;
+    letter-spacing: 1px;
+    line-height: 55px;
+    &:focus {
+      border-bottom: 3px solid $primary;
+      color: #333;
+    }
+  }
+
+  span {
+    width: 400px;
+  }
+  .tab-section-title {
+    position: relative;
+    margin-top: 40px;
+    margin-bottom: 35px;
+    &:after {
+      position: absolute;
+      display: block;
+      content: "";
+      height: 4px;
+      width: 30px;
+      top: 88%;
+
+      background: $primary;
+    }
+    .tab-intro-title {
+      color: #333;
+      font-size: 22px;
+    }
+  }
+}
 </style>
 
 <template>
@@ -356,7 +401,7 @@
 
     <Breadcrumb></Breadcrumb>
   </header>
-  <div class="container">
+  <div class="container mb-5">
     <div class="row justify-content-center pt-3">
       <div class="col-md-6">
         <div class="product d-flex justify-content-end">
@@ -468,6 +513,124 @@
       </div>
     </div>
   </div>
+
+  <section class="tab-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="tabs border-bottom">
+            <ul
+              class="container nav bg-white d-md-flex justify-content-around"
+              id="myTab"
+              role="tablist"
+            >
+              <li class="nav-item" role="presentation">
+                <button
+                  class="tab-btn"
+                  id="intro-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#project-intro"
+                  type="button"
+                  role="tab"
+                  aria-controls="intro"
+                  aria-selected="true"
+                >
+                  <span> 商品描述</span>
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="tab-btn"
+                  id="qa-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#project-qa"
+                  type="button"
+                  role="tab"
+                  aria-controls="qa"
+                  aria-selected="false"
+                >
+                  <span> 送貨及付款方式</span>
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="tab-btn"
+                  id="schedule-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#project-schedule"
+                  type="button"
+                  role="tab"
+                  aria-controls="schedule"
+                  aria-selected="false"
+                >
+                  <span> 顧客評價</span>
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          <div class="tab-content" id="myTabContent">
+            <!-- 產品描述 -->
+            <div
+              class="tab-pane fade show active project-intro mt-5"
+              id="project-intro"
+              role="tabpanel"
+              aria-labelledby="intro-tab"
+            >
+              <div
+                class="
+                  container
+                  tab-section-title
+                  d-flex
+                  justify-content-center
+                "
+              >
+                <h2 class="tab-intro-title mb-4 fw-normal">商品描述</h2>
+              </div>
+            </div>
+
+            <!-- 送貨及付款方式 -->
+            <div
+              class="tab-pane fade project-qa mt-5"
+              id="project-qa"
+              role="tabpanel"
+              aria-labelledby="qa-tab"
+            >
+              <div
+                class="
+                  container
+                  tab-section-title
+                  d-flex
+                  justify-content-center
+                "
+              >
+                <h2 class="tab-intro-title mb-4 fw-normal">送貨及付款方式</h2>
+              </div>
+            </div>
+
+            <!-- 目前進度 -->
+            <div
+              class="tab-pane fade project-schedule mt-5"
+              id="project-schedule"
+              role="tabpanel"
+              aria-labelledby="schedule-tab"
+            >
+              <div
+                class="
+                  container
+                  tab-section-title
+                  d-flex
+                  justify-content-center
+                "
+              >
+                <h2 class="tab-intro-title mb-4 fw-normal">顧客評價</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>

@@ -420,12 +420,19 @@
   }
 }
 ///顧客評價
+.review-summary {
+  margin-bottom: 20px;
+}
 .review-summary-info {
   &-title {
     letter-spacing: 2px;
     font-weight: 600;
     font-size: 18px;
     margin-bottom: 8px;
+  }
+  .review-summary-info-stars {
+    margin-right: 12px;
+    color: #ffc500;
   }
 }
 .review-summery-bars {
@@ -445,6 +452,25 @@
     color: #333;
     padding: 5px 0;
     border-radius: 0.25em;
+  }
+}
+.review-comments {
+  .review-comment-author {
+    img {
+      width: 45px;
+      height: 45px;
+      margin-right: 12px;
+    }
+  }
+  .review-comment-author-info {
+    color: #333;
+    font-size: 14px;
+  }
+  .review-comment-stars {
+    font-size: 14px;
+    color: #ffc500;
+    letter-spacing: 0.6px;
+    word-break: break-word;
   }
 }
 
@@ -790,13 +816,19 @@
               </div>
               <div class="customers-container">
                 <!-- 星星評等 -->
-                <div class="review-summery">
+                <div class="review-summary">
                   <div class="row">
                     <div class="col-3">
                       <div class="review-summary-info">
                         <div class="review-summary-info-title">88個評價</div>
-                        <div class="review-summary-info-score d-flex">
-                          <div class="review-summery-info-stars">
+                        <div
+                          class="
+                            review-summary-info-score
+                            d-flex
+                            align-items-center
+                          "
+                        >
+                          <div class="review-summary-info-stars">
                             <font-awesome-icon :icon="['fas', 'star']" />
                             <font-awesome-icon :icon="['fas', 'star']" />
                             <font-awesome-icon :icon="['fas', 'star']" />
@@ -872,9 +904,132 @@
                     </div>
                   </div>
                 </div>
-                <!-- 顧客評價 -->
-                <div class="review-comments"></div>
+                <!-- 顧客留言 -->
+                <div class="review-comments">
+                  <div class="row mb-5">
+                    <div class="col-3">
+                      <div class="review-comment-author d-flex">
+                        <img src="@/assets/img/user.png" alt="" />
+                        <div class="review-comment-author-info">
+                          <div class="review-comment-author-info-name">
+                            C****u
+                          </div>
+                          <div class="review-comment-author-info-date">
+                            May 18, 2021
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <div class="review-comment-stars">
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-5">
+                    <div class="col-3">
+                      <div class="review-comment-author d-flex">
+                        <img src="@/assets/img/user.png" alt="" />
+                        <div class="review-comment-author-info">
+                          <div class="review-comment-author-info-name">
+                            C****u
+                          </div>
+                          <div class="review-comment-author-info-date">
+                            May 18, 2021
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <div class="review-comment-stars">
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row mb-5">
+                    <div class="col-3">
+                      <div class="review-comment-author d-flex">
+                        <img src="@/assets/img/user.png" alt="" />
+                        <div class="review-comment-author-info">
+                          <div class="review-comment-author-info-name">
+                            C****u
+                          </div>
+                          <div class="review-comment-author-info-date">
+                            May 18, 2021
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <div class="review-comment-stars">
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-5">
+                    <div class="col-3">
+                      <div class="review-comment-author d-flex">
+                        <img src="@/assets/img/user.png" alt="" />
+                        <div class="review-comment-author-info">
+                          <div class="review-comment-author-info-name">
+                            C****u
+                          </div>
+                          <div class="review-comment-author-info-date">
+                            May 18, 2021
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <div class="review-comment-stars">
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row mb-5">
+                    <div class="col-3">
+                      <div class="review-comment-author d-flex">
+                        <img src="@/assets/img/user.png" alt="" />
+                        <div class="review-comment-author-info">
+                          <div class="review-comment-author-info-name">
+                            C****u
+                          </div>
+                          <div class="review-comment-author-info-date">
+                            May 18, 2021
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <div class="review-comment-stars">
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+              <Pagination></Pagination>
             </div>
           </div>
         </div>
@@ -895,6 +1050,7 @@
 <script>
 import Navbar from "@/components/Navbar.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
+import Pagination from "@/components/Pagination.vue";
 import ProductCard from "@/components/ProductCard.vue";
 import Footer from "@/components/Footer.vue";
 export default {
@@ -902,6 +1058,7 @@ export default {
   components: {
     Navbar,
     Breadcrumb,
+    Pagination,
     ProductCard,
     Footer,
   },

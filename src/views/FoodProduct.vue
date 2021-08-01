@@ -419,6 +419,35 @@
     line-height: 20px;
   }
 }
+///顧客評價
+.review-summary-info {
+  &-title {
+    letter-spacing: 2px;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+}
+.review-summery-bars {
+  align-items: center;
+
+  .review-summary-bar-star {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .progress {
+    width: 600px;
+    height: 13px;
+    background-color: transparent;
+  }
+  .progress-bar {
+    background-color: rgb(245, 198, 131);
+    color: #333;
+    padding: 5px 0;
+    border-radius: 0.25em;
+  }
+}
+
 ///相關產品 卡片區
 .relevant-products {
   .section-title {
@@ -758,6 +787,93 @@
                 "
               >
                 <h2 class="tab-intro-title mb-4 fw-normal">顧客評價</h2>
+              </div>
+              <div class="customers-container">
+                <!-- 星星評等 -->
+                <div class="review-summery">
+                  <div class="row">
+                    <div class="col-3">
+                      <div class="review-summary-info">
+                        <div class="review-summary-info-title">88個評價</div>
+                        <div class="review-summary-info-score d-flex">
+                          <div class="review-summery-info-stars">
+                            <font-awesome-icon :icon="['fas', 'star']" />
+                            <font-awesome-icon :icon="['fas', 'star']" />
+                            <font-awesome-icon :icon="['fas', 'star']" />
+                            <font-awesome-icon :icon="['fas', 'star']" />
+                            <font-awesome-icon :icon="['fas', 'star']" />
+                          </div>
+                          <div class="review-summary-info-desc">5.0 分</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <div class="review-summery-bars">
+                        <div
+                          class="review-summery-bar d-flex align-items-center"
+                        >
+                          <div class="review-summary-bar-star">5 分</div>
+                          <!-- 長條圖 -->
+
+                          <div class="progress">
+                            <div
+                              class="progress-bar"
+                              role="progressbar"
+                              style="width: 95%"
+                              aria-valuenow="95"
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            >
+                              95%
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="review-summery-bar d-flex align-items-center"
+                        >
+                          <div class="review-summary-bar-star">4 分</div>
+                          <!-- 長條圖 -->
+
+                          <div class="progress">
+                            <div
+                              class="progress-bar"
+                              role="progressbar"
+                              style="width: 3%"
+                              aria-valuenow="3"
+                              aria-valuemin="0"
+                              aria-valuemax="100"
+                            >
+                              3%
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          class="review-summery-bar d-flex align-items-center"
+                        >
+                          <div class="review-summary-bar-star">3 分</div>
+                          <!-- 長條圖 -->
+                          <span>0%</span>
+                        </div>
+                        <div
+                          class="review-summery-bar d-flex align-items-center"
+                        >
+                          <div class="review-summary-bar-star">2 分</div>
+                          <!-- 長條圖 -->
+                          <span>0%</span>
+                        </div>
+                        <div
+                          class="review-summery-bar d-flex align-items-center"
+                        >
+                          <div class="review-summary-bar-star">1 分</div>
+                          <!-- 長條圖 -->
+                          <span>0%</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- 顧客評價 -->
+                <div class="review-comments"></div>
               </div>
             </div>
           </div>

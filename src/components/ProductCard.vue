@@ -5,7 +5,7 @@
 }
 </style>
 <template>
-  <div class="container d-flex mb-3">
+  <div class="container d-flex mb-3 justify-content-around">
     <div class="row row-cols-md-4">
       <div class="col gap-4" v-for="item in ifood" :key="item.title">
         <div class="card product-card">

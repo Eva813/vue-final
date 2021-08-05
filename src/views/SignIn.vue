@@ -24,6 +24,7 @@
       background: #f5f5f5;
       border-radius: 5px;
       outline: none;
+      cursor: pointer;
     }
     input[type="checkbox"] {
       width: 30px;
@@ -48,6 +49,7 @@
     }
   }
   select {
+    color: #555;
     appearance: none;
   }
   .form-option {
@@ -74,12 +76,12 @@
   color: #111;
 }
 
-.form .tab-content > div.active {
-  display: block;
-}
-.form .tab-content > div {
-  display: none;
-}
+// .form .tab-content > div.active {
+//   display: block;
+// }
+// .form .tab-content > div {
+//   display: none;
+// }
 </style>
 <template>
   <Navbar></Navbar>
@@ -89,11 +91,21 @@
         <div class="col-sm-12">
           <div class="form">
             <div class="tab-header">
-              <div class="active">註冊會員</div>
-              <div>會員登入</div>
+              <div
+                @click="activetab = 1"
+                :class="[activetab === 1 ? 'active' : '']"
+              >
+                註冊會員
+              </div>
+              <div
+                @click="activetab = 2"
+                :class="[activetab === 2 ? 'active' : '']"
+              >
+                會員登入
+              </div>
             </div>
             <div class="tab-content">
-              <div class="tab-body active">
+              <div class="tab-body active" v-if="activetab === 1">
                 <div class="form-element">
                   <input type="text" placeholder="用戶名" />
                 </div>
@@ -114,14 +126,19 @@
                   </select>
                 </div>
                 <div class="form-element">
-                  <input id="date" type="date" placeholder="生日日期" />
+                  <input
+                    type="text"
+                    onfocus="(this.type='date')"
+                    onblur="if(this.value==''){this.type='text'}"
+                    placeholder="生日日期"
+                  />
                 </div>
                 <div class="form-element">
                   <button>立即加入</button>
                 </div>
               </div>
 
-              <div class="tab-body">
+              <div class="tab-body" v-if="activetab === 2">
                 <div class="form-element">
                   <input type="text" placeholder="Email / Username" />
                 </div>
@@ -147,8 +164,14 @@
 <script>
 import Navbar from "@/components/Navbar.vue";
 export default {
+  name: "SignIn",
   components: {
     Navbar,
+  },
+  data() {
+    return {
+      activetab: 1,
+    };
   },
 };
 </script>

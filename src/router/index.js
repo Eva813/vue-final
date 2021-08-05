@@ -24,6 +24,11 @@ const routes = [
     path: '/foodproduct',
     name: '產品頁面',
     component: () => import('../views/FoodProduct')
+  },
+  {
+    path: '/signin',
+    name: '登入頁面',
+    component: () => import('../views/SignIn')
   }
 ]
 

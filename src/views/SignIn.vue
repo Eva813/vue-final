@@ -4,7 +4,7 @@
 .form {
   max-width: 600px;
   margin: 40px auto;
-  background: #f5f5f5;
+  background: #fff;
   box-shadow: 5px 5px 10px 5px #ccc;
   .tab-header {
     height: 50px;
@@ -21,7 +21,7 @@
       padding: 10px 20px;
       border: 1px solid #aaa;
       font-size: 16px;
-      background: #f5f5f5;
+      background: #fff;
       border-radius: 5px;
       outline: none;
       cursor: pointer;
@@ -40,12 +40,16 @@
       padding: 10px;
       border: none;
       outline: none;
-      background: #00acee;
+      background: darken($primary, 10%);
+      margin-bottom: 5px;
       color: #f5f5f5;
       font-size: 16px;
       text-transform: uppercase;
       cursor: pointer;
       border-radius: 5px;
+      &:hover {
+        background: lighten($primary, 3%);
+      }
     }
   }
   select {
@@ -57,9 +61,12 @@
     padding: 10px 20px;
     border: 1px solid #aaa;
     font-size: 16px;
-    background: #f5f5f5;
+    background: #fff;
     border-radius: 5px;
     outline: none;
+  }
+  a {
+    text-align: center;
   }
 }
 
@@ -67,12 +74,12 @@
   width: 50%;
   float: left;
   text-align: center;
-  background: #ddd;
+  background: #f0eded;
   color: #555;
   cursor: pointer;
 }
 .form .tab-header > div.active {
-  background: #f5f5f5;
+  background: #fff;
   color: #111;
 }
 
@@ -134,23 +141,24 @@
                   />
                 </div>
                 <div class="form-element">
-                  <button>立即加入</button>
+                  <button>立即加入！</button>
                 </div>
               </div>
 
               <div class="tab-body" v-if="activetab === 2">
                 <div class="form-element">
-                  <input type="text" placeholder="Email / Username" />
+                  <input type="text" placeholder="Email" />
                 </div>
                 <div class="form-element">
-                  <input type="password" placeholder="Password" />
+                  <input type="password" placeholder="密碼" />
                 </div>
                 <div class="form-element">
                   <input type="checkbox" id="remember_me" />
-                  <label for="remember_me">Remember me</label>
+                  <label for="remember_me">記住我</label>
                 </div>
                 <div class="form-element">
-                  <button>Sign In</button>
+                  <button>開始購物吧！</button>
+                  <a href="">忘記密碼？</a>
                 </div>
               </div>
             </div>
@@ -159,14 +167,19 @@
       </div>
     </div>
   </section>
+  <footer>
+    <Footer></Footer>
+  </footer>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
 export default {
   name: "SignIn",
   components: {
     Navbar,
+    Footer,
   },
   data() {
     return {

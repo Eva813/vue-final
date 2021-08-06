@@ -81,39 +81,48 @@
           <div class="col-sm-1 operate">操作(del)</div>
         </div>
       </div>
-      <div class="row cart-item justify-content-center">
-        <div class="col-xs-12 col-sm-3 d-flex item-info">
-          <a href=""
-            ><img src="@/assets/img/food/totmatonoodle1.png" alt=""
-          /></a>
-          <div class="description">
-            <span> 【NEW】雜炊湯粥-五穀雜糧 </span>
+      <div
+        class="cart-item-container"
+        v-for="(item, index) in itemList"
+        :key="item.id"
+      >
+        <div class="row cart-item justify-content-center">
+          <div class="col-xs-12 col-sm-3 d-flex item-info">
+            <a href=""
+              ><img src="@/assets/img/food/totmatonoodle1.png" alt=""
+            /></a>
+            <div class="description">
+              <span> 【NEW】雜炊湯粥-五穀雜糧 </span>
+            </div>
           </div>
-        </div>
-        <div class="col-xs-12 col-sm-2 item-discount"></div>
-        <div class="col-xs-12 col-sm-2 item-price text-center">
-          <span class="price-label">NT$98</span>
-        </div>
-        <div class="col-xs-12 col-sm-2 item-quantity text-center">
-          <div class="counter-form d-flex">
-            <span class="input-group-btn">
-              <button type="button" class="btn" @click="minusBtn()">
-                <font-awesome-icon class="btn-icon" :icon="['fas', 'minus']" />
-              </button>
-            </span>
-            <input type="number" v-model.number="quantity" />
-            <span class="input-group-btn">
-              <button type="button" class="btn" @click="addBtn()">
-                <font-awesome-icon class="btn-icon" :icon="['fas', 'plus']" />
-              </button>
-            </span>
+          <div class="col-xs-12 col-sm-2 item-discount"></div>
+          <div class="col-xs-12 col-sm-2 item-price text-center">
+            <span class="price-label">NT$98</span>
           </div>
-        </div>
-        <div class="col-xs-12 col-sm-2 item-total text-center">
-          <span>total</span>
-        </div>
-        <div class="col-xs-12 col-sm-1 item-operate text-center">
-          <span>operate</span>
+          <div class="col-xs-12 col-sm-2 item-quantity text-center">
+            <div class="counter-form d-flex">
+              <span class="input-group-btn">
+                <button type="button" class="btn" @click="minusBtn()">
+                  <font-awesome-icon
+                    class="btn-icon"
+                    :icon="['fas', 'minus']"
+                  />
+                </button>
+              </span>
+              <input type="number" v-model.number="quantity" />
+              <span class="input-group-btn">
+                <button type="button" class="btn" @click="addBtn()">
+                  <font-awesome-icon class="btn-icon" :icon="['fas', 'plus']" />
+                </button>
+              </span>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-2 item-total text-center">
+            <span>total</span>
+          </div>
+          <div class="col-xs-12 col-sm-1 item-operate text-center">
+            <span>operate</span>
+          </div>
         </div>
       </div>
     </div>

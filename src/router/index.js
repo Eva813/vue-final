@@ -33,7 +33,7 @@ const routes = [
   {
     path: '/shoppingcart',
     name: '購物車頁面',
-    component: () => import('../views/ShoopingCart')
+    component: () => import('../views/ShoppingCart')
   }
 ]
 

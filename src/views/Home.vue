@@ -6,7 +6,11 @@
 }
 .section-video {
   width: calc(100% - 1px);
+
   height: 650px;
+  .player-container {
+    width: 1140px;
+  }
   .player {
     width: 100%;
     height: 100%;
@@ -60,14 +64,16 @@
     <Pagination></Pagination>
   </section>
   <section class="container section-video d-flex justify-content-center mb-5">
-    <iframe
-      class="player"
-      src="https://www.youtube.com/embed/EuEguYzDlL0"
-      title="YouTube video player"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-    ></iframe>
+    <div class="player-container">
+      <iframe
+        class="player"
+        src="https://www.youtube.com/embed/EuEguYzDlL0"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
   </section>
   <section class="food-card mb-5">
     <div class="container section-title d-flex justify-content-center">

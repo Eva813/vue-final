@@ -29,6 +29,11 @@ const routes = [
     path: '/signin',
     name: '登入頁面',
     component: () => import('../views/SignIn')
+  },
+  {
+    path: '/shoppingcart',
+    name: '購物車頁面',
+    component: () => import('../views/ShoopingCart')
   }
 ]
 

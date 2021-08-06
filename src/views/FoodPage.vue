@@ -358,11 +358,26 @@ export default {
           price: 168,
           src: require("@/assets/img/food/food4-1.png"),
         },
-        // {
-        //   title: "酵素旅行包(5入/盒)",
-        //   price: 1688,
-        //   src: require("@/assets/img/food/food1-2.png"),
-        // },
+        {
+          title: "素旅行包(5入/盒)",
+          price: 1688,
+          src: require("@/assets/img/food/food1-2.png"),
+        },
+        {
+          title: "酵素旅包(5入/盒)",
+          price: 1688,
+          src: require("@/assets/img/food/food1-2.png"),
+        },
+        {
+          title: "酵旅行包(5入/盒)",
+          price: 1688,
+          src: require("@/assets/img/food/food1-2.png"),
+        },
+        {
+          title: "素旅行包(5入/盒)",
+          price: 1688,
+          src: require("@/assets/img/food/food1-2.png"),
+        },
       ],
 
       sortProduct: [

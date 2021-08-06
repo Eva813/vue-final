@@ -7,7 +7,7 @@
 <template>
   <div class="container d-flex mb-3 justify-content-around">
     <div class="row row-cols-md-4">
-      <div class="col gap-4" v-for="item in ifood" :key="item.title">
+      <div class="col items-card" v-for="item in ifood" :key="item.title">
         <div class="card product-card">
           <div class="card-top">
             <a class="card-img-link" href="#">

@@ -136,6 +136,41 @@ export default {
   components: {
     Navbar,
   },
+  data() {
+    return {
+      itemList: [
+        {
+          id:'1',
+          title: "酵素旅行包(20入/盒)",
+          price: 1380,
+          src: require("@/assets/img/food/food1-1.png"),
+          count:1,
+        },
+        { 
+          id:'2',
+          title: "圓圓母湯 (20瓶/箱)",
+          price: 1560,
+          src: require("@/assets/img/food/food2-1.png"),
+          count:1,
+        },
+        { 
+          id:'3',
+          title: "POPOLAの酵",
+          price: 1550,
+          src: require("@/assets/img/food/food3-1.png"),
+          count:1,
+        },
+        { 
+          id:'4',
+          title: "吶吶的桃花朵朵紅茶包",
+          price: 168,
+          src: require("@/assets/img/food/food4-1.png"),
+          count:1,
+        },
+        
+      ],
+    }
+  },
 };
 </script>
 

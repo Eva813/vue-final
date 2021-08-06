@@ -25,7 +25,7 @@
   }
 }
 
-///右側產品
+///右側產品資訊
 .product-info {
   color: #333333;
   padding: 0 15px 20px 20px;
@@ -521,7 +521,7 @@
             </div>
           </div>
           <div class="img-container">
-            <img :src="currentImage" alt="" />
+            <img :src="currentImage" alt="商品圖示" />
           </div>
         </div>
       </div>

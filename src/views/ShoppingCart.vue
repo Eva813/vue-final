@@ -6,10 +6,10 @@
   font-size: 14px;
   .item_header {
     display: flex;
-    // margin: 0 auto;
     padding: 15px;
     // height: 30px;
     background-color: #fff;
+    border-bottom: 1px solid #ededed;
 
     > div {
       line-height: 30px;
@@ -26,11 +26,19 @@
       height: 60px;
       border-radius: 3px;
     }
+    .description {
+      padding-left: 10px;
+    }
   }
+  .cart-item-container .cart-item:last-child {
+    border-bottom: 1px solid #ededed;
+  }
+
   .del-icon {
     cursor: pointer;
   }
 }
+//數量增減按鈕
 .counter-form {
   display: table-cell;
   margin-bottom: 20px;
@@ -43,6 +51,7 @@
   }
   input[type="number"] {
     padding-left: 10px;
+    text-align: center;
   }
   button {
     border: 1px solid #ccc;
@@ -64,13 +73,109 @@
     }
   }
 }
+.input-group-btn:first-child > .btn,
+.input-group-btn:first-child > .btn-group {
+  border-radius: 3px 0 0 3px;
+  margin-right: -1px;
+  border-right: none;
+}
+.input-group-btn:last-child > .btn,
+.input-group-btn:last-child > .btn-group {
+  border-radius: 0px 3px 3px 0px;
+  margin-left: -2px;
+}
+/////*********** *////
+.shopping-cart-description {
+  .shopping-cart-title {
+    padding: 10px 15px;
+    background-color: #f6f6f6;
+    line-height: 26px;
+    font-weight: 500;
+    margin: 0;
+    font-size: 18px;
+    border-bottom: 1px solid #ededed;
+  }
+  .order-form {
+    border: 1px solid #ededed;
+
+    .order-form-body {
+      padding: 15px 15px 0 15px;
+      font-size: 14px;
+    }
+    .form-group {
+      margin-bottom: 15px;
+      label {
+        margin-bottom: 5px;
+      }
+    }
+    .help-block {
+      display: block;
+      margin-top: 5px;
+      color: #737373;
+    }
+  }
+}
+
+.order-checkout-form {
+  border: 1px solid #ededed;
+  .checkout-summary-list {
+    padding: 15px 15px 0 15px;
+    font-size: 14px;
+  }
+  .coupon-btn {
+    color: darken($primary, 10%);
+    cursor: pointer;
+  }
+  .coupon-form {
+    .control-label {
+      display: block;
+      margin-bottom: 5px;
+    }
+    .form-control {
+      border: 1px solid #ededed;
+      display: inline-block;
+      width: 67%;
+      padding: 6px 12px;
+      &:focus {
+        box-shadow: none;
+      }
+    }
+    .btn-primary {
+      background-color: #9daab0;
+      border: 1px solid #9daab0;
+      color: white;
+      width: 30%;
+      padding: 6px 12px;
+      margin-left: 10px;
+    }
+  }
+  .use-btn {
+    display: inline-block;
+  }
+  .btn-checkout {
+    width: 100%;
+    padding: 6px 12px;
+    background-color: $primary;
+    color: #fff;
+    border-radius: 3px;
+    border: 1px solid $primary;
+    &:hover {
+      background-color: #fff;
+      color: $primary;
+    }
+  }
+}
+//  設定使按鈕點擊後消失的class
+.coupon-btn.hide {
+  display: none;
+}
 </style>
 
 <template>
   <header>
     <Navbar></Navbar>
   </header>
-  <section class="shopping-cart">
+  <section class="shopping-cart mb-5">
     <div class="container">
       <div class="header">
         <h2>購物車</h2>
@@ -134,6 +239,113 @@
       </div>
     </div>
   </section>
+  <section class="shopping-cart-description">
+    <div class="container justify-content-between">
+      <div class="row">
+        <div class="col-sm-7 col-md-8 ps-0">
+          <div class="order-form">
+            <h3 class="shopping-cart-title">選擇送貨及付款方式</h3>
+            <div class="order-form-body">
+              <form name="cart-form">
+                <div class="form-group">
+                  <label for="order-delivery-country">送貨地點</label>
+                  <span class="select-cart-form">
+                    <select id="order-delivery-country" class="form-control">
+                      <option value="AU">澳大利亞</option>
+                      <option value="HK">香港</option>
+                      <option value="MO">澳門</option>
+                      <option value="MY">馬來西亞</option>
+                      <option value="SG">新加坡</option>
+                      <option value="TW" selected="">台灣</option>
+                    </select>
+                  </span>
+                </div>
+                <div class="form-group">
+                  <label for="order-delivery-method">送貨方式</label>
+                  <span class="select-cart-form">
+                    <select id="order-delivery-method" class="form-control">
+                      <option value="5ae05a9a00fddea820001230">
+                        常溫物流宅配 (台灣含離島)
+                      </option>
+                      <option value="freezen" selected="">冷凍宅配</option>
+                      <option disabled="" value="empty">沒有適用方式</option>
+                    </select>
+                  </span>
+                </div>
+                <div class="form-group">
+                  <label for="order-payment-method">付款方式</label>
+                  <span class="select-cart-form">
+                    <select
+                      id="order-payment-method"
+                      class="form-control"
+                      ng-disabled="multiSelect &amp;&amp; state &amp;&amp; state.isCartLoading"
+                    >
+                      <option value="5a2e126459d524a6b80003ba">
+                        信用卡（支援銀聯卡）
+                      </option>
+                      <option value="5b0fcb6310abb922b200012e">LINE Pay</option>
+                      <option value="5a35248e72fdc0255f001140">
+                        ATM虛擬代碼繳費（限台灣帳戶，須持結帳畫面中的代碼於訂購日次日到實體ATM或網路銀行繳費，第一銀行在ATM操作選擇繳費）
+                      </option>
+                      <option value="5adefc0559d52433f8000494" selected="">
+                        信用卡3期分期付款（支援台灣的銀行發行的信用卡，除台銀/土銀信用卡）
+                      </option>
+                    </select>
+                  </span>
+                  <span class="help-block" ng-non-bindable=""
+                    >⚠購物金使用時請注意⚠
+                    <br />使用購物金折扣並且訂單送出付款失敗時，系統將即時自動回補<br />若需要取消訂單系統無法自動回補購物金<br />請在訂單處留言，客服人員將於上班日處理☎</span
+                  >
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-5 col-md-4 pe-0">
+          <div class="order-checkout-form">
+            <h3 class="shopping-cart-title">訂單資訊</h3>
+            <div class="checkout-summary-list">
+              <div class="subtotal mb-3 d-flex justify-content-between">
+                <span class="pull-left">小計:</span>
+                <span class="pull-right">NT${{ getSubTotalPrice() }}</span>
+              </div>
+              <div class="delivery-fee mb-3 d-flex justify-content-between">
+                <span class="pull-left"> 運費: </span>
+                <span class="pull-right">NT${{ getShipFee() }}</span>
+              </div>
+              <div class="cart-coupon">
+                <a
+                  class=""
+                  style=""
+                  @click="handDomShow('isShow')"
+                  :class="['coupon-btn', isShow == true ? 'hide' : '']"
+                  >使用優惠代碼</a
+                >
+                <form class="coupon-form" v-show="isShow" style="">
+                  <div class="form-group">
+                    <label for="order-coupon" class="control-label"
+                      >優惠代碼</label
+                    >
+
+                    <input id="order-coupon" class="form-control" />
+                    <a class="btn btn-primary use-btn">套用</a>
+                  </div>
+                </form>
+              </div>
+              <hr class="ng-scope" />
+              <div class="final-total mb-3 d-flex justify-content-between">
+                <span class="pull-left">合計:</span>
+                <span class="pull-right"
+                  >NT${{ getSubTotalPrice() + getShipFee() }}</span
+                >
+              </div>
+              <a class="btn btn-success mb-3 btn-checkout">前往結帳</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -145,6 +357,9 @@ export default {
   },
   data() {
     return {
+      isShow: false,
+      isShowBtn: true,
+      buyitems: [],
       itemList: [
         {
           id: "1",
@@ -198,7 +413,27 @@ export default {
       this.changeIndex = deleteIndex;
       this.itemList.splice(deleteIndex, 1);
     },
+    handDomShow(key) {
+      this[key] = !this[key];
+    },
+    getSubTotalPrice() {
+      let totalPrice = 0;
+      this.itemList.forEach((o) => {
+        totalPrice += o.count * o.price;
+      });
+      return totalPrice;
+    },
+    getShipFee() {
+      let shipFee = 0;
+      let totalPrice = this.getSubTotalPrice();
+      console.log(totalPrice);
+      if (totalPrice < 2000) {
+        shipFee = 60;
+        return shipFee;
+      } else return shipFee;
+    },
   },
+  computed: {},
 };
 </script>
 

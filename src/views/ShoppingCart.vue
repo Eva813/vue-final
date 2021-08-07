@@ -20,11 +20,15 @@
   }
   ///
   .item-info {
+    padding-left: 0px;
     img {
       width: 60px;
       height: 60px;
       border-radius: 3px;
     }
+  }
+  .del-icon {
+    cursor: pointer;
   }
 }
 .counter-form {
@@ -78,7 +82,7 @@
           <div class="col-sm-2 text-center price">單價</div>
           <div class="col-sm-2 text-center quantity">數量</div>
           <div class="col-sm-2 text-center total">小計</div>
-          <div class="col-sm-1 operate">操作(del)</div>
+          <div class="col-sm-1 operate"></div>
         </div>
       </div>
       <div
@@ -119,7 +123,12 @@
             <span>NT$</span><span>{{ item.price * item.count }}</span>
           </div>
           <div class="col-xs-12 col-sm-1 item-operate text-center">
-            <span>operate</span>
+            <span>
+              <font-awesome-icon
+                class="del-icon"
+                :icon="['fas', 'trash-alt']"
+                @click="deleteBtn(index)"
+            /></span>
           </div>
         </div>
       </div>
@@ -179,11 +188,15 @@ export default {
       this.changeIndex = minusIndex;
       let count = this.itemList[minusIndex].count;
       //console.log(count);
-      if (count <= 0) {
-        count = 0;
+      if (count <= 1) {
+        count = 1;
       } else {
         this.itemList[minusIndex].count--;
       }
+    },
+    deleteBtn(deleteIndex) {
+      this.changeIndex = deleteIndex;
+      this.itemList.splice(deleteIndex, 1);
     },
   },
 };

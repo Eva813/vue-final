@@ -37,8 +37,8 @@
     border-left: none;
     border-right: none;
   }
-  input[type="text"] {
-    padding: 0px;
+  input[type="number"] {
+    padding-left: 10px;
   }
   button {
     border: 1px solid #ccc;
@@ -88,37 +88,35 @@
       >
         <div class="row cart-item justify-content-center">
           <div class="col-xs-12 col-sm-3 d-flex item-info">
-            <a href=""
-              ><img src="@/assets/img/food/totmatonoodle1.png" alt=""
-            /></a>
+            <a href=""><img :src="item.src" alt="商品圖示" /></a>
             <div class="description">
-              <span> 【NEW】雜炊湯粥-五穀雜糧 </span>
+              <span> {{ item.title }} </span>
             </div>
           </div>
           <div class="col-xs-12 col-sm-2 item-discount"></div>
           <div class="col-xs-12 col-sm-2 item-price text-center">
-            <span class="price-label">NT$98</span>
+            <span>NT$</span><span class="price-label">{{ item.price }}</span>
           </div>
           <div class="col-xs-12 col-sm-2 item-quantity text-center">
             <div class="counter-form d-flex">
               <span class="input-group-btn">
-                <button type="button" class="btn" @click="minusBtn()">
+                <button type="button" class="btn" @click="minusBtn(index)">
                   <font-awesome-icon
                     class="btn-icon"
                     :icon="['fas', 'minus']"
                   />
                 </button>
               </span>
-              <input type="number" v-model.number="quantity" />
+              <input type="number" v-model.number="item.count" />
               <span class="input-group-btn">
-                <button type="button" class="btn" @click="addBtn()">
+                <button type="button" class="btn" @click="addBtn(index)">
                   <font-awesome-icon class="btn-icon" :icon="['fas', 'plus']" />
                 </button>
               </span>
             </div>
           </div>
           <div class="col-xs-12 col-sm-2 item-total text-center">
-            <span>total</span>
+            <span>NT$</span><span>{{ item.price * item.count }}</span>
           </div>
           <div class="col-xs-12 col-sm-1 item-operate text-center">
             <span>operate</span>
@@ -140,36 +138,53 @@ export default {
     return {
       itemList: [
         {
-          id:'1',
+          id: "1",
           title: "酵素旅行包(20入/盒)",
           price: 1380,
           src: require("@/assets/img/food/food1-1.png"),
-          count:1,
+          count: 1,
         },
-        { 
-          id:'2',
+        {
+          id: "2",
           title: "圓圓母湯 (20瓶/箱)",
           price: 1560,
           src: require("@/assets/img/food/food2-1.png"),
-          count:1,
+          count: 1,
         },
-        { 
-          id:'3',
+        {
+          id: "3",
           title: "POPOLAの酵",
           price: 1550,
           src: require("@/assets/img/food/food3-1.png"),
-          count:1,
+          count: 1,
         },
-        { 
-          id:'4',
+        {
+          id: "4",
           title: "吶吶的桃花朵朵紅茶包",
           price: 168,
           src: require("@/assets/img/food/food4-1.png"),
-          count:1,
+          count: 1,
         },
-        
       ],
-    }
+      changeIndex: 0,
+    };
+  },
+  methods: {
+    addBtn(addIndex) {
+      this.changeIndex = addIndex;
+      //console.log(btnIndex);
+      this.itemList[addIndex].count++;
+    },
+    minusBtn(minusIndex) {
+      this.changeIndex = minusIndex;
+      let count = this.itemList[minusIndex].count;
+      //console.log(count);
+      if (count <= 0) {
+        count = 0;
+      } else {
+        this.itemList[minusIndex].count--;
+      }
+    },
   },
 };
 </script>

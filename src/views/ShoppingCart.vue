@@ -1,7 +1,82 @@
 <style lang="scss" scoped>
 @import "~@/assets/all.scss";
 
+.time-line {
+  counter-reset: test 0;
+  position: relative;
+  li {
+    list-style: none;
+    float: left;
+    width: 15.3333%;
+    left: 27%;
+    position: relative;
+    text-align: center;
+    font-size: 14px;
+    &:before {
+      counter-increment: test;
+      content: counter(test);
+      font-size: 12px;
+      width: 30px;
+      height: 30px;
+      border: 2px solid darken($primary, 15%);
+      border-radius: 50%;
+      display: block;
+      text-align: center;
+      line-height: 30px;
+      margin: 0 auto 10px auto;
+      background: #fff;
+      color: #000;
+      transition: all ease-in-out 0.3s;
+      cursor: pointer;
+    }
+    &:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      background-color: grey;
+      top: 17px;
+      left: -50%;
+      z-index: -999;
+      transition: all ease-in-out 0.3s;
+    }
+  }
+  li:first-child:after {
+    content: none;
+  }
+  li.active-tl {
+    color: #555555;
+    &:before {
+      background: darken($primary, 15%);
+      color: #f1f1f1;
+    }
+  }
+  li.active-tl + li:after {
+    background: darken($primary, 15%);
+  }
+
+  ul {
+    &:nth-child(1) {
+      color: darken($primary, 15%);
+    }
+  }
+}
+
 .shopping-cart {
+  .shopping-cart-lists {
+    border-top: 1px solid #ededed;
+    border-right: 1px solid #ededed;
+    border-left: 1px solid #ededed;
+  }
+  h2 {
+    padding: 10px 15px;
+    background-color: #f6f6f6;
+    line-height: 26px;
+    font-weight: 500;
+    margin: 0;
+    font-size: 18px;
+    border-bottom: 1px solid #ededed;
+  }
   color: #333;
   font-size: 14px;
   .item_header {
@@ -108,60 +183,65 @@
         margin-bottom: 5px;
       }
     }
+    .form-control {
+      &:focus {
+        box-shadow: none;
+        border-color: none;
+      }
+    }
     .help-block {
       display: block;
       margin-top: 5px;
       color: #737373;
     }
   }
-}
-
-.order-checkout-form {
-  border: 1px solid #ededed;
-  .checkout-summary-list {
-    padding: 15px 15px 0 15px;
-    font-size: 14px;
-  }
-  .coupon-btn {
-    color: darken($primary, 10%);
-    cursor: pointer;
-  }
-  .coupon-form {
-    .control-label {
-      display: block;
-      margin-bottom: 5px;
+  .order-checkout-form {
+    border: 1px solid #ededed;
+    .checkout-summary-list {
+      padding: 15px 15px 0 15px;
+      font-size: 14px;
     }
-    .form-control {
-      border: 1px solid #ededed;
-      display: inline-block;
-      width: 67%;
-      padding: 6px 12px;
-      &:focus {
-        box-shadow: none;
+    .coupon-btn {
+      color: darken($primary, 10%);
+      cursor: pointer;
+    }
+    .coupon-form {
+      .control-label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      .form-control {
+        border: 1px solid #ededed;
+        display: inline-block;
+        width: 67%;
+        padding: 6px 12px;
+        &:focus {
+          box-shadow: none;
+        }
+      }
+      .btn-primary {
+        background-color: #9daab0;
+        border: 1px solid #9daab0;
+        color: white;
+        width: 30%;
+        padding: 6px 12px;
+        margin-left: 10px;
       }
     }
-    .btn-primary {
-      background-color: #9daab0;
-      border: 1px solid #9daab0;
-      color: white;
-      width: 30%;
-      padding: 6px 12px;
-      margin-left: 10px;
+    .use-btn {
+      display: inline-block;
     }
-  }
-  .use-btn {
-    display: inline-block;
-  }
-  .btn-checkout {
-    width: 100%;
-    padding: 6px 12px;
-    background-color: $primary;
-    color: #fff;
-    border-radius: 3px;
-    border: 1px solid $primary;
-    &:hover {
-      background-color: #fff;
-      color: $primary;
+    .btn-checkout {
+      width: 100%;
+      padding: 6px 12px;
+      background-color: $primary;
+      color: #fff;
+      border-radius: 3px;
+      border: 1px solid $primary;
+      &:hover {
+        background-color: #fff;
+        color: $primary;
+      }
     }
   }
 }
@@ -169,15 +249,36 @@
 .coupon-btn.hide {
   display: none;
 }
+///**促銷圖片**//
+.promotion-section {
+  .img-container {
+    padding: 15px;
+    border: 1px solid #ededed;
+    img {
+      margin: 0 auto;
+    }
+  }
+}
 </style>
 
 <template>
-  <header>
+  <header class="mb-4">
     <Navbar></Navbar>
   </header>
-  <section class="shopping-cart mb-5">
+  <section class="mb-4">
     <div class="container">
-      <div class="header">
+      <div class="row">
+        <ul class="time-line">
+          <li class="active-tl">購物車</li>
+          <li>填寫資料</li>
+          <li>訂單確認</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="shopping-cart mb-5">
+    <div class="container shopping-cart-lists">
+      <div class="row shopping-cart-header">
         <h2>購物車</h2>
       </div>
       <div class="row">
@@ -239,7 +340,7 @@
       </div>
     </div>
   </section>
-  <section class="shopping-cart-description">
+  <section class="shopping-cart-description mb-4">
     <div class="container justify-content-between">
       <div class="row">
         <div class="col-sm-7 col-md-8 ps-0">
@@ -346,14 +447,25 @@
       </div>
     </div>
   </section>
+  <section class="promotion-section mb-5">
+    <div class="container img-container">
+      <img src="@/assets/img/checkout.png" alt="" />
+      <img src="@/assets/img/checkout-level.png" alt="" />
+    </div>
+  </section>
+  <footer>
+    <Footer></Footer>
+  </footer>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar.vue";
+import Footer from "@/components/Footer.vue";
 export default {
   name: "ShoppingCart",
   components: {
     Navbar,
+    Footer,
   },
   data() {
     return {
@@ -426,7 +538,7 @@ export default {
     getShipFee() {
       let shipFee = 0;
       let totalPrice = this.getSubTotalPrice();
-      console.log(totalPrice);
+      //console.log(totalPrice);
       if (totalPrice < 2000) {
         shipFee = 60;
         return shipFee;

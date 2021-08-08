@@ -25,7 +25,7 @@
       line-height: 30px;
       margin: 0 auto 10px auto;
       background: #fff;
-      color: #000;
+      color: rgb(66, 64, 64);
       transition: all ease-in-out 0.3s;
       cursor: pointer;
     }

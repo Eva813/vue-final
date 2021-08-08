@@ -25,7 +25,7 @@
       line-height: 30px;
       margin: 0 auto 10px auto;
       background: #fff;
-      color: #000;
+      color: rgb(66, 64, 64);
       transition: all ease-in-out 0.3s;
       cursor: pointer;
     }
@@ -185,6 +185,21 @@
     }
   }
 }
+
+.customer-footer {
+  .btn-checkout {
+    width: 100%;
+    padding: 6px 12px;
+    background-color: $primary;
+    color: #fff;
+    border-radius: 3px;
+    border: 1px solid $primary;
+    &:hover {
+      background-color: #fff;
+      color: $primary;
+    }
+  }
+}
 </style>
 
 <template>
@@ -208,7 +223,7 @@
         <h2>購物車</h2>
       </div>
       <div class="row">
-        <div class="item_header justify-content-center">
+        <div class="item_header">
           <div class="col-xs-12 col-sm-3 item_detail">商品資料</div>
           <div class="col-sm-2 discount">優惠</div>
           <div class="col-sm-2 text-center price">單價</div>
@@ -222,7 +237,7 @@
         v-for="(item, index) in itemList"
         :key="item.id"
       >
-        <div class="row cart-item justify-content-center">
+        <div class="row cart-item">
           <div class="col-xs-12 col-sm-3 d-flex item-info">
             <a href=""><img :src="item.src" alt="商品圖示" /></a>
             <div class="description">
@@ -266,7 +281,7 @@
       </div>
     </div>
   </section>
-  <section class="customer-form">
+  <section class="customer-form mb-5">
     <div class="container">
       <div class="row">
         <div class="col-sm-6 ps-0">
@@ -341,6 +356,18 @@
               </form>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="customer-footer mb-5">
+    <div class="footer container">
+      <div class="row">
+        <div class="col-sm-6">
+          <a class="btn btn-link text-start" href="">&lt; 返回購物車</a>
+        </div>
+        <div class="col-sm-6">
+          <a class="btn btn-success mb-3 btn-checkout">提交訂單</a>
         </div>
       </div>
     </div>

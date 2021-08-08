@@ -34,6 +34,11 @@ const routes = [
     path: '/shoppingcart',
     name: '購物車頁面',
     component: () => import('../views/ShoppingCart')
+  },
+  {
+    path: '/customerform',
+    name: '顧客資料頁面',
+    component: () => import('../views/CustomerForm')
   }
 ]
 

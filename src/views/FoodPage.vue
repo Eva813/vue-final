@@ -162,6 +162,7 @@
 
     <Breadcrumb></Breadcrumb>
   </header>
+  <span>ddd {{ numbers }}</span>
   <div class="container d-flex">
     <div class="row">
       <div class="col-3">
@@ -289,7 +290,9 @@
               <a class="card-img-link" href="#">
                 <img :src="item.src" class="card-img-top" alt="product-img" />
               </a>
-              <a href="#" class="btn card-btn">加入購物車</a>
+              <div class="btn card-btn" @click="addToCart(item)">
+                加入購物車
+              </div>
             </div>
             <div class="card-body">
               <h5 class="card-title text-center fw-normal">{{ item.title }}</h5>
@@ -303,6 +306,11 @@
     </div>
   </div>
   <Pagination></Pagination>
+
+  <!-- <div class="container">
+    {{ checkoutGroup }}
+  </div> -->
+
   <footer>
     <Footer></Footer>
   </footer>
@@ -322,9 +330,10 @@ export default {
     Pagination,
     Footer,
   },
-  props: ["ifood"],
+
   data() {
     return {
+      cart: [],
       isShow: false,
       isTransformFood: false,
       isTransformBeauty: false,
@@ -388,12 +397,44 @@ export default {
       ],
       limitProduct: ["每頁顯示24個", "每頁顯示48個", "每頁顯示72個"],
       selected: "",
+      numbers: 0,
     };
   },
   methods: {
     handDomShow(key) {
       this[key] = !this[key];
     },
+    addToCart(goods) {
+      // let alreadyIndex = this.food.findIndex(function (item, index) {
+      //   return item.id === goods.id;
+      // });
+      // return alreadyIndex;
+      this.cartNumbers();
+    },
+    cartNumbers() {
+      let productNumbers = localStorage.getItem("cartNumbers");
+      //取得的productNumbers 型別是string，所以要轉為數字
+      productNumbers = parseInt(productNumbers);
+      //要判斷我的localStorage是否已經有資料存在
+      if (productNumbers) {
+        localStorage.setItem("cartNumbers", productNumbers + 1);
+        return (this.numbers = productNumbers + 1);
+      } else {
+        localStorage.setItem("cartNumbers", 1);
+        return (this.numbers = 1);
+      }
+    },
+  },
+  watch: {
+    cartnum(newNum) {
+      localstorage.num = newNum;
+    },
+  },
+  computed: {},
+  mounted() {
+    if (localStorage.num) {
+      this.numbers = localstorage.num;
+    }
   },
 };
 </script>

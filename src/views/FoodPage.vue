@@ -322,6 +322,7 @@ import Navbar from "@/components/Navbar.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 import Pagination from "@/components/Pagination.vue";
 import Footer from "@/components/Footer.vue";
+import { createHydrationRenderer } from "@vue/runtime-core";
 export default {
   name: "FoodPage",
   components: {
@@ -418,6 +419,7 @@ export default {
       // });
       // console.log(alreadyIndex);
       this.cartNumbers(foods);
+      this.totalPrice(foods);
     },
     cartNumbers(theFood) {
       // console.log("the product clicked is", theFood);
@@ -437,12 +439,41 @@ export default {
     setItems(theFood) {
       //點擊後，選到該品項
       //console.log("point to ", theFood);
-      theFood.inCart = 1;
-      //創建變數，存放於localStorage
-      let cartItems = {
-        [theFood.title]: theFood,
-      };
+      // 設定初始化。並先取得localstorage的資料，確認我們的本地是否有資料
+      let cartItems = localStorage.getItem("productsInCart");
+      //將取得的資料，轉換為js物件形式
+      cartItems = JSON.parse(cartItems);
+      //check localStorage 是否為null
+      if (cartItems != null) {
+        if (cartItems[theFood.title] == undefined) {
+          cartItems = {
+            ...cartItems,
+            //物件名稱：內容
+            [theFood.title]: theFood,
+          };
+        }
+        cartItems[theFood.title].inCart += 1;
+      } else {
+        theFood.inCart = 1;
+        //變數，存放於localStorage
+        cartItems = {
+          //物件名稱：內容
+          [theFood.title]: theFood,
+        };
+      }
+
       localStorage.setItem("productsInCart", JSON.stringify(cartItems));
+    },
+    totalPrice(theFoodPrice) {
+      let cartPrice = localStorage.getItem("totalPrice");
+      //console.log("the price is", cartPrice);
+
+      if (cartPrice != null) {
+        cartPrice = parseInt(cartPrice);
+        localStorage.setItem("totalPrice", cartPrice + theFoodPrice.price);
+      } else {
+        localStorage.setItem("totalPrice", theFoodPrice.price);
+      }
     },
   },
   watch: {},

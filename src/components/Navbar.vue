@@ -136,6 +136,8 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["inNav"],
+};
 </script>
 

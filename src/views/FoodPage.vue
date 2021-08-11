@@ -162,7 +162,7 @@
 
     <Breadcrumb></Breadcrumb>
   </header>
-  <span>ddd {{ numbers }}</span>
+  <span>ddd {{ spanNumbers }}</span>
   <div class="container d-flex">
     <div class="row">
       <div class="col-3">
@@ -351,41 +351,49 @@ export default {
           title: "酵素旅行包(20入/盒)",
           price: 1380,
           src: require("@/assets/img/food/food1-1.png"),
+          inCart: 0,
         },
         {
           title: "圓圓母湯 (20瓶/箱)",
           price: 1560,
           src: require("@/assets/img/food/food2-1.png"),
+          inCart: 0,
         },
         {
           title: "POPOLAの酵",
           price: 1550,
           src: require("@/assets/img/food/food3-1.png"),
+          inCart: 0,
         },
         {
           title: "吶吶的桃花朵朵紅茶包",
           price: 168,
           src: require("@/assets/img/food/food4-1.png"),
+          inCart: 0,
         },
         {
-          title: "素旅行包(5入/盒)",
+          title: "旅行包(6入/盒)",
           price: 1688,
           src: require("@/assets/img/food/food1-2.png"),
+          inCart: 0,
         },
         {
-          title: "酵素旅包(5入/盒)",
+          title: "酵素旅包(7入/盒)",
           price: 1688,
           src: require("@/assets/img/food/food1-2.png"),
+          inCart: 0,
         },
         {
-          title: "酵旅行包(5入/盒)",
+          title: "酵旅行包(8入/盒)",
           price: 1688,
           src: require("@/assets/img/food/food1-2.png"),
+          inCart: 0,
         },
         {
-          title: "素旅行包(5入/盒)",
+          title: "素旅行包(9入/盒)",
           price: 1688,
           src: require("@/assets/img/food/food1-2.png"),
+          inCart: 0,
         },
       ],
 
@@ -397,44 +405,52 @@ export default {
       ],
       limitProduct: ["每頁顯示24個", "每頁顯示48個", "每頁顯示72個"],
       selected: "",
-      numbers: 0,
+      spanNumbers: 0,
     };
   },
   methods: {
     handDomShow(key) {
       this[key] = !this[key];
     },
-    addToCart(goods) {
+    addToCart(foods) {
       // let alreadyIndex = this.food.findIndex(function (item, index) {
-      //   return item.id === goods.id;
+      //   return item.title === foods.title;
       // });
-      // return alreadyIndex;
-      this.cartNumbers();
+      // console.log(alreadyIndex);
+      this.cartNumbers(foods);
     },
-    cartNumbers() {
+    cartNumbers(theFood) {
+      // console.log("the product clicked is", theFood);
       let productNumbers = localStorage.getItem("cartNumbers");
       //取得的productNumbers 型別是string，所以要轉為數字
       productNumbers = parseInt(productNumbers);
       //要判斷我的localStorage是否已經有資料存在
       if (productNumbers) {
         localStorage.setItem("cartNumbers", productNumbers + 1);
-        return (this.numbers = productNumbers + 1);
+        this.spanNumbers = productNumbers + 1;
       } else {
         localStorage.setItem("cartNumbers", 1);
-        return (this.numbers = 1);
+        this.spanNumbers = 1;
       }
+      this.setItems(theFood);
+    },
+    setItems(theFood) {
+      //點擊後，選到該品項
+      //console.log("point to ", theFood);
+      theFood.inCart = 1;
+      //創建變數，存放於localStorage
+      let cartItems = {
+        [theFood.title]: theFood,
+      };
+      localStorage.setItem("productsInCart", JSON.stringify(cartItems));
     },
   },
-  watch: {
-    cartnum(newNum) {
-      localstorage.num = newNum;
-    },
-  },
+  watch: {},
   computed: {},
   mounted() {
-    if (localStorage.num) {
-      this.numbers = localstorage.num;
-    }
+    //讓數字在更新之後，仍然存取到資料
+    this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
+    //console.log(this.spanNumbers);
   },
 };
 </script>

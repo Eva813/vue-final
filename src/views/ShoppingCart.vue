@@ -291,9 +291,10 @@
           <div class="col-sm-1 operate"></div>
         </div>
       </div>
+      <!-- ////購物車 -->
       <div
         class="cart-item-container"
-        v-for="(item, index) in itemList"
+        v-for="(item, index) in cartItems"
         :key="item.id"
       >
         <div class="row cart-item justify-content-center">
@@ -461,6 +462,8 @@
 <script>
 import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
+import mitt from "mitt";
+const emitter = mitt();
 export default {
   name: "ShoppingCart",
   components: {
@@ -471,7 +474,7 @@ export default {
     return {
       isShow: false,
       isShowBtn: true,
-      buyitems: [],
+      cartItems: [],
       itemList: [
         {
           id: "1",
@@ -546,6 +549,12 @@ export default {
     },
   },
   computed: {},
+  created() {
+    emitter.on("getData", (items) => {
+      this.cartItems = items;
+    });
+    console.log(this.cartItems);
+  },
 };
 </script>
 

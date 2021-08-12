@@ -155,7 +155,12 @@
 
 <script>
 export default {
-  props: ["parentSpanNumbers"],
+  props: {
+    parentSpanNumbers: {
+      type: Number,
+      default: 0,
+    },
+  },
 };
 </script>
 

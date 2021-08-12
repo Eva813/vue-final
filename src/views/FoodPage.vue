@@ -158,11 +158,11 @@
 
 <template>
   <header>
-    <Navbar></Navbar>
+    <Navbar v-bind:parentSpanNumbers="spanNumbers"></Navbar>
 
     <Breadcrumb></Breadcrumb>
   </header>
-  <span>ddd {{ spanNumbers }}</span>
+
   <div class="container d-flex">
     <div class="row">
       <div class="col-3">
@@ -474,6 +474,10 @@ export default {
       } else {
         localStorage.setItem("totalPrice", theFoodPrice.price);
       }
+    },
+    displayCart() {
+      //取得本地端拿到的資料
+      //當從localStorage取得資料後，會是JSON的字串形式，所以要將它轉為JS的物件格式
     },
   },
   watch: {},

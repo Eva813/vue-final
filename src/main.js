@@ -14,6 +14,7 @@ import VueAgile from 'vue-agile'
 const app = createApp(App);
 library.add(faUserSecret, faShoppingCart, faUser, faComments, faSearch, faChevronRight, faChevronLeft, faChevronDown, faChevronUp, faMinus, faPlus, faStar, faTrashAlt);
 
+
 app.component('font-awesome-icon', FontAwesomeIcon);
 app.use(VueAgile)
 

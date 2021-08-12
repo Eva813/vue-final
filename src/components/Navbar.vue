@@ -40,6 +40,21 @@
     }
   }
 }
+.Cart-count {
+  background-color: #c74060;
+  color: #fff;
+  position: absolute;
+  z-index: 5;
+  font-size: 11px;
+  width: 18px;
+  height: 18px;
+  line-height: 18px;
+  text-align: center;
+  border-radius: 10px;
+  right: 13px;
+  top: 25px;
+  text-indent: -1px;
+}
 </style>
 
 <template>
@@ -126,8 +141,11 @@
           </li>
           <li class="icon-group-item">
             <a href="#" class="link-dark"
-              ><font-awesome-icon :icon="['fas', 'shopping-cart']"
-            /></a>
+              ><font-awesome-icon :icon="['fas', 'shopping-cart']" />
+              <span class="Cart-count primary-color" style="display: inline">{{
+                parentSpanNumbers
+              }}</span></a
+            >
           </li>
         </ul>
       </div>
@@ -137,7 +155,7 @@
 
 <script>
 export default {
-  props: ["inNav"],
+  props: ["parentSpanNumbers"],
 };
 </script>
 

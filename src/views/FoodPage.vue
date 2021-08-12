@@ -310,7 +310,7 @@
   <!-- <div class="container">
     {{ checkoutGroup }}
   </div> -->
-
+  <a href="" @click="pushData">發送至另一個元件</a>
   <footer>
     <Footer></Footer>
   </footer>
@@ -322,7 +322,9 @@ import Navbar from "@/components/Navbar.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 import Pagination from "@/components/Pagination.vue";
 import Footer from "@/components/Footer.vue";
-import { createHydrationRenderer } from "@vue/runtime-core";
+import mitt from "mitt";
+
+const emitter = mitt();
 export default {
   name: "FoodPage",
   components: {
@@ -407,6 +409,7 @@ export default {
       limitProduct: ["每頁顯示24個", "每頁顯示48個", "每頁顯示72個"],
       selected: "",
       spanNumbers: 0,
+      displayCartItems: [],
     };
   },
   methods: {
@@ -420,6 +423,7 @@ export default {
       // console.log(alreadyIndex);
       this.cartNumbers(foods);
       this.totalPrice(foods);
+      this.pushData();
     },
     cartNumbers(theFood) {
       // console.log("the product clicked is", theFood);
@@ -475,9 +479,8 @@ export default {
         localStorage.setItem("totalPrice", theFoodPrice.price);
       }
     },
-    displayCart() {
-      //取得本地端拿到的資料
-      //當從localStorage取得資料後，會是JSON的字串形式，所以要將它轉為JS的物件格式
+    pushData() {
+      emitter.emit("getData", this.displayCartItems);
     },
   },
   watch: {},
@@ -485,7 +488,9 @@ export default {
   mounted() {
     //讓數字在更新之後，仍然存取到資料
     this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
-    //console.log(this.spanNumbers);
+    this.displayCartItems =
+      JSON.parse(localStorage.getItem("productsInCart")) || [];
+    console.log(this.displayCartItems);
   },
 };
 </script>

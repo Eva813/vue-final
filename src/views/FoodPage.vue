@@ -322,9 +322,6 @@ import Navbar from "@/components/Navbar.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 import Pagination from "@/components/Pagination.vue";
 import Footer from "@/components/Footer.vue";
-import mitt from "mitt";
-
-const emitter = mitt();
 export default {
   name: "FoodPage",
   components: {
@@ -482,7 +479,7 @@ export default {
     },
     pushData() {
       console.log("send");
-      emitter.emit("getData", this.text);
+      this.emitter.emit("getData", this.text);
     },
   },
   watch: {},

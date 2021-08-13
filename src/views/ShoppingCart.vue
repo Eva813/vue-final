@@ -454,6 +454,7 @@
       <img src="@/assets/img/checkout-level.png" alt="" />
     </div>
   </section>
+  <div>{{ text }}</div>
   <footer>
     <Footer></Footer>
   </footer>
@@ -463,6 +464,7 @@
 import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
 import mitt from "mitt";
+
 const emitter = mitt();
 export default {
   name: "ShoppingCart",
@@ -472,6 +474,7 @@ export default {
   },
   data() {
     return {
+      text: "原始資料",
       isShow: false,
       isShowBtn: true,
       cartItems: [],
@@ -550,10 +553,11 @@ export default {
   },
   computed: {},
   created() {
-    emitter.on("getData", (items) => {
-      this.cartItems = items;
+    emitter.on("getData", (msg) => {
+      console.log("shopping", msg);
+      this.text = msg;
     });
-    console.log(this.cartItems);
+    //console.log(this.cartItems);
   },
 };
 </script>

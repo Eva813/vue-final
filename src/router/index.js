@@ -39,6 +39,11 @@ const routes = [
     path: '/customerform',
     name: '顧客資料頁面',
     component: () => import('../views/CustomerForm')
+  },
+  {
+    path: '/testmitt',
+    name: '測試頁面',
+    component: () => import('../views/Testmitt')
   }
 ]
 

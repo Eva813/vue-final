@@ -455,6 +455,7 @@
     </div>
   </section>
   <div>{{ text }}</div>
+  <component-b></component-b>
   <footer>
     <Footer></Footer>
   </footer>
@@ -463,6 +464,7 @@
 <script>
 import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
+import componentB from "@/components/Component-b.vue";
 import mitt from "mitt";
 
 const emitter = mitt();
@@ -471,6 +473,7 @@ export default {
   components: {
     Navbar,
     Footer,
+    componentB,
   },
   data() {
     return {
@@ -553,9 +556,9 @@ export default {
   },
   computed: {},
   created() {
-    emitter.on("getData", (msg) => {
-      console.log("shopping", msg);
+    this.emitter.on("getData", (msg) => {
       this.text = msg;
+      console.log("shopping", msg);
     });
     //console.log(this.cartItems);
   },

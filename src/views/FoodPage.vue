@@ -307,10 +307,10 @@
   </div>
   <Pagination></Pagination>
 
-  <!-- <div class="container">
-    {{ checkoutGroup }}
-  </div> -->
-  <a href="" @click="pushData">發送至另一個元件</a>
+  <div>
+    {{ text }} <button type="button" @click="pushData">發送至另一個元件</button>
+  </div>
+
   <footer>
     <Footer></Footer>
   </footer>
@@ -410,6 +410,7 @@ export default {
       selected: "",
       spanNumbers: 0,
       displayCartItems: [],
+      text: "這有一段話",
     };
   },
   methods: {
@@ -480,7 +481,8 @@ export default {
       }
     },
     pushData() {
-      emitter.emit("getData", this.displayCartItems);
+      console.log("send");
+      emitter.emit("getData", this.text);
     },
   },
   watch: {},
@@ -490,7 +492,7 @@ export default {
     this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
     this.displayCartItems =
       JSON.parse(localStorage.getItem("productsInCart")) || [];
-    console.log(this.displayCartItems);
+    //console.log(this.displayCartItems);
   },
 };
 </script>

@@ -11,13 +11,13 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import VueAgile from 'vue-agile'
 
-// import mitt from 'mitt';
-// const emitter = mitt();
+import mitt from 'mitt';
+const emitter = mitt();
 
 const app = createApp(App);
 library.add(faUserSecret, faShoppingCart, faUser, faComments, faSearch, faChevronRight, faChevronLeft, faChevronDown, faChevronUp, faMinus, faPlus, faStar, faTrashAlt);
 
-// app.config.globalProperties.emitter = emitter;
+app.config.globalProperties.emitter = emitter;
 app.component('font-awesome-icon', FontAwesomeIcon);
 app.use(VueAgile)
 

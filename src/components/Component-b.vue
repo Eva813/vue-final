@@ -12,7 +12,7 @@ export default {
   created() {
     this.emitter.on("getData", (msg) => {
       this.text = msg;
-      console.log("getdata");
+      console.log("getdata componentb");
     });
   },
 };

@@ -6,9 +6,9 @@
 </style>
 <template>
   <div class="container d-flex mb-3 justify-content-around">
-    <div class="row row-cols-md-4">
+    <div class="row-cols-lg-4 row-cols-md-2 row-cols-sm-1">
       <div class="col items-card" v-for="item in ifood" :key="item.title">
-        <div class="card product-card">
+        <div class="card product-card align-items-center">
           <div class="card-top">
             <a class="card-img-link" href="#">
               <img :src="item.src" class="card-img-top" alt="product-img" />
@@ -25,6 +25,7 @@
       </div>
     </div>
   </div>
+  <!-- <span class="btn-add-to-cart js-btn-add-to-cart mobile-cart visible-xs visible-sm  ">  <i class="fa fa-shopping-cart"></i>        </span> -->
 </template>
 
 <script>

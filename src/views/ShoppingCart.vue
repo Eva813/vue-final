@@ -455,7 +455,7 @@
     </div>
   </section>
   <div>{{ text }}</div>
-  <component-b></component-b>
+  <!-- <component-b></component-b> -->
   <footer>
     <Footer></Footer>
   </footer>
@@ -465,9 +465,6 @@
 import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
 import componentB from "@/components/Component-b.vue";
-import mitt from "mitt";
-
-const emitter = mitt();
 export default {
   name: "ShoppingCart",
   components: {

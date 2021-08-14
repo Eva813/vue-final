@@ -478,7 +478,7 @@ export default {
       }
     },
     pushData() {
-      console.log("send");
+      console.log("send foodpage data");
       this.emitter.emit("getData", this.text);
     },
   },

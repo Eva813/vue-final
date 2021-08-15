@@ -55,6 +55,11 @@
       border-left-color: $primary;
     }
   }
+  @include desk-below {
+    @media (max-width: 1023px) {
+      display: none;
+    }
+  }
 }
 .inner-catagory {
   position: static;
@@ -84,7 +89,7 @@
   float: right;
   width: 350px;
   right: 218px;
-  z-index: 999;
+  z-index: 2;
   width: 200px;
 
   .first {
@@ -152,7 +157,48 @@
 .product-section {
   z-index: -1;
 }
+
+.navbar-breadcrumb {
+  margin-top: 90px;
+  @include desk-below {
+    @media (max-width: 1023px) {
+      margin-top: 60px;
+    }
+  }
+}
 //////
+
+.card-btn {
+  @include desk-below {
+    @media (max-width: 1023px) {
+      display: none;
+    }
+  }
+}
+.btn-mobile-cart {
+  display: none;
+  @include desk-below {
+    @media (max-width: 1023px) {
+      display: block;
+      color: darken($primary, 5%);
+      background-color: #f7f7f7;
+      border-color: #f7f7f7;
+    }
+  }
+}
+.product-item {
+  // width: 33.3%;
+
+  max-width: 340px;
+  margin-bottom: 15px;
+  .card-top {
+    max-width: 340px;
+
+    &:hover .card-btn {
+      margin-top: -175px;
+    }
+  }
+}
 </style>
 
 
@@ -160,7 +206,7 @@
   <header>
     <Navbar v-bind:parentSpanNumbers="spanNumbers"></Navbar>
 
-    <Breadcrumb></Breadcrumb>
+    <Breadcrumb class="navbar-breadcrumb"></Breadcrumb>
   </header>
 
   <div class="container d-flex">
@@ -283,8 +329,8 @@
           </div>
         </div>
       </div>
-      <div class="row product-section row-cols-md-3">
-        <div class="col gap-4" v-for="item in food" :key="item.title">
+      <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 product-section">
+        <div class="product-item gap-1" v-for="item in food" :key="item.title">
           <div class="card product-card">
             <div class="card-top">
               <a class="card-img-link" href="#">
@@ -300,6 +346,9 @@
                 <span>NT$</span> {{ item.price }}
               </p>
             </div>
+            <span class="btn btn-mobile-cart">
+              <font-awesome-icon :icon="['fas', 'shopping-cart']" />
+            </span>
           </div>
         </div>
       </div>

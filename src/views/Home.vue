@@ -1,4 +1,8 @@
 <style lang="scss">
+
+.banner{
+  margin-top:65px;
+}
 .sale-pic {
   img {
     margin: 0 auto;
@@ -42,7 +46,7 @@
 
     <!-- <Carousel></Carousel> -->
 
-    <div class="banner mb-5">
+    <div class="banner  mb-5">
       <!-- <Swiper></Swiper> -->
       <Agile></Agile>
     </div>

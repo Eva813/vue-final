@@ -6,8 +6,8 @@
   transform-style: preserve-3d;
   -webkit-perspective: 1000px;
   perspective: 1000px;
-  @include pad {
-    @media (max-width: 768px) {
+  @include desk-below {
+    @media (max-width: 1023px) {
       margin: 10px;
     }
   }
@@ -123,7 +123,7 @@
 
 <template>
   <div class="container">
-    <div class="row-cols-lg-4 row-cols-md-2">
+    <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1">
       <div class="col gap-3" v-for="item in productlink" :key="item.title">
         <div class="flip-card">
           <div class="flip-card-inner">

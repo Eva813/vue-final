@@ -8,6 +8,11 @@ nav {
   top: 0;
   width: 100%; /* Full width */
   z-index: 2;
+  @include pad {
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+  }
 }
 .nav-container {
   margin: 0 auto;
@@ -168,10 +173,7 @@ nav {
       padding-top: 65px;
     }
   }
-  @include pad {
-    @media (max-width: 768px) {
-    }
-  }
+
   li {
     @include desk-below {
       @media (max-width: 1023px) {

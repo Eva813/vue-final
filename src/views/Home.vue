@@ -1,7 +1,12 @@
 <style lang="scss">
 @import "~@/assets/all.scss";
 .banner {
-  margin-top: 65px;
+  margin-top: 80px;
+   @include pad {
+    @media (max-width: 768px) {
+      margin-top: 65px;
+    }
+  }
 }
 .sale-pic {
   img {

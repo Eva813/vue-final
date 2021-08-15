@@ -7,7 +7,12 @@ nav {
   position: fixed;
   top: 0;
   width: 100%; /* Full width */
-  z-index: 2;
+  z-index: 5;
+  @include desk-below {
+    @media (max-width: 1023px) {
+      max-height: 60px;
+    }
+  }
   @include pad {
     @media (max-width: 768px) {
       padding: 0;
@@ -69,7 +74,7 @@ nav {
   background-color: #c74060;
   color: #fff;
   position: absolute;
-  z-index: 5;
+  z-index: 3;
   font-size: 11px;
   width: 18px;
   height: 18px;
@@ -114,7 +119,8 @@ nav {
   position: absolute;
   width: 40px;
   height: 100%;
-  z-index: 3;
+  // 要比漢堡高一層，點擊才順暢
+  z-index: 6;
   cursor: pointer;
   opacity: 0;
 }
@@ -169,7 +175,7 @@ nav {
       background: #fff;
       width: 300px;
       height: 100%;
-      z-index: 2;
+      z-index: 5;
       padding-top: 65px;
     }
   }

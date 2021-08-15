@@ -6,7 +6,7 @@
 </style>
 <template>
   <div class="container d-flex mb-3 justify-content-around">
-    <div class="row-cols-lg-4 row-cols-md-2 row-cols-sm-1">
+    <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1">
       <div class="col items-card" v-for="item in ifood" :key="item.title">
         <div class="card product-card align-items-center">
           <div class="card-top">

@@ -3,6 +3,12 @@
     @content
   }
 };
+@mixin for-card-list{
+  @media(max-width:991px){
+    @content
+  }
+};
+
 @mixin pad{
   @media(max-width:768px){
     @content

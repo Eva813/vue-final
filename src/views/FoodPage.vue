@@ -77,21 +77,60 @@
 
 .product-list-section {
   padding: 15px 0;
+  .title-part {
+    display: block;
+    position: relative;
+  }
   h2 {
+    float: left;
     font-size: 20px;
     padding: 15px 0 25px;
+    line-height: 1.24;
     color: #333;
+    @include pad {
+      @media (max-width: 768px) {
+        float: none;
+        padding-bottom: 8px;
+      }
+    }
   }
 }
 
 .product-list-select {
+  display: flex;
   position: absolute;
   float: right;
-  width: 350px;
-  right: 218px;
+  // min-width: 350px;
+  right: 0px;
   z-index: 2;
-  width: 200px;
+  min-width: 200px;
 
+  @include pad {
+    @media (max-width: 768px) {
+      display: flex;
+      float: none;
+      font-size: 13px;
+      position: unset;
+      margin-bottom: 15px;
+      z-index: 2;
+    }
+  }
+
+  .sort-section {
+    @include pad {
+      @media (max-width: 768px) {
+        width: 100%;
+        margin-right: 5%;
+      }
+    }
+  }
+  .limit-section {
+    @include pad {
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+    }
+  }
   .first {
     position: relative;
     transition: transform 0.4s;
@@ -134,9 +173,16 @@
     border-left: 1px solid #888;
     border-right: 1px solid #888;
     border-bottom: 1px solid #888;
-
     position: static;
     //display: none;
+
+    @include pad {
+      @media (max-width: 768px) {
+        z-index: 2;
+        position: absolute;
+        width: 100%;
+      }
+    }
     li {
       line-height: 35px;
       border-bottom: none;
@@ -153,6 +199,12 @@
 .limit-section-list {
   margin-left: 10px;
   width: 170px;
+  @include pad {
+    @media (max-width: 768px) {
+      width: 100%;
+      position:relative;
+    }
+  }
 }
 .product-section {
   z-index: -1;
@@ -280,9 +332,9 @@
       </div>
     </div>
     <div class="product-list-section">
-      <div class="title-part d-flex justify-content-between">
+      <div class="title-part clearfix">
         <h2>美食生活</h2>
-        <div class="product-list-select d-flex">
+        <div class="product-list-select clearfix">
           <div class="sort-section">
             <ul class="sort-section-list">
               <li>
@@ -329,7 +381,7 @@
           </div>
         </div>
       </div>
-      <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 product-section">
+      <div class="row row-cols-lg-3 row-cols-md-2 row-cols-2 product-section">
         <div class="product-item gap-1" v-for="item in food" :key="item.title">
           <div class="card product-card">
             <div class="card-top">

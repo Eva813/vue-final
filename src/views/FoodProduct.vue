@@ -1,10 +1,20 @@
 
 <style lang="scss" scoped>
 @import "~@/assets/all.scss";
+
+.navbar-breadcrumb {
+  margin-top: 90px;
+  @include desk-below {
+    @media (max-width: 1023px) {
+      margin-top: 60px;
+    }
+  }
+}
+
 //左側圖片
 .thumbnail-section {
   img {
-    height: 92px;
+    max-height: 92px;
     margin: 10px 0;
     cursor: pointer;
     opacity: 0.6;
@@ -20,8 +30,28 @@
 
 .img-container {
   padding: 10px;
+  @include pad {
+    @media (max-width: 768px) {
+      max-width: 768px;
+    }
+  }
   img {
-    height: 415px;
+    @include pad {
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+    }
+  }
+}
+.product-gallery {
+  display: flex;
+  justify-content: end;
+  @include desk-below {
+    @media (max-width: 1023px) {
+      text-align: left;
+      padding-right: 10px;
+      margin: 0 auto 10px auto;
+    }
   }
 }
 
@@ -29,7 +59,18 @@
 .product-info {
   color: #333333;
   padding: 0 15px 20px 20px;
-  width: 435px;
+  // min-width: 435px;
+  @include desk-below {
+    @media (max-width: 1023px) {
+      margin: 0 auto;
+    }
+  }
+  @include pad {
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
   .product-title {
     font-size: 28px;
     padding-bottom: 20px;
@@ -148,7 +189,7 @@
     transition-property: border;
     transition-timing-function: ease-in-out;
     transition-duration: 0.15s;
-    min-width: 385px;
+    width: 100%;
   }
 
   .icon-with-text {
@@ -368,6 +409,11 @@
       border-bottom: 3px solid $primary;
       color: #333;
     }
+    @include mobile {
+      @media (max-width: 568px) {
+        font-size: 13px;
+      }
+    }
   }
 
   span {
@@ -407,6 +453,9 @@
   .img-section > img {
     margin: 0 auto;
   }
+}
+iframe {
+  max-width: 100%;
 }
 .product-deliver-way,
 .product-payment-way {
@@ -500,12 +549,12 @@
   <header>
     <Navbar></Navbar>
 
-    <Breadcrumb></Breadcrumb>
+    <Breadcrumb class="navbar-breadcrumb"></Breadcrumb>
   </header>
   <div class="container mb-5">
     <div class="row justify-content-center pt-3">
-      <div class="col-md-6">
-        <div class="product d-flex justify-content-end">
+      <div class="col-lg-12 col-xl-6">
+        <div class="product-gallery">
           <div class="thumbnail-section">
             <div
               v-for="(product, index) in productImg"
@@ -525,7 +574,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-lg-12 col-xl-6">
         <div class="product-info">
           <h1 class="product-title">七分卡-番茄紅燒牛肉湯麵</h1>
           <div class="promotion-text">

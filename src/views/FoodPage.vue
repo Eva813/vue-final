@@ -202,7 +202,7 @@
   @include pad {
     @media (max-width: 768px) {
       width: 100%;
-      position:relative;
+      position: relative;
     }
   }
 }

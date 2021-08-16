@@ -6,6 +6,7 @@
   font-size: 13px;
   color: #999;
   $breadcrumb-divider: quote(">");
+  max-width: 100%;
 }
 </style>
 

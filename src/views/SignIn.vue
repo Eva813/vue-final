@@ -1,11 +1,20 @@
 <style lang="scss" scoped>
 @import "~@/assets/all.scss";
 
+.signin-form {
+  margin-top: 25px;
+}
 .form {
   max-width: 600px;
   margin: 40px auto;
   background: #fff;
   box-shadow: 5px 5px 10px 5px #ccc;
+  margin-top: 90px;
+  @include desk-below {
+    @media (max-width: 1023px) {
+      margin-top: 65px;
+    }
+  }
   .tab-header {
     height: 50px;
     line-height: 50px;
@@ -93,7 +102,7 @@
 <template>
   <Navbar></Navbar>
   <section>
-    <div class="container justify-content-center">
+    <div class="signin-form container justify-content-center">
       <div class="row">
         <div class="col-sm-12">
           <div class="form">
@@ -112,55 +121,103 @@
               </div>
             </div>
             <div class="tab-content">
-              <div class="tab-body active" v-if="activetab === 1">
-                <div class="form-element">
-                  <input type="text" placeholder="用戶名" />
-                </div>
-                <div class="form-element">
-                  <input type="text" placeholder="Email" />
-                </div>
-                <div class="form-element">
-                  <input type="password" placeholder="密碼" />
-                  <span>至少8個字元</span>
-                </div>
-                <div class="form-element">
-                  <select class="form-option" name="sex" id="sex">
-                    <option value="" class="ng-binding">性別&nbsp;</option>
-                    <option value="男">男</option>
-                    　
-                    <option value="女">女</option>
-                    <option value="nun">不透露</option>
-                  </select>
-                </div>
-                <div class="form-element">
-                  <input
-                    type="text"
-                    onfocus="(this.type='date')"
-                    onblur="if(this.value==''){this.type='text'}"
-                    placeholder="生日日期"
-                  />
-                </div>
-                <div class="form-element">
-                  <button>立即加入！</button>
-                </div>
-              </div>
+              <Form @submit="onSubmit" v-slot="{ errors }">
+                <div class="tab-body active" v-if="activetab === 1">
+                  <div class="form-element">
+                    <Field
+                      type="text"
+                      name="用戶名"
+                      v-model="user.name"
+                      placeholder="用戶名"
+                    />
+                    <span class="invalid-feedback"></span>
+                  </div>
+                  <div class="form-element">
+                    <Field
+                      class="form-control"
+                      type="text"
+                      name="email"
+                      placeholder="Email"
+                      rules="email|required"
+                      v-model="user.email"
+                      :class="{
+                        'is-invalid': errors['email'],
+                        'is-valid': !errors['email'] && user.email != '',
+                      }"
+                    />
 
-              <div class="tab-body" v-if="activetab === 2">
-                <div class="form-element">
-                  <input type="text" placeholder="Email" />
+                    <ErrorMessage name="email" class="invalid-feedback" />
+                  </div>
+                  <div class="form-element">
+                    <Field
+                      class="form-control"
+                      type="password"
+                      name="password"
+                      rules="required|min:8"
+                      placeholder="密碼"
+                      v-model="user.password"
+                      :class="{
+                        'is-invalid': errors['password'],
+                        'is-valid': !errors['password'] && user.password != '',
+                      }"
+                    />
+                    <ErrorMessage name="password" class="invalid-feedback" />
+                  </div>
+                  <div class="form-element">
+                    <select class="form-option" name="sex" id="sex">
+                      <option value="" class="ng-binding">性別&nbsp;</option>
+                      <option value="男">男</option>
+                      　
+                      <option value="女">女</option>
+                      <option value="nun">不透露</option>
+                    </select>
+                  </div>
+                  <div class="form-element">
+                    <Field
+                      type="text"
+                      onfocus="(this.type='date')"
+                      onblur="if(this.value==''){this.type='text'}"
+                      name="生日日期"
+                      placeholder="生日日期"
+                      v-model="user.date"
+                    />
+                  </div>
+                  <div class="form-element">
+                    <button>立即加入！</button>
+                  </div>
                 </div>
-                <div class="form-element">
-                  <input type="password" placeholder="密碼" />
+              </Form>
+
+              <Form @submit="onSubmit" v-slot="{ errors }">
+                <div class="tab-body" v-if="activetab === 2">
+                  <div class="form-element">
+                    <Field
+                      class="form-control"
+                      type="text"
+                      name="email"
+                      placeholder="Email"
+                      rules="email|required"
+                      v-model="user.email"
+                      :class="{
+                        'is-invalid': errors['email'],
+                        'is-valid': !errors['email'] && user.email != '',
+                      }"
+                    />
+                    <ErrorMessage name="email" class="invalid-feedback" />
+                  </div>
+                  <div class="form-element">
+                    <Field type="password" name="password" placeholder="密碼" />
+                  </div>
+                  <div class="form-element">
+                    <Field type="checkbox" name="記住我" id="remember_me" />
+                    <label for="remember_me">記住我</label>
+                  </div>
+                  <div class="form-element">
+                    <button>開始購物吧！</button>
+                    <a href="">忘記密碼？</a>
+                  </div>
                 </div>
-                <div class="form-element">
-                  <input type="checkbox" id="remember_me" />
-                  <label for="remember_me">記住我</label>
-                </div>
-                <div class="form-element">
-                  <button>開始購物吧！</button>
-                  <a href="">忘記密碼？</a>
-                </div>
-              </div>
+              </Form>
             </div>
           </div>
         </div>
@@ -184,7 +241,18 @@ export default {
   data() {
     return {
       activetab: 1,
+      user: {
+        name: "",
+        email: "",
+        password: "",
+        date="",
+      },
     };
+  },
+  methods: {
+    onSubmit(value) {
+      alert(JSON.stringify(values, null, 2));
+    },
   },
 };
 </script>

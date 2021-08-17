@@ -4,6 +4,13 @@
 .time-line {
   counter-reset: test 0;
   position: relative;
+  margin-top: 85px;
+  @include desk-below {
+    @media (max-width: 1023px) {
+      margin-top: 60px;
+    }
+  }
+
   li {
     list-style: none;
     float: left;
@@ -63,10 +70,19 @@
 }
 
 .shopping-cart {
+  color: #333;
+  font-size: 14px;
   .shopping-cart-lists {
     border-top: 1px solid #ededed;
     border-right: 1px solid #ededed;
     border-left: 1px solid #ededed;
+    width: 100%;
+    @include pad {
+      @media (max-width: 768px) {
+        max-width: 90%;
+        margin: 0 auto;
+      }
+    }
   }
   h2 {
     padding: 10px 15px;
@@ -77,14 +93,18 @@
     font-size: 18px;
     border-bottom: 1px solid #ededed;
   }
-  color: #333;
-  font-size: 14px;
+
   .item_header {
     display: flex;
     padding: 15px;
     // height: 30px;
     background-color: #fff;
     border-bottom: 1px solid #ededed;
+    @include pad {
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
 
     > div {
       line-height: 30px;
@@ -105,12 +125,89 @@
       padding-left: 10px;
     }
   }
+
+  .cart-item-container {
+    @include pad {
+      @media (max-width: 768px) {
+        position: relative;
+        min-height: 130px;
+      }
+    }
+  }
   .cart-item-container .cart-item:last-child {
     border-bottom: 1px solid #ededed;
   }
 
   .del-icon {
     cursor: pointer;
+  }
+
+  ////個別項目處理
+  .item-info {
+    @include pad {
+      @media (max-width: 768px) {
+        position: static;
+      }
+    }
+  }
+  .item-discount {
+    @include pad {
+      @media (max-width: 768px) {
+        position: static;
+        padding-left: 80px;
+        margin-bottom: 5px;
+      }
+    }
+  }
+  .item-price {
+    .price-label {
+      @include pad {
+        @media (max-width: 768px) {
+          display: block;
+          text-align: right;
+        }
+      }
+    }
+  }
+  .item-quantity {
+    @include pad {
+      @media (max-width: 768px) {
+        top: 90px;
+        left: 10px;
+        position: absolute;
+        padding: 0;
+        padding-top: 16px;
+        width: 160px;
+      }
+    }
+
+    @include mobile {
+      @media (max-width: 568px) {
+      }
+    }
+  }
+
+  .item-total {
+    text-align: center;
+    padding-right: 10px;
+    > span {
+      @include pad {
+        @media (max-width: 768px) {
+          display: block;
+          text-align: right;
+          padding-top: 24px;
+        }
+      }
+    }
+  }
+  .item-operate {
+    @include pad {
+      @media (max-width: 768px) {
+        width: 34px;
+        position: absolute;
+        right: 25px;
+      }
+    }
   }
 }
 //數量增減按鈕
@@ -127,6 +224,11 @@
   input[type="number"] {
     padding-left: 10px;
     text-align: center;
+    @include for-desk {
+      @media (max-width: 991px) {
+        padding-left: 0;
+      }
+    }
   }
   button {
     border: 1px solid #ccc;
@@ -145,6 +247,12 @@
     cursor: pointer;
     &:hover .btn-icon {
       color: darken($primary, 20%);
+    }
+    @include for-desk {
+      @media (max-width: 991px) {
+        line-height: 20px;
+        font-size: 13px;
+      }
     }
   }
 }
@@ -170,9 +278,24 @@
     font-size: 18px;
     border-bottom: 1px solid #ededed;
   }
+  .container {
+    @include pad {
+      @media (max-width: 768px) {
+        max-width: 90%;
+        margin: 0 auto;
+      }
+    }
+    .col-sm-12 {
+      padding: 0;
+    }
+  }
   .order-form {
     border: 1px solid #ededed;
-
+    @include pad {
+      @media (max-width: 768px) {
+        margin-bottom: 30px;
+      }
+    }
     .order-form-body {
       padding: 15px 15px 0 15px;
       font-size: 14px;
@@ -254,6 +377,13 @@
   .img-container {
     padding: 15px;
     border: 1px solid #ededed;
+    @include pad {
+      @media (max-width: 768px) {
+        max-width: 85%;
+        margin: 0 auto;
+      }
+    }
+
     img {
       margin: 0 auto;
     }
@@ -279,7 +409,9 @@
   <section class="shopping-cart mb-5">
     <div class="container shopping-cart-lists">
       <div class="row shopping-cart-header">
-        <h2>購物車</h2>
+        <div class="col-12 p-0">
+          <h2>購物車</h2>
+        </div>
       </div>
       <div class="row">
         <div class="item_header justify-content-center">
@@ -292,50 +424,57 @@
         </div>
       </div>
       <!-- ////購物車 -->
-      <div
-        class="cart-item-container"
-        v-for="(item, index) in cartItems"
-        :key="item.id"
-      >
-        <div class="row cart-item justify-content-center">
-          <div class="col-xs-12 col-sm-3 d-flex item-info">
-            <a href=""><img :src="item.src" alt="商品圖示" /></a>
-            <div class="description">
-              <span> {{ item.title }} </span>
-            </div>
-          </div>
-          <div class="col-xs-12 col-sm-2 item-discount"></div>
-          <div class="col-xs-12 col-sm-2 item-price text-center">
-            <span>NT$</span><span class="price-label">{{ item.price }}</span>
-          </div>
-          <div class="col-xs-12 col-sm-2 item-quantity text-center">
-            <div class="counter-form d-flex">
-              <span class="input-group-btn">
-                <button type="button" class="btn" @click="minusBtn(index)">
+      <div class="row">
+        <div class="col-12">
+          <div
+            class="cart-item-container"
+            v-for="(item, index) in itemList"
+            :key="item.id"
+          >
+            <div class="row cart-item justify-content-center">
+              <div class="col-12 col-md-3 d-flex item-info">
+                <a href=""><img :src="item.src" alt="商品圖示" /></a>
+                <div class="description">
+                  <span> {{ item.title }} </span>
+                </div>
+              </div>
+              <div class="col-12 col-md-2 item-discount"></div>
+              <div class="col-xs-12 col-md-2 item-price text-center">
+                <span class="price-label">NT${{ item.price }}</span>
+              </div>
+              <div class="col-12 col-md-2 item-quantity text-center">
+                <div class="counter-form d-flex">
+                  <span class="input-group-btn">
+                    <button type="button" class="btn" @click="minusBtn(index)">
+                      <font-awesome-icon
+                        class="btn-icon"
+                        :icon="['fas', 'minus']"
+                      />
+                    </button>
+                  </span>
+                  <input type="number" v-model.number="item.count" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn" @click="addBtn(index)">
+                      <font-awesome-icon
+                        class="btn-icon"
+                        :icon="['fas', 'plus']"
+                      />
+                    </button>
+                  </span>
+                </div>
+              </div>
+              <div class="col-12 col-md-2 item-total">
+                <span>NT${{ item.price * item.count }}</span>
+              </div>
+              <div class="col-12 col-md-1 item-operate text-center">
+                <span>
                   <font-awesome-icon
-                    class="btn-icon"
-                    :icon="['fas', 'minus']"
-                  />
-                </button>
-              </span>
-              <input type="number" v-model.number="item.count" />
-              <span class="input-group-btn">
-                <button type="button" class="btn" @click="addBtn(index)">
-                  <font-awesome-icon class="btn-icon" :icon="['fas', 'plus']" />
-                </button>
-              </span>
+                    class="del-icon"
+                    :icon="['fas', 'trash-alt']"
+                    @click="deleteBtn(index)"
+                /></span>
+              </div>
             </div>
-          </div>
-          <div class="col-xs-12 col-sm-2 item-total text-center">
-            <span>NT$</span><span>{{ item.price * item.count }}</span>
-          </div>
-          <div class="col-xs-12 col-sm-1 item-operate text-center">
-            <span>
-              <font-awesome-icon
-                class="del-icon"
-                :icon="['fas', 'trash-alt']"
-                @click="deleteBtn(index)"
-            /></span>
           </div>
         </div>
       </div>
@@ -344,7 +483,7 @@
   <section class="shopping-cart-description mb-4">
     <div class="container justify-content-between">
       <div class="row">
-        <div class="col-sm-7 col-md-8 ps-0">
+        <div class="col-sm-12 col-md-8 ps-0">
           <div class="order-form">
             <h3 class="shopping-cart-title">選擇送貨及付款方式</h3>
             <div class="order-form-body">
@@ -403,7 +542,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-5 col-md-4 pe-0">
+        <div class="col-sm-12 col-md-4 pe-0">
           <div class="order-checkout-form">
             <h3 class="shopping-cart-title">訂單資訊</h3>
             <div class="checkout-summary-list">

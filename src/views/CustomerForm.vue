@@ -146,6 +146,14 @@
   }
 }
 .customer-form {
+  .container {
+    @include pad {
+      @media (max-width: 768px) {
+        max-width: 90%;
+        margin: 0 auto;
+      }
+    }
+  }
   &-info {
     border: 1px solid #ededed;
   }
@@ -168,6 +176,11 @@
     &-body {
       padding: 15px 15px 0 15px;
       font-size: 14px;
+    }
+    @include pad {
+      @media (max-width: 768px) {
+        margin-bottom: 30px;
+      }
     }
   }
 
@@ -284,7 +297,7 @@
   <section class="customer-form mb-5">
     <div class="container">
       <div class="row">
-        <div class="col-sm-6 ps-0">
+        <div class="col-sm-12 col-md-6 ps-0">
           <div class="customer-form-info">
             <h3 class="form-title customer-form-title">顧客資料</h3>
             <div class="customer-form-body">
@@ -339,7 +352,7 @@
             </div>
           </div>
         </div>
-        <div class="col-sm-6 pe-0">
+        <div class="col-sm-12 col-md-6 pe-0">
           <div class="message-form">
             <h3 class="form-title message-form-title">訂單備註</h3>
             <div class="message-form-body">

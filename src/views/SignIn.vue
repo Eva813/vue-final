@@ -98,6 +98,51 @@
 // .form .tab-content > div {
 //   display: none;
 // }
+
+.password-form {
+  position: relative;
+}
+.password-span {
+  position: absolute;
+  color: #fff;
+  font-weight: 700;
+  z-index: 2;
+  font-size: 7px;
+  top: 51px;
+  left: 26px;
+}
+.po-password-strength-bar {
+  border-radius: 2px;
+  transition: all 0.2s linear;
+  height: 13px;
+  margin-top: 8px;
+}
+
+.po-password-strength-bar.risky {
+  background-color: #f95e68;
+  width: 10%;
+}
+
+.po-password-strength-bar.guessable {
+  background-color: #fb964d;
+  width: 32.5%;
+  content: "guess";
+}
+
+.po-password-strength-bar.weak {
+  background-color: #fdd244;
+  width: 55%;
+}
+
+.po-password-strength-bar.safe {
+  background-color: #b0dc53;
+  width: 77.5%;
+}
+
+.po-password-strength-bar.secure {
+  background-color: #35cc62;
+  width: 100%;
+}
 </style>
 <template>
   <Navbar></Navbar>
@@ -148,12 +193,12 @@
 
                     <ErrorMessage name="email" class="invalid-feedback" />
                   </div>
-                  <div class="form-element">
+                  <div class="form-element password-form">
                     <Field
                       class="form-control"
                       type="password"
                       name="password"
-                      rules="required|min:8"
+                      rules="required|min:9"
                       placeholder="密碼"
                       v-model="user.password"
                       :class="{
@@ -162,6 +207,13 @@
                       }"
                     />
                     <ErrorMessage name="password" class="invalid-feedback" />
+                    <span v-if="score === 1" class="password-span">week</span>
+                    <span v-if="score === 2" class="password-span">secure</span>
+                    <span v-if="score === 3" class="password-span">strong</span>
+                    <password-meter
+                      :password="user.password"
+                      @score="onScore"
+                    />
                   </div>
                   <div class="form-element">
                     <select class="form-option" name="sex" id="sex">
@@ -232,11 +284,14 @@
 <script>
 import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
+import passwordMeter from "vue-simple-password-meter";
+
 export default {
   name: "SignIn",
   components: {
     Navbar,
     Footer,
+    passwordMeter,
   },
   data() {
     return {
@@ -244,16 +299,29 @@ export default {
       user: {
         name: "",
         email: "",
-        password: "",
-        date="",
+        password: null,
+        date: "",
       },
+      score: null,
     };
   },
   methods: {
     onSubmit(value) {
       alert(JSON.stringify(values, null, 2));
     },
+    onScore(payload) {
+      console.log(payload.score); // from 0 to 4
+      console.log(payload.strength); // one of : 'risky', 'guessable', 'weak', 'safe' , 'secure'
+      this.score = payload.score;
+    },
   },
 };
 </script>
 
+// if (this.score === 1) {
+//         return "weak";
+//       } else if (this.score === 2) {
+//         return "safe";
+//       } else if (this.score === 3) {
+//         return "secure";
+//       }

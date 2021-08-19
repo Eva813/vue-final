@@ -1,16 +1,17 @@
 <style lang="scss" scoped>
 @import "~@/assets/all.scss";
 nav {
-  overflow: hidden;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   background: rgba(255, 255, 255, 0.98);
   position: fixed;
   top: 0;
   width: 100%; /* Full width */
   z-index: 5;
+  justify-content: flex-start;
   @include desk-below {
     @media (max-width: 1023px) {
       max-height: 60px;
+      justify-content: space-between;
     }
   }
   @include pad {
@@ -29,6 +30,7 @@ nav {
 }
 .icon-group {
   display: flex;
+  margin-right: 15px;
   &-item {
     font-size: 16px;
     margin: 0 10px;
@@ -62,6 +64,7 @@ nav {
   @include desk-below {
     @media (max-width: 1023px) {
       display: none;
+      
     }
   }
   @include pad {
@@ -151,32 +154,25 @@ nav {
   transform: rotate(45deg);
   width: 30px;
 }
-.icon-nav input:checked ~ .navbar-nav {
-  @include desk-below {
-    @media (max-width: 1023px) {
-      right: 0;
-      box-shadow: -20px 0 40px rgba(0, 0, 0, 0.3);
-    }
-  }
-}
 
 .navbar-expand .navbar-nav {
   justify-content: flex-start;
   flex-direction: row;
   @include desk-below {
     @media (max-width: 1023px) {
-      justify-content: start;
-      flex-direction: column;
-      align-items: center;
-      position: fixed;
-      top: 0;
-      // 使整個區塊隱藏
-      right: -300px;
-      background: #fff;
-      width: 300px;
-      height: 100%;
-      z-index: 5;
-      padding-top: 65px;
+      display: none;
+      // justify-content: start;
+      // flex-direction: column;
+      // align-items: center;
+      // position: fixed;
+      // top: 0;
+      // // 使整個區塊隱藏
+      // right: -300px;
+      // background: #fff;
+      // width: 300px;
+      // height: 100%;
+      // z-index: 5;
+      // padding-top: 65px;
     }
   }
 
@@ -196,20 +192,104 @@ nav {
     }
   }
 }
+
+////
+.menuPanel {
+  position: fixed;
+  z-index: 5;
+  padding-top: 5px;
+  background-color: #fff;
+  box-shadow: -20px 0 40px rgba(0, 0, 0, 0.3);
+  left: 0;
+  top: 0;
+
+  @media (max-width: 1023px) {
+  }
+}
+.aside-menu {
+  overflow: scroll;
+  padding: 15px 0;
+  margin-right: 16px;
+  width: 300px;
+  height: 100vh;
+  //background: #1b1b1b;
+  ul {
+    height: 100%;
+    width: 100%;
+  }
+  li {
+    line-height: 55px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+    cursor: pointer;
+  }
+  .first {
+    position: relative;
+    transition: transform 0.4s;
+    span {
+      display: inline-block;
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      font-size: 10px;
+    }
+    &:hover .icon {
+      // transform: rotate(-180deg);
+      color: $primary;
+    }
+    &:hover a {
+      color: $primary;
+      // border-left-color: $primary;
+    }
+    &:hover {
+      background: rgba(247, 243, 243, 0.9);
+    }
+    .icon.rotate {
+      transform: rotate(-180deg);
+    }
+  }
+  a {
+    width: 90%;
+    color: #333;
+    font-size: 16px;
+    padding-left: 20px;
+
+    border-left: 3px solid transparent;
+    transition: transform 0.4s;
+    &:hover {
+      color: $primary;
+      // border-left-color: $primary;
+    }
+  }
+  @include desk-below {
+    @media (max-width: 1023px) {
+    }
+  }
+}
+.inner-catagory {
+  position: static;
+  //display: none;
+  li {
+    line-height: 35px;
+    border-bottom: none;
+  }
+  a {
+    font-size: 15px;
+    color: #888;
+    padding-left: 40px;
+  }
+}
 </style>
 
 <template>
-  <nav class="navbar navbar-expand navbar-light bg-white">
+  <nav class="navbar navbar-out navbar-expand navbar-light bg-white">
     <div class="nav-container container-fluid px-3">
       <a class="navbar-brand" href="#">
         <img src="@/assets/img/logo1.png" alt="" />
       </a>
       <div class="icon-nav d-flex align-items-center">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- 漢堡選單 -->
-          <input type="checkbox" class="toggle-menu" />
-          <div class="hamburger"></div>
-          <!-- 漢堡選單 END -->
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="#"
@@ -260,44 +340,129 @@ nav {
             </li>
           </ul>
         </div>
-        <ul class="icon-group">
-          <!-- 搜尋 -->
-          <li class="icon-group-item">
-            <div class="search-box d-flex">
-              <div class="input">
-                <input
-                  type="text"
-                  class="search-box-input"
-                  placeholder="search"
-                />
-              </div>
-              <a href="#" class="search-box-btn link-dark">
-                <font-awesome-icon :icon="['fas', 'search']" />
-              </a>
-            </div>
-          </li>
-          <li class="icon-group-item">
-            <a href="#" class="link-dark"
-              ><font-awesome-icon :icon="['fas', 'comments']"
-            /></a>
-          </li>
-          <li class="icon-group-item">
-            <a href="#" class="link-dark"
-              ><font-awesome-icon :icon="['fas', 'user']"
-            /></a>
-          </li>
-          <li class="icon-group-item">
-            <a href="#" class="link-dark"
-              ><font-awesome-icon :icon="['fas', 'shopping-cart']" />
-              <span class="Cart-count primary-color" style="display: inline">{{
-                parentSpanNumbers
-              }}</span></a
-            >
-          </li>
-        </ul>
+        <!-- 漢堡選單 -->
+        <input
+          type="checkbox"
+          class="toggle-menu"
+          @click="handDomShow('isShowMenu')"
+        />
+        <div class="hamburger"></div>
+        <!-- 漢堡選單 END -->
       </div>
     </div>
+    <ul class="icon-group">
+      <!-- 搜尋 -->
+      <li class="icon-group-item">
+        <div class="search-box d-flex">
+          <div class="input">
+            <input type="text" class="search-box-input" placeholder="search" />
+          </div>
+          <a href="#" class="search-box-btn link-dark">
+            <font-awesome-icon :icon="['fas', 'search']" />
+          </a>
+        </div>
+      </li>
+      <li class="icon-group-item">
+        <a href="#" class="link-dark"
+          ><font-awesome-icon :icon="['fas', 'comments']"
+        /></a>
+      </li>
+      <li class="icon-group-item">
+        <a href="#" class="link-dark"
+          ><font-awesome-icon :icon="['fas', 'user']"
+        /></a>
+      </li>
+      <li class="icon-group-item">
+        <a href="#" class="link-dark"
+          ><font-awesome-icon :icon="['fas', 'shopping-cart']" />
+          <span class="Cart-count primary-color" style="display: inline">{{
+            parentSpanNumbers
+          }}</span></a
+        >
+      </li>
+    </ul>
   </nav>
+
+  <div class="menuPanel aside-menu" v-show="isShowMenu">
+    <ul class="catagory">
+      <li>
+        <div class="first d-flex">
+          <a href="#">🐷 開鍋祭，開鍋囉~ </a>
+        </div>
+      </li>
+      <li>
+        <div class="first d-flex">
+          <a href="#">美食生活 </a>
+          <span @click="handDomShow('isShowFood')">
+            <font-awesome-icon
+              class="icon"
+              :icon="['fas', 'chevron-down']"
+              :class="{ rotate: isTransformFood }"
+              @click="handDomShow('isTransformFood')"
+            />
+          </span>
+        </div>
+        <ul v-show="isShowFood" class="inner-catagory">
+          <li><a href="#">冷凍食品</a></li>
+          <li><a href="#">POPOLA BAKE</a></li>
+          <li><a href="#">廚房用品</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="first d-flex">
+          <a href="#">美妝保養 </a>
+          <span @click="handDomShow('isShowBeauty')"
+            ><font-awesome-icon
+              class="icon"
+              :icon="['fas', 'chevron-down']"
+              :class="{ rotate: isTransformBeauty }"
+              @click="handDomShow('isTransformBeauty')"
+            />
+          </span>
+        </div>
+        <ul v-show="isShowBeauty" class="inner-catagory">
+          <li><a href="#">保養系列</a></li>
+          <li><a href="#">美妝系列</a></li>
+          <li><a href="#">日程生活</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="first d-flex">
+          <a href="#">毛孩愛用 </a>
+          <span @click="handDomShow('isShowPet')">
+            <font-awesome-icon
+              class="icon"
+              :icon="['fas', 'chevron-down']"
+              :class="{ rotate: isTransformPet }"
+              @click="handDomShow('isTransformPet')"
+            />
+          </span>
+        </div>
+        <ul v-show="isShowPet" class="inner-catagory">
+          <li><a href="#">狗狗食品</a></li>
+          <li><a href="#">狗狗用品</a></li>
+          <li><a href="#">老犬照護</a></li>
+          <li><a href="#">貓貓食品</a></li>
+          <li><a href="#">貓貓用品</a></li>
+        </ul>
+      </li>
+      <li>
+        <div class="first d-flex">
+          <a href="#">營養師專欄 </a>
+        </div>
+      </li>
+      <li>
+        <div class="first d-flex">
+          <a href="#">會員福利 </a>
+        </div>
+      </li>
+      <li>
+        <div class="first d-flex">
+          <a href="#">《防疫期間物流變更公告》 </a>
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -308,6 +473,40 @@ export default {
       default: 0,
     },
   },
+  data() {
+    return {
+      headerFixed: true,
+      isShow: false,
+      isTransformFood: true,
+      isTransformBeauty: false,
+      isTransformPet: false,
+      isTransformOrder: false,
+      isTransformLimit: false,
+
+      isShowBeauty: false,
+      isShowFood: true,
+      isShowPet: false,
+      isShowOrder: false,
+      isShowLimit: false,
+      isShowMenu: false,
+    };
+  },
+  methods: {
+    handDomShow(key) {
+      this[key] = !this[key];
+    },
+    handleScroll() {
+      // 得到页面滚动的距离
+      let scrollTop =
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop;
+      // 判断页面滚动的距离是否大于吸顶元素的位置
+      this.headerFixed = scrollTop > this.offsetTop - this.offsetHeight * 2;
+    },
+  },
+  mounted() {},
+  destroyed() {},
 };
 </script>
 

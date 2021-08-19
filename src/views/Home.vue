@@ -1,10 +1,10 @@
 <style lang="scss">
 @import "~@/assets/all.scss";
 .banner {
-  margin-top: 80px;
-   @include pad {
+  margin-top: 66px;
+  @include pad {
     @media (max-width: 768px) {
-      margin-top: 65px;
+      margin-top: 63px;
     }
   }
 }
@@ -26,7 +26,7 @@
     display: flex;
   }
   .player-container {
-    max-width: 1140px;
+    width: 1140px;
   }
   .player {
     width: 100%;

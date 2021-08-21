@@ -113,7 +113,9 @@
 
     <div class="row bg-light text-center p-4">
       <div class="col">
-        <div class="copyright">POPOLA版權所有 Copyright &copy; 2017</div>
+        <div class="copyright">
+          2021 &copy; Eva Chan <span> 僅做為個人學習使用，非商業用途</span>
+        </div>
       </div>
     </div>
   </div>

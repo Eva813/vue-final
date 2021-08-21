@@ -7,11 +7,17 @@ nav {
   top: 0;
   width: 100%; /* Full width */
   z-index: 5;
-  justify-content: flex-start;
+  > .container-fluid {
+    justify-content: flex-start;
+    @include desk-below {
+      @media (max-width: 1023px) {
+        justify-content: space-between;
+      }
+    }
+  }
   @include desk-below {
     @media (max-width: 1023px) {
       max-height: 60px;
-      justify-content: space-between;
     }
   }
   @include pad {
@@ -64,7 +70,6 @@ nav {
   @include desk-below {
     @media (max-width: 1023px) {
       display: none;
-      
     }
   }
   @include pad {

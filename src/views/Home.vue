@@ -14,23 +14,42 @@
   }
 }
 .section-video {
-  width: calc(100% - 1px);
-  height: 650px;
+  // height: 650px;
   overflow: auto;
+  max-width: 1140px;
   @include pad {
     @media (max-width: 768px) {
-      width: 750px;
     }
   }
   .row {
-    display: flex;
+    @include for-desk {
+      @media (max-width: 991px) {
+        flex-wrap: nowrap;
+      }
+    }
   }
   .player-container {
-    width: 1140px;
+    // width: 1140px;
+
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+
+    @include for-desk {
+      @media (max-width: 991px) {
+        // width: calc(100% - 1px);
+        flex-grow: 1;
+        width: 0;
+      }
+    }
   }
   .player {
-    width: 100%;
-    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100% !important;
+    height: 100% !important;
   }
 }
 .title {
@@ -60,7 +79,6 @@
     <!-- <Carousel></Carousel> -->
 
     <div class="banner mb-5">
-      <!-- <Swiper></Swiper> -->
       <Agile></Agile>
     </div>
   </header>
@@ -81,17 +99,13 @@
     <Pagination></Pagination>
   </section>
   <section class="container section-video d-flex justify-content-center mb-5">
-    <div class="row">
-      <div class="player-container">
-        <iframe
-          class="player"
-          src="https://www.youtube.com/embed/EuEguYzDlL0"
-          title="YouTube video player"
-          frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
-      </div>
+    <div class="player-container">
+      <iframe
+        class="player"
+        src="https://www.youtube.com/embed/EuEguYzDlL0"
+        title="YouTube video player"
+        allowfullscreen="true"
+      ></iframe>
     </div>
   </section>
   <section class="food-card mb-5">

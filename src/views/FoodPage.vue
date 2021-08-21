@@ -251,6 +251,13 @@
     }
   }
 }
+////cart-panel-container
+.cart-panel {
+  display: none;
+  .cart-items {
+    max-height: calc(100vh-267px);
+  }
+}
 </style>
 
 
@@ -406,6 +413,37 @@
       </div>
     </div>
   </div>
+  <div class="cart-panel">
+    <div class="cart-items">
+      <div class="cart-item-container v-for">
+        <div class="cart-item">
+          <a href="" target="_blank" class="product-link">
+            <img src="" alt="product-img" />
+          </a>
+        </div>
+        <div class="cart-item-content">
+          <div class="cart-item-title">milk tea</div>
+        </div>
+        <div class="price-detail">
+          <span>數</span>
+          <span style="margin: 0 3px">x</span>
+          <span>NT$99</span>
+        </div>
+      </div>
+      <div class="remove">
+        <a href=""
+          ><font-awesome-icon
+            class="del-icon"
+            :icon="['fas', 'trash-alt']"
+            @click="deleteBtn(index)"
+        /></a>
+      </div>
+    </div>
+    <div class="cart-check-btn">
+      <button class="btn">訂單結帳</button>
+    </div>
+  </div>
+
   <Pagination></Pagination>
 
   <div>

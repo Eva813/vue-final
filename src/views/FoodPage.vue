@@ -253,10 +253,70 @@
 }
 ////cart-panel-container
 .cart-panel {
-  display: none;
+  background-color: #fff;
+  display: block;
+  position: absolute;
+  right: 5% !important;
+  top: 179px;
+  width: 300px;
+  color: #333;
+  z-index: 20;
+  overflow: visible;
+  border: 1px solid #f7f7f7;
   .cart-items {
     max-height: calc(100vh-267px);
   }
+  .cart-item {
+    position: relative;
+    padding: 15px 15px 92px 15px;
+  }
+  .cart-item-img {
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin-right: 10px;
+  }
+  .cart-item-content {
+    float: left;
+    &-title {
+      color: #888;
+      font-size: 13px;
+      padding-bottom: 2px;
+    }
+  }
+  .price-detail {
+    position: absolute;
+    bottom: 10px;
+    font-size: 14px;
+  }
+  .remove {
+    color: #858585;
+    width: 16px;
+    position: absolute;
+    text-align: left;
+    right: 12px;
+    bottom: 11px;
+  }
+  .cart-check-btn {
+    padding: 15px;
+    .btn {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 6px 12px;
+      background-color: $primary;
+      color: #fff;
+      border-radius: 3px;
+    }
+  }
+}
+.cart-panel.cart-items > .cart-item-container:not(:first-child):before,
+.cart-panel .cart-items > .cart-item-container:not(:first-child):after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  width: 15px;
+  border-top-width: 1px;
+  border-top-style: solid;
 }
 </style>
 
@@ -418,28 +478,32 @@
       <div class="cart-item-container v-for">
         <div class="cart-item">
           <a href="" target="_blank" class="product-link">
-            <img src="" alt="product-img" />
+            <img
+              class="cart-item-img"
+              src="@/assets/img/food/food1-2.png"
+              alt="product-img"
+            />
           </a>
+          <div class="cart-item-content">
+            <div class="cart-item-title">milk tea</div>
+            <div class="price-detail">
+              <span>數</span>
+              <span style="margin: 0 3px">x</span>
+              <span>NT$99</span>
+            </div>
+          </div>
+          <div class="remove">
+            <a href=""
+              ><font-awesome-icon
+                class="del-icon"
+                :icon="['fas', 'trash-alt']"
+                @click="deleteBtn(index)"
+            /></a>
+          </div>
         </div>
-        <div class="cart-item-content">
-          <div class="cart-item-title">milk tea</div>
-        </div>
-        <div class="price-detail">
-          <span>數</span>
-          <span style="margin: 0 3px">x</span>
-          <span>NT$99</span>
-        </div>
-      </div>
-      <div class="remove">
-        <a href=""
-          ><font-awesome-icon
-            class="del-icon"
-            :icon="['fas', 'trash-alt']"
-            @click="deleteBtn(index)"
-        /></a>
       </div>
     </div>
-    <div class="cart-check-btn">
+    <div class="cart-check-btn button">
       <button class="btn">訂單結帳</button>
     </div>
   </div>

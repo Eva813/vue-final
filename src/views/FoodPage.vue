@@ -269,6 +269,15 @@
   .cart-item {
     position: relative;
     padding: 15px 15px 92px 15px;
+    &:before {
+      content: "";
+      top: -1px;
+      width: 92%;
+      position: absolute;
+      border-top-width: 1px;
+      border-top-style: solid;
+      color: rgb(211, 211, 211);
+    }
   }
   .cart-item-img {
     width: 50px;
@@ -278,7 +287,7 @@
   }
   .cart-item-content {
     float: left;
-    &-title {
+    .cart-item-title {
       color: #888;
       font-size: 13px;
       padding-bottom: 2px;
@@ -309,14 +318,15 @@
     }
   }
 }
-.cart-panel.cart-items > .cart-item-container:not(:first-child):before,
-.cart-panel .cart-items > .cart-item-container:not(:first-child):after {
+.cart-panel .first-none:before {
   content: "";
-  position: absolute;
   top: -1px;
-  width: 15px;
+  width: 92%;
+  position: absolute;
   border-top-width: 1px;
   border-top-style: solid;
+  //   border-top-style: solid;
+  border-top-color: transparent;
 }
 </style>
 
@@ -455,7 +465,13 @@
               <a class="card-img-link" href="#">
                 <img :src="item.src" class="card-img-top" alt="product-img" />
               </a>
-              <div class="btn card-btn" @click="addToCart(item)">
+              <div
+                class="btn card-btn"
+                @click="
+                  addToCart(item);
+                  triggerPanel();
+                "
+              >
                 加入購物車
               </div>
             </div>
@@ -473,23 +489,24 @@
       </div>
     </div>
   </div>
-  <div class="cart-panel">
+  <div class="cart-panel" v-show="showPanel">
     <div class="cart-items">
-      <div class="cart-item-container v-for">
-        <div class="cart-item">
+      <div
+        class="cart-item-container v-for"
+        v-for="(item, index) in displayCartItems"
+        :key="item.title"
+      >
+        <!-- //使第一筆的資料，沒有上方的線條 -->
+        <div :class="['cart-item', item === item[0] ? 'first-none' : '']">
           <a href="" target="_blank" class="product-link">
-            <img
-              class="cart-item-img"
-              src="@/assets/img/food/food1-2.png"
-              alt="product-img"
-            />
+            <img class="cart-item-img" :src="item.src" alt="product-img" />
           </a>
           <div class="cart-item-content">
-            <div class="cart-item-title">milk tea</div>
+            <div class="cart-item-title">{{ item.title }}</div>
             <div class="price-detail">
-              <span>數</span>
+              <span>{{ item.inCart }}</span>
               <span style="margin: 0 3px">x</span>
-              <span>NT$99</span>
+              <span>NT{{ item.price }}</span>
             </div>
           </div>
           <div class="remove">
@@ -549,54 +566,63 @@ export default {
       isShowPet: false,
       isShowOrder: false,
       isShowLimit: false,
+      showPanel: false,
       food: [
         {
           title: "酵素旅行包(20入/盒)",
           price: 1380,
           src: require("@/assets/img/food/food1-1.png"),
           inCart: 0,
+          checked: false,
         },
         {
           title: "圓圓母湯 (20瓶/箱)",
           price: 1560,
           src: require("@/assets/img/food/food2-1.png"),
           inCart: 0,
+          checked: false,
         },
         {
           title: "POPOLAの酵",
           price: 1550,
           src: require("@/assets/img/food/food3-1.png"),
           inCart: 0,
+          checked: false,
         },
         {
           title: "吶吶的桃花朵朵紅茶包",
           price: 168,
           src: require("@/assets/img/food/food4-1.png"),
           inCart: 0,
+          checked: false,
         },
         {
           title: "旅行包(6入/盒)",
           price: 1688,
           src: require("@/assets/img/food/food1-2.png"),
           inCart: 0,
+          checked: false,
         },
         {
           title: "酵素旅包(7入/盒)",
           price: 1688,
           src: require("@/assets/img/food/food1-2.png"),
           inCart: 0,
+          checked: false,
         },
         {
           title: "酵旅行包(8入/盒)",
           price: 1688,
           src: require("@/assets/img/food/food1-2.png"),
           inCart: 0,
+          checked: false,
         },
         {
           title: "素旅行包(9入/盒)",
           price: 1688,
           src: require("@/assets/img/food/food1-2.png"),
           inCart: 0,
+          checked: false,
         },
       ],
 
@@ -645,29 +671,35 @@ export default {
       //點擊後，選到該品項
       //console.log("point to ", theFood);
       // 設定初始化。並先取得localstorage的資料，確認我們的本地是否有資料
-      let cartItems = localStorage.getItem("productsInCart");
+
+      this.displayCartItems = localStorage.getItem("productsInCart");
       //將取得的資料，轉換為js物件形式
-      cartItems = JSON.parse(cartItems);
+      this.displayCartItems = JSON.parse(this.displayCartItems);
       //check localStorage 是否為null
-      if (cartItems != null) {
-        if (cartItems[theFood.title] == undefined) {
-          cartItems = {
-            ...cartItems,
+      if (this.displayCartItems != null) {
+        if (this.displayCartItems[theFood.title] == undefined) {
+          this.displayCartItems = {
+            ...this.displayCartItems,
             //物件名稱：內容
             [theFood.title]: theFood,
           };
         }
-        cartItems[theFood.title].inCart += 1;
+
+        this.displayCartItems[theFood.title].inCart += 1;
       } else {
         theFood.inCart = 1;
         //變數，存放於localStorage
-        cartItems = {
+        this.displayCartItems = {
           //物件名稱：內容
           [theFood.title]: theFood,
         };
       }
 
-      localStorage.setItem("productsInCart", JSON.stringify(cartItems));
+      localStorage.setItem(
+        "productsInCart",
+        JSON.stringify(this.displayCartItems)
+      );
+      console.log(this.displayCartItems);
     },
     totalPrice(theFoodPrice) {
       let cartPrice = localStorage.getItem("totalPrice");
@@ -684,15 +716,21 @@ export default {
       console.log("send foodpage data");
       this.emitter.emit("getData", this.text);
     },
+    triggerPanel() {
+      this.showPanel = true;
+      setTimeout(() => (this.showPanel = false), 4000);
+    },
   },
   watch: {},
   computed: {},
   mounted() {
     //讓數字在更新之後，仍然存取到資料
     this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
-    this.displayCartItems =
-      JSON.parse(localStorage.getItem("productsInCart")) || [];
-    //console.log(this.displayCartItems);
+    // this.displayCartItems =
+    //   JSON.parse(localStorage.getItem("productsInCart")) || [];
+    // console.log(Object.keys(this.displayCartItems));
+    // let newObj = Object.assign({}, this.displayCartItems);
+    // console.log(Array.prototype.slice.call(newObj));
   },
 };
 </script>

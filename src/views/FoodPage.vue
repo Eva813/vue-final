@@ -261,10 +261,14 @@
   width: 300px;
   color: #333;
   z-index: 20;
-  overflow: visible;
+  // overflow: visible;
   border: 1px solid #f7f7f7;
+  transition: 0.5s;
+
   .cart-items {
     max-height: calc(100vh-267px);
+    overflow: auto;
+    position: relative;
   }
   .cart-item {
     position: relative;
@@ -327,6 +331,29 @@
   border-top-style: solid;
   //   border-top-style: solid;
   border-top-color: transparent;
+}
+//cart-panel animations
+.Panel-enter-from {
+  opacity: 0;
+  transform: translateY(-60px);
+}
+.Panel-enter-to {
+  opacity: 1;
+  transform: translateY(0px);
+}
+.Panel-enter-active {
+  transition: all 0.3 ease;
+}
+.Panel-leave-from {
+  opacity: 1;
+  transform: translateY(0px);
+}
+.Panel-leave-to {
+  opacity: 0;
+  transform: translateY(-60px);
+}
+.Panel-leave-active {
+  transition: all 0.3 ease;
 }
 </style>
 
@@ -489,43 +516,45 @@
       </div>
     </div>
   </div>
-  <div class="cart-panel" v-show="showPanel">
-    <div class="cart-items" ref="cartItems">
-      <div
-        class="cart-item-container"
-        v-for="(item, index) in displayCartItems"
-        :key="item.productId"
-      >
-        <!-- //使第一筆的資料，沒有上方的線條 -->
-        <div :class="['cart-item', getCartClass(item)]" :id="item.productId">
-          <a href="" target="_blank" class="product-link">
-            <img class="cart-item-img" :src="item.src" alt="product-img" />
-          </a>
-          <div class="cart-item-content">
-            <div class="cart-item-title">
-              {{ item.productId }},{{ item.title }}
+  <transition name="Panel">
+    <div class="cart-panel" v-show="showPanel">
+      <div class="cart-items">
+        <div
+          class="cart-item-container"
+          v-for="(item, index) in displayCartItems"
+          :key="item.productId"
+        >
+          <!-- //使第一筆的資料，沒有上方的線條 -->
+          <div :class="['cart-item', getCartClass(item)]" :id="item.productId">
+            <a href="" target="_blank" class="product-link">
+              <img class="cart-item-img" :src="item.src" alt="product-img" />
+            </a>
+            <div class="cart-item-content">
+              <div class="cart-item-title">
+                {{ item.productId }},{{ item.title }}
+              </div>
+              <div class="price-detail">
+                <span>{{ item.inCart }}</span>
+                <span style="margin: 0 3px">x</span>
+                <span>NT{{ item.price }}</span>
+              </div>
             </div>
-            <div class="price-detail">
-              <span>{{ item.inCart }}</span>
-              <span style="margin: 0 3px">x</span>
-              <span>NT{{ item.price }}</span>
+            <div class="remove">
+              <a href=""
+                ><font-awesome-icon
+                  class="del-icon"
+                  :icon="['fas', 'trash-alt']"
+                  @click="deleteBtn(index)"
+              /></a>
             </div>
-          </div>
-          <div class="remove">
-            <a href=""
-              ><font-awesome-icon
-                class="del-icon"
-                :icon="['fas', 'trash-alt']"
-                @click="deleteBtn(index)"
-            /></a>
           </div>
         </div>
       </div>
+      <div class="cart-check-btn button">
+        <button class="btn">訂單結帳</button>
+      </div>
     </div>
-    <div class="cart-check-btn button">
-      <button class="btn">訂單結帳</button>
-    </div>
-  </div>
+  </transition>
 
   <Pagination></Pagination>
 
@@ -724,11 +753,14 @@ export default {
       setTimeout(() => (this.showPanel = false), 4000);
     },
     getCartClass(item) {
-      // let cartItems = this.$refs.cartItems;
+      // fm
       let cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
-      // console.log(cartItems);
-      console.log(Object.values(cart)[0].productId);
-      if (item.productId === 2) {
+
+      let firstItemId = Object.values(cart)[0].productId;
+      console.log(cart);
+
+      //所傳入的item就是所有點擊的item的資料？
+      if (item.productId === firstItemId) {
         return { classNone: this.firstNone };
       }
     },
@@ -739,7 +771,7 @@ export default {
     //讓數字在更新之後，仍然存取到資料
     this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
     this.itemsInCart = JSON.parse(localStorage.getItem("productsInCart")) || [];
-    console.log(this.displayCartItems);
+
     // let newObj = Object.assign({}, this.displayCartItems);
     // console.log(Array.prototype.slice.call(newObj));
   },

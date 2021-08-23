@@ -725,10 +725,9 @@ export default {
     },
     getCartClass(item) {
       // let cartItems = this.$refs.cartItems;
-      this.itemsInCart =
-        JSON.parse(localStorage.getItem("productsInCart")) || [];
+      let cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
       // console.log(cartItems);
-      console.log(item.productId);
+      console.log(Object.values(cart)[0].productId);
       if (item.productId === 2) {
         return { classNone: this.firstNone };
       }

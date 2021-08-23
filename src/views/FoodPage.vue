@@ -239,8 +239,6 @@
   }
 }
 .product-item {
-  // width: 33.3%;
-
   max-width: 340px;
   margin-bottom: 15px;
   .card-top {
@@ -260,7 +258,7 @@
   top: 179px;
   width: 300px;
   color: #333;
-  z-index: 20;
+  z-index: 4;
   // overflow: visible;
   border: 1px solid #f7f7f7;
   transition: 0.5s;
@@ -302,6 +300,9 @@
     bottom: 10px;
     font-size: 14px;
   }
+  .price-x {
+    margin: 0 3px;
+  }
   .remove {
     color: #858585;
     width: 16px;
@@ -329,7 +330,6 @@
   position: absolute;
   border-top-width: 1px;
   border-top-style: solid;
-  //   border-top-style: solid;
   border-top-color: transparent;
 }
 //cart-panel animations
@@ -494,10 +494,7 @@
               </a>
               <div
                 class="btn card-btn"
-                @click="
-                  addToCart(item);
-                  triggerPanel();
-                "
+                @click="addToCart(item), triggerPanel(), goto('cartPanel')"
               >
                 加入購物車
               </div>
@@ -517,7 +514,7 @@
     </div>
   </div>
   <transition name="Panel">
-    <div class="cart-panel" v-show="showPanel">
+    <div class="cart-panel" v-show="showPanel" ref="cartPanel">
       <div class="cart-items">
         <div
           class="cart-item-container"
@@ -531,11 +528,11 @@
             </a>
             <div class="cart-item-content">
               <div class="cart-item-title">
-                {{ item.productId }},{{ item.title }}
+                {{ item.title }}
               </div>
               <div class="price-detail">
                 <span>{{ item.inCart }}</span>
-                <span style="margin: 0 3px">x</span>
+                <span class="price-x">x</span>
                 <span>NT{{ item.price }}</span>
               </div>
             </div>
@@ -584,7 +581,6 @@ export default {
 
   data() {
     return {
-      cart: [],
       isShow: false,
       isTransformFood: false,
       isTransformBeauty: false,
@@ -755,14 +751,17 @@ export default {
     getCartClass(item) {
       // fm
       let cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
-
+      //抓出第一筆資料的id
       let firstItemId = Object.values(cart)[0].productId;
-      console.log(cart);
-
-      //所傳入的item就是所有點擊的item的資料？
+      //所傳入的item就是所有點擊的item的資料
       if (item.productId === firstItemId) {
         return { classNone: this.firstNone };
       }
+    },
+    goto(refName) {
+      var element = this.$refs[refName];
+      var top = element.offsetTop;
+      window.scrollTo(0, top);
     },
   },
   watch: {},
@@ -770,10 +769,6 @@ export default {
   mounted() {
     //讓數字在更新之後，仍然存取到資料
     this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
-    this.itemsInCart = JSON.parse(localStorage.getItem("productsInCart")) || [];
-
-    // let newObj = Object.assign({}, this.displayCartItems);
-    // console.log(Array.prototype.slice.call(newObj));
   },
 };
 </script>

@@ -428,7 +428,7 @@
         <div class="col-12">
           <div
             class="cart-item-container"
-            v-for="(item, index) in itemList"
+            v-for="(item, index) in cartItems"
             :key="item.id"
           >
             <div class="row cart-item justify-content-center">
@@ -452,7 +452,7 @@
                       />
                     </button>
                   </span>
-                  <input type="number" v-model.number="item.count" />
+                  <input type="number" v-model.number="item.inCart" />
                   <span class="input-group-btn">
                     <button type="button" class="btn" @click="addBtn(index)">
                       <font-awesome-icon
@@ -606,6 +606,14 @@ import Footer from "@/components/Footer.vue";
 import componentB from "@/components/Component-b.vue";
 export default {
   name: "ShoppingCart",
+  props: {
+    shoppingCart: {
+      type: Object,
+      default() {
+        return { message: "hello" };
+      },
+    },
+  },
   components: {
     Navbar,
     Footer,
@@ -689,6 +697,12 @@ export default {
         return shipFee;
       } else return shipFee;
     },
+  },
+  mounted() {
+    // if (this.shoppingCart) {
+    //   this.cartItems = this.shoppingCart;
+    // }
+    this.cartItems = JSON.parse(localStorage.getItem("productsInCart")) || [];
   },
   computed: {},
   created() {

@@ -33,7 +33,9 @@ const routes = [
   {
     path: '/shoppingcart',
     name: '購物車頁面',
-    component: () => import('../views/ShoppingCart')
+    component: () => import('../views/ShoppingCart'),
+    props: true,
+
   },
   {
     path: '/customerform',

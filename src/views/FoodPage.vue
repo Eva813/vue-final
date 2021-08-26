@@ -518,7 +518,7 @@
       <div class="cart-items">
         <div
           class="cart-item-container"
-          v-for="(item, index) in displayCartItems"
+          v-for="(item, index) in shoppingCart"
           :key="item.productId"
         >
           <!-- //使第一筆的資料，沒有上方的線條 -->
@@ -548,7 +548,11 @@
         </div>
       </div>
       <div class="cart-check-btn button">
-        <button class="btn">訂單結帳</button>
+        <router-link
+          class="btn"
+          :to="{ name: '購物車頁面', params: { shoppingCart } }"
+          >訂單結帳</router-link
+        >
       </div>
     </div>
   </transition>
@@ -664,7 +668,7 @@ export default {
       selected: "",
       spanNumbers: 0,
       displayCartItems: [],
-      itemsInCart: [],
+      shoppingCart: [],
       text: "這有一段話",
     };
   },
@@ -696,38 +700,54 @@ export default {
       this.setItems(theFood);
     },
     setItems(theFood) {
-      //點擊後，選到該品項
-      //console.log("point to ", theFood);
-      // 設定初始化。並先取得localstorage的資料，確認我們的本地是否有資料
-
-      this.displayCartItems = localStorage.getItem("productsInCart");
-      //將取得的資料，轉換為js物件形式
-      this.displayCartItems = JSON.parse(this.displayCartItems);
-      //check localStorage 是否為null
-      if (this.displayCartItems != null) {
-        if (this.displayCartItems[theFood.title] == undefined) {
-          this.displayCartItems = {
-            ...this.displayCartItems,
-            //物件名稱：內容
-            [theFood.title]: theFood,
-          };
-        }
-
-        this.displayCartItems[theFood.title].inCart += 1;
-      } else {
-        theFood.inCart = 1;
-        //變數，存放於localStorage
-        this.displayCartItems = {
-          //物件名稱：內容
-
-          [theFood.title]: theFood,
+      const cacheCarID = []; // 暫存 ID 放置處
+      // 一開始先將 carData 中的 ID 全部撈出來
+      this.shoppingCart.forEach((item) => {
+        cacheCarID.push(item.productId);
+      });
+      // 接下來使用 indexOf 尋找傳進來的參數 ID 是否有在該陣列中
+      // 若不存在則會回傳 -1 並加入到陣列儲存在 localStorage
+      // 若存在則會回傳 0 並改走 else
+      if (cacheCarID.indexOf(theFood.productId) === -1) {
+        const cartContent = {
+          productId: theFood.productId, // 產品 ID
+          inCart: 1, // 產品數量，預設一筆
+          title: theFood.title, // 產品標題
+          price: theFood.price, // 產品銷售金額
+          src: theFood.src,
         };
+        // 將數量推回陣列中
+        this.shoppingCart.push(cartContent);
+        // 重新寫入 localStorage
+        localStorage.setItem(
+          "productsInCart",
+          JSON.stringify(this.shoppingCart)
+        );
+      } else {
+        let cache = {}; // 產品暫存處
+        this.shoppingCart.forEach((item, keys) => {
+          // 只找相同的產品內容
+          if (item.productId === theFood.productId) {
+            let { inCart } = item; // 取出已存在 localStorage 購物車的資料並加數量增加
+            cache = {
+              productId: theFood.productId, // 產品 ID
+              inCart: (inCart += 1), // 產品當前數量，針對數量增加數量
+              title: theFood.title, // 產品標題
+              price: theFood.price, // 產品原始金額
+              src: theFood.src,
+            };
+            // 移除現有 localStorage 購物車的資料，否則 localStorage 會重複加入
+            this.shoppingCart.splice(keys, 1);
+          }
+        });
+        // 將數量已經增加的資料推回陣列中
+        this.shoppingCart.push(cache); // 不建議放在 forEach 內，否則迴圈會重複執行導致變成加二
+        localStorage.setItem(
+          "productsInCart",
+          JSON.stringify(this.shoppingCart)
+        );
       }
-
-      localStorage.setItem(
-        "productsInCart",
-        JSON.stringify(this.displayCartItems)
-      );
+      console.log(this.shoppingCart);
     },
     totalPrice(theFoodPrice) {
       let cartPrice = localStorage.getItem("totalPrice");
@@ -753,6 +773,7 @@ export default {
       let cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
       //抓出第一筆資料的id
       let firstItemId = Object.values(cart)[0].productId;
+      console.log(firstItemId);
       //所傳入的item就是所有點擊的item的資料
       if (item.productId === firstItemId) {
         return { classNone: this.firstNone };
@@ -769,6 +790,8 @@ export default {
   mounted() {
     //讓數字在更新之後，仍然存取到資料
     this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
+    // this.shoppingCart =
+    //   JSON.parse(localStorage.getItem("productsInCart")) || [];
   },
 };
 </script>

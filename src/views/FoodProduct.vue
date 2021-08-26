@@ -1104,6 +1104,7 @@ import ProductCard from "@/components/ProductCard.vue";
 import Footer from "@/components/Footer.vue";
 export default {
   name: "FoodProduct",
+  
   components: {
     Navbar,
     Breadcrumb,
@@ -1158,6 +1159,7 @@ export default {
         //   src: require("@/assets/img/food/food1-2.png"),
         // },
       ],
+      
     };
   },
   methods: {
@@ -1180,5 +1182,6 @@ export default {
       return this.productImg[this.activeImage].img;
     },
   },
+  
 };
 </script>

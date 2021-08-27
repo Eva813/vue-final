@@ -429,7 +429,7 @@
           <div
             class="cart-item-container"
             v-for="(item, index) in cartItems"
-            :key="item.id"
+            :key="item.productId"
           >
             <div class="row cart-item justify-content-center">
               <div class="col-12 col-md-3 d-flex item-info">
@@ -606,14 +606,7 @@ import Footer from "@/components/Footer.vue";
 import componentB from "@/components/Component-b.vue";
 export default {
   name: "ShoppingCart",
-  props: {
-    shoppingCart: {
-      type: Object,
-      default() {
-        return { message: "hello" };
-      },
-    },
-  },
+  props: {},
   components: {
     Navbar,
     Footer,
@@ -675,8 +668,7 @@ export default {
       }
     },
     deleteBtn(deleteIndex) {
-      this.changeIndex = deleteIndex;
-      this.itemList.splice(deleteIndex, 1);
+      this.cartItems.splice(deleteIndex, 1);
     },
     handDomShow(key) {
       this[key] = !this[key];

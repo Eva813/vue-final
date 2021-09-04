@@ -305,35 +305,31 @@ nav {
               >
             </li>
             <li class="nav-item dropdown">
-              <router-link
+              <a
                 class="nav-link dropdown-toggle"
+                href="#"
                 id="navbarDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
-                to="/foodproduct"
               >
                 所有商品
-              </router-link>
+              </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">常溫飲食</a></li>
                 <li>
-                  <a class="dropdown-item dropend" href="#"
-                    >美食生活<button
-                      type="button"
-                      class="
-                        btn btn-secondary
-                        dropdown-toggle dropdown-toggle-split
-                      "
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <span class="visually-hidden">Toggle Dropright</span>
-                    </button>
-                  </a>
+                  <router-link class="dropdown-item" to="/foodpage"
+                    >常溫飲食</router-link
+                  >
                 </li>
                 <li>
-                  <a class="dropdown-item" href="#">美妝保健</a>
+                  <router-link class="dropdown-item dropend" to="/foodpage"
+                    >美食生活
+                  </router-link>
+                </li>
+                <li>
+                  <router-lin class="dropdown-item" to="/foodpage"
+                    >美妝保健</router-lin
+                  >
                 </li>
               </ul>
             </li>

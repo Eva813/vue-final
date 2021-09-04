@@ -291,6 +291,7 @@
   }
   .order-form {
     border: 1px solid #ededed;
+    margin-right:10px;
     @include pad {
       @media (max-width: 768px) {
         margin-bottom: 30px;
@@ -593,8 +594,7 @@
       <img src="@/assets/img/checkout-level.png" alt="" />
     </div>
   </section>
-  <div>{{ text }}</div>
-  <!-- <component-b></component-b> -->
+  
   <footer>
     <Footer></Footer>
   </footer>
@@ -610,7 +610,6 @@ export default {
   components: {
     Navbar,
     Footer,
-    componentB,
   },
   data() {
     return {
@@ -691,17 +690,15 @@ export default {
     },
   },
   mounted() {
-    // if (this.shoppingCart) {
-    //   this.cartItems = this.shoppingCart;
-    // }
+  
     this.cartItems = JSON.parse(localStorage.getItem("productsInCart")) || [];
   },
   computed: {},
   created() {
-    this.emitter.on("getData", (msg) => {
-      this.text = msg;
-      console.log("shopping", msg);
-    });
+    // this.emitter.on("getData", (msg) => {
+    //   this.text = msg;
+    //   console.log("shopping", msg);
+    // });
     //console.log(this.cartItems);
   },
 };

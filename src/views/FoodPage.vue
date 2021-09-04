@@ -559,9 +559,7 @@
 
   <Pagination></Pagination>
 
-  <div>
-    {{ text }} <button type="button" @click="pushData">發送至另一個元件</button>
-  </div>
+ 
 
   <footer>
     <Footer></Footer>
@@ -682,7 +680,7 @@ export default {
       // });
       this.cartNumbers(foods);
       this.totalPrice(foods);
-      this.pushData();
+      // this.pushData();
     },
     cartNumbers(theFood) {
       // console.log("the product clicked is", theFood);
@@ -760,10 +758,10 @@ export default {
         localStorage.setItem("totalPrice", theFoodPrice.price);
       }
     },
-    pushData() {
-      console.log("send foodpage data");
-      this.emitter.emit("getData", this.text);
-    },
+    // pushData() {
+    //   console.log("send foodpage data");
+    //   this.emitter.emit("getData", this.text);
+    // },
     triggerPanel() {
       this.showPanel = true;
       setTimeout(() => (this.showPanel = false), 4000);
@@ -773,7 +771,6 @@ export default {
       let cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
       //抓出第一筆資料的id
       let firstItemId = Object.values(cart)[0].productId;
-      console.log(firstItemId);
       //所傳入的item就是所有點擊的item的資料
       if (item.productId === firstItemId) {
         return { classNone: this.firstNone };

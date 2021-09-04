@@ -76,8 +76,6 @@
   <header>
     <Navbar></Navbar>
 
-    <!-- <Carousel></Carousel> -->
-
     <div class="banner mb-5">
       <Agile></Agile>
     </div>

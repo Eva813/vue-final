@@ -15,6 +15,13 @@
   a {
     color: #494848;
   }
+  .need-help {
+    @include pad {
+      @media (max-width: 768px) {
+        text-align: center;
+      }
+    }
+  }
   .about-us {
     a:hover {
       color: #faaf48;
@@ -45,6 +52,9 @@
         margin-bottom: 16px;
       }
     }
+  }
+  .copyright {
+    margin-left: 117px;
   }
 }
 </style>
@@ -112,9 +122,10 @@
     </div>
 
     <div class="row bg-light text-center p-4">
-      <div class="col">
+      <div class="col-7">
         <div class="copyright">
-          2021 &copy; Eva Chan <span> 僅做為個人學習使用，非商業用途</span>
+          2021 &copy; Eva Chan &emsp; &emsp;
+          <span> 僅做為個人學習使用，非商業用途</span>
         </div>
       </div>
     </div>

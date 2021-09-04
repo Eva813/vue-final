@@ -297,21 +297,24 @@ nav {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#"
-                >🐷 開鍋祭，開鍋囉~</a
+              <router-link
+                class="nav-link active"
+                aria-current="page"
+                to="/foodproduct"
+                >🐷 開鍋祭，開鍋囉~</router-link
               >
             </li>
             <li class="nav-item dropdown">
-              <a
+              <router-link
                 class="nav-link dropdown-toggle"
-                href="#"
                 id="navbarDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
+                to="/foodproduct"
               >
                 所有商品
-              </a>
+              </router-link>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li><a class="dropdown-item" href="#">常溫飲食</a></li>
                 <li>

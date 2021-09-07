@@ -327,14 +327,16 @@ nav {
                   </router-link>
                 </li>
                 <li>
-                  <router-lin class="dropdown-item" to="/foodpage"
-                    >美妝保健</router-lin
+                  <router-link class="dropdown-item" to="/foodpage"
+                    >美妝保健</router-link
                   >
                 </li>
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">POPOLA營養師專欄</a>
+              <router-link class="nav-link" to="/columnpage"
+                >POPOLA營養師專欄</router-link
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">會員福利</a>

@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
+import ColumnPage from '@/views/ColumnPage'
 
 const routes = [
   {
@@ -46,7 +47,12 @@ const routes = [
     path: '/testmitt',
     name: '測試頁面',
     component: () => import('../views/Testmitt')
-  }
+  },
+  {
+    path: '/columnpage',
+    name: 'columnpage',
+    component: ColumnPage
+  },
 ]
 
 const router = createRouter({

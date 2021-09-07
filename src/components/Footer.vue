@@ -122,7 +122,7 @@
     </div>
 
     <div class="row bg-light text-center p-4">
-      <div class="col-7">
+      <div>
         <div class="copyright">
           2021 &copy; Eva Chan &emsp; &emsp;
           <span> 僅做為個人學習使用，非商業用途</span>

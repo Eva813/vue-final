@@ -339,7 +339,9 @@ nav {
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">會員福利</a>
+              <router-link class="nav-link" to="/memberpage"
+                >會員福利</router-link
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">《防疫期間物流變更公告》</a>

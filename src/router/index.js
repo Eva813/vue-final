@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '@/views/Home.vue'
 import ColumnPage from '@/views/ColumnPage'
+import MemberPage from '@/views/MemberPage'
 
 const routes = [
   {
@@ -52,6 +53,11 @@ const routes = [
     path: '/columnpage',
     name: 'columnpage',
     component: ColumnPage
+  },
+  {
+    path: '/memberpage',
+    name: 'memberpage',
+    component: MemberPage
   },
 ]
 

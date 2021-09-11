@@ -344,7 +344,9 @@ nav {
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">《防疫期間物流變更公告》</a>
+              <router-link class="nav-link" to="/announcepage"
+                >《防疫期間物流變更公告》</router-link
+              >
             </li>
           </ul>
         </div>

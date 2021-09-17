@@ -291,7 +291,7 @@ nav {
   <nav class="navbar navbar-out navbar-expand navbar-light bg-white">
     <div class="nav-container container-fluid px-3">
       <a class="navbar-brand" href="#">
-        <img src="@/assets/img/logo1.png" alt="" />
+        <img src="@/assets/img/logo_transparent2.png" alt="" />
       </a>
       <div class="icon-nav d-flex align-items-center">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">

@@ -10,9 +10,9 @@
       <div class="col items-card" v-for="item in ifood" :key="item.title">
         <div class="card product-card align-items-center">
           <div class="card-top">
-            <a class="card-img-link" href="#">
+            <router-link class="card-img-link" to="/foodproduct">
               <img :src="item.src" class="card-img-top" alt="product-img" />
-            </a>
+            </router-link>
             <a href="#" class="btn card-btn">加入購物車</a>
           </div>
           <div class="card-body">

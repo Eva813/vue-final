@@ -3,7 +3,7 @@
 @import "~@/assets/all.scss";
 
 .navbar-breadcrumb {
-  margin-top: 90px;
+  margin-top: 85px;
   @include desk-below {
     @media (max-width: 1023px) {
       margin-top: 60px;
@@ -1104,7 +1104,7 @@ import ProductCard from "@/components/ProductCard.vue";
 import Footer from "@/components/Footer.vue";
 export default {
   name: "FoodProduct",
-  
+
   components: {
     Navbar,
     Breadcrumb,
@@ -1159,7 +1159,6 @@ export default {
         //   src: require("@/assets/img/food/food1-2.png"),
         // },
       ],
-      
     };
   },
   methods: {
@@ -1182,6 +1181,5 @@ export default {
       return this.productImg[this.activeImage].img;
     },
   },
-  
 };
 </script>

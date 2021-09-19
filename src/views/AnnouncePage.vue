@@ -1,15 +1,25 @@
 <style lang="scss" scoped >
 @import "~@/assets/all.scss";
+.announcement {
+  .upper-part {
+    margin-top: 90px;
+    img {
+      margin: 0 auto;
+    }
+  }
+}
 </style>
 <template>
   <header>
     <Navbar></Navbar>
   </header>
 
-  <section class="announcement">
+  <section class="announcement mb-4">
     <div class="container">
-      <h2 class="text-center">《防疫期間物流變更公告》</h2>
-      <img src="@/assets/img/announce-img.jpg" alt="announce-img" />
+      <div class="upper-part mb-5">
+        <h2 class="text-center">《防疫期間物流變更公告》</h2>
+        <img src="@/assets/img/announce-img.jpg" alt="announce-img" />
+      </div>
       <div class="text-part">
         <p>
           因受疫情影響與配合防疫升級🚛 <br />

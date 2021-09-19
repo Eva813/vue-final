@@ -211,7 +211,7 @@
 }
 
 .navbar-breadcrumb {
-  margin-top: 90px;
+  margin-top: 85px;
   @include desk-below {
     @media (max-width: 1023px) {
       margin-top: 60px;
@@ -377,13 +377,12 @@
             </li>
             <li>
               <div class="first d-flex">
-                <a href="#">美食生活 </a>
-                <span @click="handDomShow('isShowFood')">
+                <a @click.prevent="handDomShow('isShowFood')">美食生活 </a>
+                <span>
                   <font-awesome-icon
                     class="icon"
                     :icon="['fas', 'chevron-down']"
-                    :class="{ rotate: isTransformFood }"
-                    @click="handDomShow('isTransformFood')"
+                    :class="[isShowFood ? activeRotate : '']"
                   />
                 </span>
               </div>
@@ -395,31 +394,29 @@
             </li>
             <li>
               <div class="first d-flex">
-                <a href="#">美妝保養 </a>
-                <span @click="handDomShow('isShowBeauty')"
+                <a @click="handDomShow('isShowBeauty')">美妝保養 </a>
+                <span
                   ><font-awesome-icon
                     class="icon"
                     :icon="['fas', 'chevron-down']"
-                    :class="{ rotate: isTransformBeauty }"
-                    @click="handDomShow('isTransformBeauty')"
+                    :class="[isShowBeauty ? activeRotate : '']"
                   />
                 </span>
               </div>
               <ul v-show="isShowBeauty" class="inner-catagory">
                 <li><a href="#">保養系列</a></li>
-                <li><a href="#">美妝系列</a></li>
-                <li><a href="#">日程生活</a></li>
+                <li><a href="#">日常生活</a></li>
               </ul>
             </li>
             <li>
               <div class="first d-flex">
-                <a href="#">毛孩愛用 </a>
-                <span @click="handDomShow('isShowPet')">
+                <a @click="handDomShow('isShowPet')" >毛孩愛用 </a>
+                <span >
                   <font-awesome-icon
                     class="icon"
                     :icon="['fas', 'chevron-down']"
-                    :class="{ rotate: isTransformPet }"
-                    @click="handDomShow('isTransformPet')"
+                    :class="[isShowPet?activeRotate : '']"
+                    
                   />
                 </span>
               </div>
@@ -559,8 +556,6 @@
 
   <Pagination></Pagination>
 
- 
-
   <footer>
     <Footer></Footer>
   </footer>
@@ -584,9 +579,6 @@ export default {
   data() {
     return {
       isShow: false,
-      isTransformFood: false,
-      isTransformBeauty: false,
-      isTransformPet: false,
       isTransformOrder: false,
       isTransformLimit: false,
 
@@ -597,6 +589,7 @@ export default {
       isShowLimit: false,
       showPanel: false,
       firstNone: true,
+      activeRotate: "rotate",
       food: [
         {
           title: "酵素旅行包(20入/盒)",

@@ -86,20 +86,22 @@
           <ul class="icon-list d-flex justify-content-center">
             <li>
               <a href="#"
-                ><img src="https://i.imgur.com/MekLQay.png" alt="facebook-logo"
+                ><img src="@/assets/img/logo/fb-logo.png" alt="facebook-logo"
               /></a>
             </li>
             <li>
               <a href="#"
                 ><img
-                  src="@/assets/img/ig-logo.png"
+                  src="@/assets/img/logo/ig-logo.png"
                   alt="instagram-logo"
                   srcset=""
               /></a>
             </li>
             <li>
               <a href="#"
-                ><img src="https://i.imgur.com/UrpZFdz.png" alt="youutube-logo"
+                ><img
+                  src="@/assets/img/logo/youtube-logo.png"
+                  alt="youtube-logo"
               /></a>
             </li>
           </ul>

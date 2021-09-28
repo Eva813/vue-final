@@ -13,6 +13,7 @@
     "@popperjs/core": "^2.9.2",
     "@vee-validate/i18n": "^4.4.7",
     "@vee-validate/rules": "^4.4.7",
+    "axios": "^0.21.4",
     "bootstrap": "^5.0.2",
     "core-js": "^3.6.5",
     "mitt": "^3.0.0",

@@ -1,0 +1,62 @@
+{
+  "products": [
+    {
+      "title": "酵素旅行包(20入/盒)",
+      "price": 1380,
+      "src": "https://i.imgur.com/jztRyZI.png",
+      "inCart": 0,
+      "productId": 1
+    },
+    {
+      "category": "food",
+      "title": "圓圓母湯 (20瓶/箱)",
+      "price": 1560,
+      "src": "https://i.imgur.com/uMFVktl.png",
+      "inCart": 0,
+      "productId": 2
+    },
+    {
+      "category": "food",
+      "title": "POPOLAの酵",
+      "price": 1550,
+      "src": "https://i.imgur.com/N8FVqRo.png",
+      "inCart": 0,
+      "productId": 3
+    },
+    {
+      "title": "吶吶的桃花朵朵紅茶包",
+      "price": 168,
+      "src": "https://i.imgur.com/gLRzUX9.png",
+      "inCart": 0,
+      "productId": 4
+    },
+    {
+      "title": "旅行包(6入/盒)",
+      "price": 1688,
+      "src": "https://i.imgur.com/j5lE4kK.jpg",
+      "inCart": 0,
+      "productId": 5
+    },
+    {
+      "title": "酵素旅包(7入/盒)",
+      "price": 1688,
+      "src": "https://i.imgur.com/qSoB5GN.png",
+      "inCart": 0,
+      "productId": 6
+    },
+    {
+      "title": "酵旅行包(8入/盒)",
+      "price": 1688,
+      "src": "https://i.imgur.com/l0SVvRt.jpg",
+      "inCart": 0,
+      "productId": 7
+    },
+    {
+      "title": "素旅行包(9入/盒)",
+      "price": 1688,
+      "src": "https://i.imgur.com/0533K7e.png",
+      "inCart": 0,
+      "productId": 8
+    }
+  ]
+}

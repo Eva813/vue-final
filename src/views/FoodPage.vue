@@ -372,12 +372,16 @@
           <ul class="catagory">
             <li>
               <div class="first d-flex">
-                <a href="#">🐷 開鍋祭，開鍋囉~ </a>
+                <a href="#" id="hotpot" @click.prevent="getMenuItem"
+                  >🐷 開鍋祭，開鍋囉~
+                </a>
               </div>
             </li>
             <li>
               <div class="first d-flex">
-                <a @click.prevent="handDomShow('isShowFood')">美食生活 </a>
+                <a id="food" @click.prevent="handDomShow('isShowFood', $event)"
+                  >美食生活
+                </a>
                 <span>
                   <font-awesome-icon
                     class="icon"
@@ -387,14 +391,28 @@
                 </span>
               </div>
               <ul v-show="isShowFood" class="inner-catagory">
-                <li><a href="#">冷凍食品</a></li>
-                <li><a href="#">POPOLA BAKE</a></li>
-                <li><a href="#">廚房用品</a></li>
+                <li>
+                  <a id="frozen-food" href="#" @click.prevent="getMenuItem"
+                    >冷凍食品</a
+                  >
+                </li>
+                <li>
+                  <a id="bakery" href="#" @click.prevent="getMenuItem"
+                    >POPOLA BAKE</a
+                  >
+                </li>
+                <li>
+                  <a id="kitchen" href="#" @click.prevent="getMenuItem"
+                    >廚房用品</a
+                  >
+                </li>
               </ul>
             </li>
             <li>
               <div class="first d-flex">
-                <a @click="handDomShow('isShowBeauty')">美妝保養 </a>
+                <a id="beauty" @click="handDomShow('isShowBeauty', $event)"
+                  >美妝保養
+                </a>
                 <span
                   ><font-awesome-icon
                     class="icon"
@@ -404,28 +422,57 @@
                 </span>
               </div>
               <ul v-show="isShowBeauty" class="inner-catagory">
-                <li><a href="#">保養系列</a></li>
-                <li><a href="#">日常生活</a></li>
+                <li>
+                  <a id="daily-care" href="#" @click.prevent="getMenuItem"
+                    >保養系列</a
+                  >
+                </li>
+                <li>
+                  <a id="life" href="#" @click.prevent="getMenuItem"
+                    >日常生活</a
+                  >
+                </li>
               </ul>
             </li>
             <li>
               <div class="first d-flex">
-                <a @click="handDomShow('isShowPet')" >毛孩愛用 </a>
-                <span >
+                <a id="pet" @click="handDomShow('isShowPet', $event)"
+                  >毛孩愛用
+                </a>
+                <span>
                   <font-awesome-icon
                     class="icon"
                     :icon="['fas', 'chevron-down']"
-                    :class="[isShowPet?activeRotate : '']"
-                    
+                    :class="[isShowPet ? activeRotate : '']"
                   />
                 </span>
               </div>
               <ul v-show="isShowPet" class="inner-catagory">
-                <li><a href="#">狗狗食品</a></li>
-                <li><a href="#">狗狗用品</a></li>
-                <li><a href="#">老犬照護</a></li>
-                <li><a href="#">貓貓食品</a></li>
-                <li><a href="#">貓貓用品</a></li>
+                <li>
+                  <a id="dog-food" href="#" @click.prevent="getMenuItem"
+                    >狗狗食品</a
+                  >
+                </li>
+                <li>
+                  <a id="dog-care" href="#" @click.prevent="getMenuItem"
+                    >狗狗保健品</a
+                  >
+                </li>
+                <li>
+                  <a id="eldery-care" href="#" @click.prevent="getMenuItem"
+                    >老犬照護</a
+                  >
+                </li>
+                <li>
+                  <a id="cat-food" href="#" @click.prevent="getMenuItem"
+                    >貓貓食品</a
+                  >
+                </li>
+                <li>
+                  <a id="cat-usage" href="#" @click.prevent="getMenuItem"
+                    >貓貓用品</a
+                  >
+                </li>
               </ul>
             </li>
           </ul>
@@ -483,7 +530,11 @@
         </div>
       </div>
       <div class="row row-cols-lg-3 row-cols-md-2 row-cols-2 product-section">
-        <div class="product-item gap-1" v-for="item in food" :key="item.title">
+        <div
+          class="product-item gap-1"
+          v-for="item in sideMenuProducts"
+          :key="item.title"
+        >
           <div class="card product-card">
             <div class="card-top">
               <a class="card-img-link" href="#">
@@ -563,6 +614,7 @@
 
 
 <script>
+const axios = require("axios");
 import Navbar from "@/components/Navbar.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 import Pagination from "@/components/Pagination.vue";
@@ -590,65 +642,123 @@ export default {
       showPanel: false,
       firstNone: true,
       activeRotate: "rotate",
-      food: [
+      sideMenu: [
         {
-          title: "酵素旅行包(20入/盒)",
-          price: 1380,
-          src: require("@/assets/img/food/food1-1.png"),
-          inCart: 0,
-          productId: 1,
+          Id: 1,
+          catagory: "food",
+          subCatagory: "hotpot",
         },
         {
-          title: "圓圓母湯 (20瓶/箱)",
-          price: 1560,
-          src: require("@/assets/img/food/food2-1.png"),
-          inCart: 0,
-          productId: 2,
+          Id: 2,
+          catagory: "food",
+          subCatagory: "frozen-food",
         },
         {
-          title: "POPOLAの酵",
-          price: 1550,
-          src: require("@/assets/img/food/food3-1.png"),
-          inCart: 0,
-          productId: 3,
+          Id: 3,
+          catagory: "food",
+          subCatagory: "bakery",
         },
         {
-          title: "吶吶的桃花朵朵紅茶包",
-          price: 168,
-          src: require("@/assets/img/food/food4-1.png"),
-          inCart: 0,
-          productId: 4,
+          Id: 4,
+          catagory: "food",
+          subCatagory: "kitchen",
         },
         {
-          title: "旅行包(6入/盒)",
-          price: 1688,
-          src: require("@/assets/img/food/food1-2.png"),
-          inCart: 0,
-          productId: 5,
+          Id: 5,
+          catagory: "beauty",
+          subCatagory: "daily-care",
         },
         {
-          title: "酵素旅包(7入/盒)",
-          price: 1688,
-          src: require("@/assets/img/food/food1-2.png"),
-          inCart: 0,
-          productId: 6,
+          Id: 6,
+          catagory: "beauty",
+          subCatagory: "life",
         },
         {
-          title: "酵旅行包(8入/盒)",
-          price: 1688,
-          src: require("@/assets/img/food/food1-2.png"),
-          inCart: 0,
-          productId: 7,
+          Id: 7,
+          catagory: "pet",
+          subCatagory: "dog-food",
         },
         {
-          title: "素旅行包(9入/盒)",
-          price: 1688,
-          src: require("@/assets/img/food/food1-2.png"),
-          inCart: 0,
-          productId: 8,
+          Id: 8,
+          catagory: "pet",
+          subCatagory: "dog-care",
+        },
+        {
+          Id: 9,
+          catagory: "pet",
+          subCatagory: "elderly-care",
+        },
+        {
+          Id: 10,
+          catagory: "pet",
+          subCatagory: "cat-food",
+        },
+        {
+          Id: 11,
+          catagory: "pet",
+          subCatagory: "cat-usage",
         },
       ],
 
+      products: [
+        // {
+        //   title: "酵素旅行包(20入/盒)",
+        //   price: 1380,
+        //   src: require("@/assets/img/food/food1-1.png"),
+        //   inCart: 0,
+        //   productId: 1,
+        // },
+        // {
+        //   title: "圓圓母湯 (20瓶/箱)",
+        //   price: 1560,
+        //   src: require("@/assets/img/food/food2-1.png"),
+        //   inCart: 0,
+        //   productId: 2,
+        // },
+        // {
+        //   title: "POPOLAの酵",
+        //   price: 1550,
+        //   src: require("@/assets/img/food/food3-1.png"),
+        //   inCart: 0,
+        //   productId: 3,
+        // },
+        // {
+        //   title: "吶吶的桃花朵朵紅茶包",
+        //   price: 168,
+        //   src: require("@/assets/img/food/food4-1.png"),
+        //   inCart: 0,
+        //   productId: 4,
+        // },
+        // {
+        //   title: "旅行包(6入/盒)",
+        //   price: 1688,
+        //   src: require("@/assets/img/food/food1-2.png"),
+        //   inCart: 0,
+        //   productId: 5,
+        // },
+        // {
+        //   title: "酵素旅包(7入/盒)",
+        //   price: 1688,
+        //   src: require("@/assets/img/food/food1-2.png"),
+        //   inCart: 0,
+        //   productId: 6,
+        // },
+        // {
+        //   title: "酵旅行包(8入/盒)",
+        //   price: 1688,
+        //   src: require("@/assets/img/food/food1-2.png"),
+        //   inCart: 0,
+        //   productId: 7,
+        // },
+        // {
+        //   title: "素旅行包(9入/盒)",
+        //   price: 1688,
+        //   src: require("@/assets/img/food/food1-2.png"),
+        //   inCart: 0,
+        //   productId: 8,
+        // },
+      ],
+      sideMenuProducts: [],
       sortProduct: [
         "上架時間：由新到舊",
         "上架時間：由舊到新",
@@ -661,11 +771,13 @@ export default {
       displayCartItems: [],
       shoppingCart: [],
       text: "這有一段話",
+      hotpot: [],
     };
   },
   methods: {
-    handDomShow(key) {
+    handDomShow(key, e) {
       this[key] = !this[key];
+      this.getMenuItem(e);
     },
     addToCart(foods) {
       // let alreadyIndex = this.food.findIndex(function (item, index) {
@@ -774,6 +886,16 @@ export default {
       var top = element.offsetTop;
       window.scrollTo(0, top);
     },
+    getMenuItem(e) {
+      console.log(e.target.id);
+      this.sideMenuProducts = this.products.filter(function (item) {
+        if (e.target.id !== item.subCategory) {
+          return item.category === e.target.id;
+        } else {
+          return item.subCategory === e.target.id;
+        }
+      });
+    },
   },
   watch: {},
   computed: {},
@@ -782,6 +904,14 @@ export default {
     this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
     // this.shoppingCart =
     //   JSON.parse(localStorage.getItem("productsInCart")) || [];
+    axios
+      .get("http://localhost:3000/products")
+      .then((response) => {
+        this.products = response.data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

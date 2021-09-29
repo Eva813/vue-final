@@ -481,25 +481,26 @@
     </div>
     <div class="product-list-section">
       <div class="title-part clearfix">
-        <h2>美食生活</h2>
+        <h2>{{ titleText }}</h2>
         <div class="product-list-select clearfix">
           <div class="sort-section">
             <ul class="sort-section-list">
               <li>
                 <div class="first d-flex">
                   <span class="title-span">商品排序</span>
-                  <span class="icon-sapn" @click="handDomShow('isShowOrder')">
+                  <span class="icon-sapn" @click="sortDomShow('isShowOrder')">
                     <font-awesome-icon
                       class="icon"
                       :icon="['fas', 'chevron-down']"
-                      :class="{ rotate: isTransformOrder }"
-                      @click="handDomShow('isTransformOrder')"
+                      :class="[isShowOrder ? activeRotate : '']"
                     />
                   </span>
                 </div>
                 <ul v-show="isShowOrder" class="inner-catagory">
-                  <li v-for="item in sortProduct">
-                    <a href="#">{{ item }}</a>
+                  <li v-for="(item, key) in sortProduct">
+                    <a href="#" @click.prevent="sort(key)"
+                      >{{ item }}{{ key }}</a
+                    >
                   </li>
                 </ul>
               </li>
@@ -510,12 +511,11 @@
               <li>
                 <div class="first d-flex">
                   <span class="title-span">每頁顯示</span>
-                  <span class="icon-sapn" @click="handDomShow('isShowLimit')">
+                  <span class="icon-sapn" @click="sortDomShow('isShowLimit')">
                     <font-awesome-icon
                       class="icon"
                       :icon="['fas', 'chevron-down']"
-                      :class="{ rotate: isTransformLimit }"
-                      @click="handDomShow('isTransformLimit')"
+                      :class="[isShowLimit ? activeRotate : '']"
                     />
                   </span>
                 </div>
@@ -770,14 +770,17 @@ export default {
       spanNumbers: 0,
       displayCartItems: [],
       shoppingCart: [],
-      text: "這有一段話",
-      hotpot: [],
+      titleText: "美食生活",
     };
   },
   methods: {
     handDomShow(key, e) {
       this[key] = !this[key];
       this.getMenuItem(e);
+    },
+    sortDomShow(key) {
+      //此函式與menu的區分開
+      this[key] = !this[key];
     },
     addToCart(foods) {
       // let alreadyIndex = this.food.findIndex(function (item, index) {
@@ -887,7 +890,8 @@ export default {
       window.scrollTo(0, top);
     },
     getMenuItem(e) {
-      console.log(e.target.id);
+      //console.log(e.target.id);
+      this.checkTitle(e);
       this.sideMenuProducts = this.products.filter(function (item) {
         if (e.target.id !== item.subCategory) {
           return item.category === e.target.id;
@@ -895,6 +899,49 @@ export default {
           return item.subCategory === e.target.id;
         }
       });
+    },
+    checkTitle(e) {
+      if (e.target.id === "hotpot") {
+        this.titleText = "🐷 開鍋祭，開鍋囉~";
+      } else if (e.target.id === "food") {
+        this.titleText = "美食生活";
+      } else if (e.target.id === "frozen-food") {
+        this.titleText = "冷凍食品";
+      } else if (e.target.id === "bakery") {
+        this.titleText = "POPOLA BAKE";
+      } else if (e.target.id === "kitchen") {
+        this.titleText = "廚房用品";
+      } else if (e.target.id === "beauty") {
+        this.titleText = "美妝保養";
+      } else if (e.target.id === "daily-care") {
+        this.titleText = "保養系列";
+      } else if (e.target.id === "life") {
+        this.titleText = "日常生活";
+      } else if (e.target.id === "pet") {
+        this.titleText = "毛孩愛用";
+      } else if (e.target.id === "dog-food") {
+        this.titleText = "狗狗食品";
+      } else if (e.target.id === "dog-care") {
+        this.titleText = "狗狗保健品";
+      } else if (e.target.id === "elderly-care") {
+        this.titleText = "老犬照護";
+      } else if (e.target.id === "cat-food") {
+        this.titleText = "貓貓食品";
+      } else if (e.target.id === "cat-usage") {
+        this.titleText = "貓貓用品";
+      }
+    },
+    sort(key) {
+      if (key === 2) {
+        this.sideMenuProducts.sort(function (a, b) {
+          return b.price - a.price;
+        });
+      }
+      if (key === 3) {
+        this.sideMenuProducts.sort(function (a, b) {
+          return a.price - b.price;
+        });
+      }
     },
   },
   watch: {},

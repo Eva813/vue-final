@@ -45,7 +45,7 @@ configure({
 // 設定預設語系
 setLocale('zh_TW');
 
-//emitter
+//emitter(eventbus)
 app.config.globalProperties.emitter = emitter;
 app.component('font-awesome-icon', FontAwesomeIcon);
 // 註冊 vee-validate 三個全域元件

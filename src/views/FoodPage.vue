@@ -458,7 +458,7 @@
                   >
                 </li>
                 <li>
-                  <a id="eldery-care" href="#" @click.prevent="getMenuItem"
+                  <a id="elderly-care" href="#" @click.prevent="getMenuItem"
                     >老犬照護</a
                   >
                 </li>
@@ -518,9 +518,9 @@
                 </div>
                 <ul v-show="isShowLimit" class="inner-catagory">
                   <li v-for="(item, key) in limitProduct">
-                    <a href="#" @click.prevent="buildPage(1, key)"
-                      >{{ item }}{{ key }}</a
-                    >
+                    <a href="#" @click.prevent="buildPage(1, key)">{{
+                      item
+                    }}</a>
                   </li>
                 </ul>
               </li>
@@ -959,7 +959,7 @@ export default {
     buildPage(currPage, perPage) {
       this.sideMenuProducts = this.sideMenuProducts.concat(this.showLimit);
       this.showLimit = [];
-      console.log(this.sideMenuProducts);
+      //console.log(this.sideMenuProducts);
       this.checkLimit(perPage);
       let trimStart = (currPage - 1) * this.numberPerPage;
       let trimEnd = trimStart + this.numberPerPage;

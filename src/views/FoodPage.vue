@@ -361,7 +361,6 @@
 <template>
   <header>
     <Navbar v-bind:parentSpanNumbers="spanNumbers"></Navbar>
-
     <Breadcrumb class="navbar-breadcrumb"></Breadcrumb>
   </header>
 
@@ -498,9 +497,7 @@
                 </div>
                 <ul v-show="isShowOrder" class="inner-catagory">
                   <li v-for="(item, key) in sortProduct">
-                    <a href="#" @click.prevent="sort(key)"
-                      >{{ item }}{{ key }}</a
-                    >
+                    <a href="#" @click.prevent="sort(key)">{{ item }}</a>
                   </li>
                 </ul>
               </li>
@@ -520,8 +517,10 @@
                   </span>
                 </div>
                 <ul v-show="isShowLimit" class="inner-catagory">
-                  <li v-for="item in limitProduct">
-                    <a href="#">{{ item }}</a>
+                  <li v-for="(item, key) in limitProduct">
+                    <a href="#" @click.prevent="buildPage(1, key)"
+                      >{{ item }}{{ key }}</a
+                    >
                   </li>
                 </ul>
               </li>
@@ -604,7 +603,7 @@
       </div>
     </div>
   </transition>
-
+  {{ getNavId }}
   <Pagination></Pagination>
 
   <footer>
@@ -699,7 +698,6 @@ export default {
           subCatagory: "cat-usage",
         },
       ],
-
       products: [
         // {
         //   title: "酵素旅行包(20入/盒)",
@@ -765,12 +763,16 @@ export default {
         "價格：由高至低",
         "價格：由低至高",
       ],
-      limitProduct: ["每頁顯示24個", "每頁顯示48個", "每頁顯示72個"],
+      limitProduct: ["每頁顯示5個", "每頁顯示10個", "每頁顯示20個"],
       selected: "",
       spanNumbers: 0,
       displayCartItems: [],
       shoppingCart: [],
       titleText: "美食生活",
+      numberPerPage: 5,
+      currentPage: 1,
+      getNavId: "hotpot",
+      showLimit: [],
     };
   },
   methods: {
@@ -943,9 +945,38 @@ export default {
         });
       }
     },
+    checkLimit(key) {
+      if (key === 0) {
+        this.numberPerPage = 5;
+      } else if (key === 1) {
+        this.numberPerPage = 10;
+      } else if (key === 2) {
+        this.numberPerPage = 20;
+      } else {
+        return (this.numberPerPage = 10);
+      }
+    },
+    buildPage(currPage, perPage) {
+      this.sideMenuProducts = this.sideMenuProducts.concat(this.showLimit);
+      this.showLimit = [];
+      console.log(this.sideMenuProducts);
+      this.checkLimit(perPage);
+      let trimStart = (currPage - 1) * this.numberPerPage;
+      let trimEnd = trimStart + this.numberPerPage;
+      let itemLength = this.sideMenuProducts.length;
+      let rearArr = this.sideMenuProducts.slice(trimEnd, itemLength);
+      this.showLimit = rearArr;
+      this.sideMenuProducts = this.sideMenuProducts.slice(trimStart, trimEnd);
+    },
   },
   watch: {},
   computed: {},
+  created() {
+    this.emitter.on("getNavId", (Navdata) => {
+      this.getNavId = Navdata;
+    });
+    console.log(this.getNavId);
+  },
   mounted() {
     //讓數字在更新之後，仍然存取到資料
     this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
@@ -955,6 +986,9 @@ export default {
       .get("http://localhost:3000/products")
       .then((response) => {
         this.products = response.data;
+        if ((this.sideMenuProducts = [])) {
+          this.sideMenuProducts = response.data;
+        }
       })
       .catch((err) => {
         console.log(err);

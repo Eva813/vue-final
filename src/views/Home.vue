@@ -70,6 +70,34 @@
     background: #faaf48;
   }
 }
+#topBtn {
+  width: 34px;
+  height: 34px;
+  display: block;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 10;
+  border: 1px solid #e7e7e7;
+  outline: none;
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  transition: 0.4s;
+  .upIcon {
+    position: absolute;
+    color: #838080;
+    top: 9px;
+    left: 11px;
+    font-size: 13px;
+    &:hover {
+      color: $primary;
+    }
+  }
+}
 </style>
 
 <template>
@@ -108,7 +136,7 @@
   </section>
   <section class="food-card mb-5">
     <div class="container section-title d-flex justify-content-center">
-      <h1 class="title mb-4 fw-normal">美裝保養</h1>
+      <h1 class="title mb-4 fw-normal">美妝保養</h1>
     </div>
     <!-- //:food="food" 綁定傳入的props -->
     <ProductCard :ifood="food"> </ProductCard>
@@ -118,9 +146,13 @@
     <Flipcard :productlink="ProductPage"></Flipcard>
   </section>
 
+  <CartPanel></CartPanel>
   <footer>
     <Footer></Footer>
   </footer>
+  <button id="topBtn" title="Go to top" @click="toTop()" v-show="isScrollTop">
+    <font-awesome-icon class="upIcon" :icon="['fas', 'chevron-up']" />
+  </button>
 </template>
 
 <script>
@@ -133,6 +165,7 @@ import Pagination from "@/components/Pagination.vue";
 import Flipcard from "@/components/Flipcard.vue";
 import Footer from "@/components/Footer.vue";
 import Agile from "@/components/Agile.vue";
+import CartPanel from "@/components/cartPanel.vue";
 
 export default {
   name: "Home",
@@ -144,6 +177,7 @@ export default {
     Flipcard,
     Footer,
     Agile,
+    CartPanel,
   },
   data() {
     return {
@@ -153,21 +187,29 @@ export default {
           title: "酵素旅行包(20入/盒)",
           price: 1380,
           src: require("@/assets/img/food/food1-1.png"),
+          inCart: 0,
+          productId: 1,
         },
         {
           title: "圓圓母湯 (20瓶/箱)",
           price: 1560,
           src: require("@/assets/img/food/food2-1.png"),
+          inCart: 0,
+          productId: 2,
         },
         {
           title: "POPOLAの酵",
           price: 1550,
           src: require("@/assets/img/food/food3-1.png"),
+          inCart: 0,
+          productId: 3,
         },
         {
           title: "吶吶的桃花朵朵紅茶包",
           price: 168,
           src: require("@/assets/img/food/food4-1.png"),
+          inCart: 0,
+          productId: 4,
         },
         // {
         //   title: "酵素旅行包(5入/盒)",
@@ -201,7 +243,42 @@ export default {
           frontImg: require("@/assets/img/img-link/u-beauty.jpg"),
         },
       ],
+      showPanel: true,
+      scrollTop: 0,
+      isScrollTop: false,
     };
+  },
+  methods: {
+    scrollFunction() {
+      this.scrollTop =
+        document.documentElement.scrollTop ||
+        window.pageYOffset ||
+        document.body.scrollTop;
+
+      if (this.scrollTop > 300) {
+        this.isScrollTop = true;
+      } else {
+        this.isScrollTop = false;
+      }
+    },
+    toTop() {
+      window.scrollTo(0, top);
+    },
+  },
+  mounted() {
+    window.addEventListener("scroll", this.scrollFunction, true);
+
+    // axios
+    //   .get("http://localhost:3000/products")
+    //   .then((response) => {
+    //     this.products = response.data;
+    //     if ((this.sideMenuProducts = [])) {
+    //       this.sideMenuProducts = response.data;
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   },
 };
 </script>

@@ -317,18 +317,25 @@ nav {
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                 <li>
-                  <router-link class="dropdown-item" to="/foodpage"
-                    >常溫飲食</router-link
+                  <router-link
+                    @click.prevent="pushNavId"
+                    id="food"
+                    class="dropdown-item"
+                    to="/foodpage"
+                    >美食生活</router-link
                   >
                 </li>
                 <li>
-                  <router-link class="dropdown-item dropend" to="/foodpage"
-                    >美食生活
+                  <router-link
+                    id="beauty"
+                    class="dropdown-item dropend"
+                    to="/foodpage"
+                    >美妝保養
                   </router-link>
                 </li>
                 <li>
-                  <router-link class="dropdown-item" to="/foodpage"
-                    >美妝保健</router-link
+                  <router-link id="pet" class="dropdown-item" to="/foodpage"
+                    >毛孩愛用</router-link
                   >
                 </li>
               </ul>
@@ -499,6 +506,7 @@ export default {
       isShowOrder: false,
       isShowLimit: false,
       isShowMenu: false,
+      NavId: "food",
     };
   },
   methods: {
@@ -513,6 +521,10 @@ export default {
         document.body.scrollTop;
       // 判断页面滚动的距离是否大于吸顶元素的位置
       this.headerFixed = scrollTop > this.offsetTop - this.offsetHeight * 2;
+    },
+    pushNavId(e) {
+      console.log(e.target.id);
+      this.emitter.emit("getNavId", this.NavId);
     },
   },
   mounted() {},

@@ -300,7 +300,7 @@ nav {
               <router-link
                 class="nav-link active"
                 aria-current="page"
-                to="/foodproduct"
+                to="/foodpage"
                 >🐷 開鍋祭，開鍋囉~</router-link
               >
             </li>
@@ -404,7 +404,9 @@ nav {
     <ul class="catagory">
       <li>
         <div class="first d-flex">
-          <a href="#">🐷 開鍋祭，開鍋囉~ </a>
+          <router-link id="hotpot" href="#" to="/foodpage"
+            >🐷 開鍋祭，開鍋囉~
+          </router-link>
         </div>
       </li>
       <li>
@@ -420,9 +422,21 @@ nav {
           </span>
         </div>
         <ul v-show="isShowFood" class="inner-catagory">
-          <li><a href="#">冷凍食品</a></li>
-          <li><a href="#">POPOLA BAKE</a></li>
-          <li><a href="#">廚房用品</a></li>
+          <li>
+            <router-link id="frozen-food" href="#" to="/foodpage"
+              >冷凍食品</router-link
+            >
+          </li>
+          <li>
+            <router-link id="bakery" href="#" to="/foodpage"
+              >POPOLA BAKE</router-link
+            >
+          </li>
+          <li>
+            <router-link id="kitchen" href="#" to="/foodpage"
+              >廚房用品</router-link
+            >
+          </li>
         </ul>
       </li>
       <li>
@@ -438,9 +452,16 @@ nav {
           </span>
         </div>
         <ul v-show="isShowBeauty" class="inner-catagory">
-          <li><a href="#">保養系列</a></li>
-          <li><a href="#">美妝系列</a></li>
-          <li><a href="#">日程生活</a></li>
+          <li>
+            <router-link id="daily-care" href="#" to="/foodpage"
+              >保養系列</router-link
+            >
+          </li>
+          <li>
+            <router-link id="life" href="#" to="/foodpage"
+              >日常生活</router-link
+            >
+          </li>
         </ul>
       </li>
       <li>
@@ -456,26 +477,48 @@ nav {
           </span>
         </div>
         <ul v-show="isShowPet" class="inner-catagory">
-          <li><a href="#">狗狗食品</a></li>
-          <li><a href="#">狗狗用品</a></li>
-          <li><a href="#">老犬照護</a></li>
-          <li><a href="#">貓貓食品</a></li>
-          <li><a href="#">貓貓用品</a></li>
+          <li>
+            <router-link id="dog-food" href="#" to="/foodpage"
+              >狗狗食品</router-link
+            >
+          </li>
+          <li>
+            <router-link id="dog-care" href="#" to="/foodpage"
+              >狗狗保健品</router-link
+            >
+          </li>
+          <li>
+            <router-link id="elderly-care" href="#" to="/foodpage"
+              >老犬照護</router-link
+            >
+          </li>
+          <li>
+            <router-link id="cat-care" href="#" to="/foodpage"
+              >貓貓食品</router-link
+            >
+          </li>
+          <li>
+            <router-link id="cat-usage" href="#" to="/foodpage"
+              >貓貓用品</router-link
+            >
+          </li>
         </ul>
       </li>
       <li>
         <div class="first d-flex">
-          <a href="#">營養師專欄 </a>
+          <router-link href="#" to="/columnpage">營養師專欄 </router-link>
         </div>
       </li>
       <li>
         <div class="first d-flex">
-          <a href="#">會員福利 </a>
+          <router-link href="#" to="/memberpage">會員福利 </router-link>
         </div>
       </li>
       <li>
         <div class="first d-flex">
-          <a href="#">《防疫期間物流變更公告》 </a>
+          <router-link href="#" to="/announcepage"
+            >《防疫期間物流變更公告》
+          </router-link>
         </div>
       </li>
     </ul>

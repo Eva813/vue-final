@@ -66,16 +66,25 @@
   <footer>
     <Footer></Footer>
   </footer>
+  <TopBtn :inScrollTop="scrollTop" :inIsScrollTop="isScrollTop"></TopBtn>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
+import TopBtn from "@/components/topBtn.vue";
 export default {
   name: "MemberPage",
   components: {
     Navbar,
     Footer,
+    TopBtn,
+  },
+  data() {
+    return {
+      scrollTop: 0,
+      isScrollTop: false,
+    };
   },
 };
 </script>

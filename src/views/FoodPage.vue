@@ -611,7 +611,7 @@
       </div>
     </div>
   </transition>
-  {{ getNavId }}
+
   <Pagination></Pagination>
 
   <footer>
@@ -783,7 +783,7 @@ export default {
       titleText: "美食生活",
       numberPerPage: 5,
       currentPage: 1,
-      getNavId: "hotpot",
+      // getNavId: "hotpot",
       showLimit: [],
       scrollTop: 0,
       isScrollTop: false,

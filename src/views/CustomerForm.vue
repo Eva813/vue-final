@@ -385,17 +385,22 @@
       </div>
     </div>
   </section>
+  <TopBtn :inScrollTop="scrollTop" :inIsScrollTop="isScrollTop"></TopBtn>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar.vue";
+import TopBtn from "@/components/topBtn.vue";
 export default {
   name: "CustomerForm",
   components: {
     Navbar,
+    TopBtn,
   },
   data() {
     return {
+      scrollTop: 0,
+      isScrollTop: false,
       itemList: [
         {
           id: "1",

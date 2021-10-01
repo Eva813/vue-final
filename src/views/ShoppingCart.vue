@@ -291,7 +291,7 @@
   }
   .order-form {
     border: 1px solid #ededed;
-    margin-right:10px;
+    margin-right: 10px;
     @include pad {
       @media (max-width: 768px) {
         margin-bottom: 30px;
@@ -594,22 +594,25 @@
       <img src="@/assets/img/checkout-level.png" alt="" />
     </div>
   </section>
-  
+
   <footer>
     <Footer></Footer>
   </footer>
+  <TopBtn :inScrollTop="scrollTop" :inIsScrollTop="isScrollTop"></TopBtn>
 </template>
 
 <script>
 import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
 import componentB from "@/components/Component-b.vue";
+import TopBtn from "@/components/topBtn.vue";
 export default {
   name: "ShoppingCart",
   props: {},
   components: {
     Navbar,
     Footer,
+    TopBtn,
   },
   data() {
     return {
@@ -648,6 +651,8 @@ export default {
         },
       ],
       changeIndex: 0,
+      scrollTop: 0,
+      isScrollTop: false,
     };
   },
   methods: {
@@ -690,7 +695,6 @@ export default {
     },
   },
   mounted() {
-  
     this.cartItems = JSON.parse(localStorage.getItem("productsInCart")) || [];
   },
   computed: {},

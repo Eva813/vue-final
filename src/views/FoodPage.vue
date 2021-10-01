@@ -227,6 +227,14 @@
     }
   }
 }
+.card .in-card-btn {
+  &:hover {
+    background-color: #faaf48;
+    color: #fff;
+    top: 0px;
+  }
+}
+
 .btn-mobile-cart {
   display: none;
   @include desk-below {
@@ -540,7 +548,7 @@
                 <img :src="item.src" class="card-img-top" alt="product-img" />
               </a>
               <div
-                class="btn card-btn"
+                class="btn card-btn in-card-btn"
                 @click="addToCart(item), triggerPanel(), goto('cartPanel')"
               >
                 加入購物車
@@ -609,6 +617,8 @@
   <footer>
     <Footer></Footer>
   </footer>
+  <!-- 加入置頂按鈕 -->
+  <topBtn :inScrollTop="scrollTop" :inIsScrollTop="isScrollTop"></topBtn>
 </template>
 
 
@@ -618,6 +628,7 @@ import Navbar from "@/components/Navbar.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 import Pagination from "@/components/Pagination.vue";
 import Footer from "@/components/Footer.vue";
+import topBtn from "@/components/topBtn.vue";
 export default {
   name: "FoodPage",
   components: {
@@ -625,6 +636,7 @@ export default {
     Breadcrumb,
     Pagination,
     Footer,
+    topBtn,
   },
 
   data() {
@@ -773,6 +785,8 @@ export default {
       currentPage: 1,
       getNavId: "hotpot",
       showLimit: [],
+      scrollTop: 0,
+      isScrollTop: false,
     };
   },
   methods: {
@@ -934,6 +948,16 @@ export default {
       }
     },
     sort(key) {
+      if (key === 0) {
+        this.sideMenuProducts.sort(function (a, b) {
+          return new Date(b.date) - new Date(a.date);
+        });
+      }
+      if (key === 1) {
+        this.sideMenuProducts.sort(function (a, b) {
+          return new Date(a.date) - new Date(b.date);
+        });
+      }
       if (key === 2) {
         this.sideMenuProducts.sort(function (a, b) {
           return b.price - a.price;

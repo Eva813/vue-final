@@ -390,11 +390,11 @@ nav {
         /></a>
       </li>
       <li class="icon-group-item">
-        <a href="#" class="link-dark"
+        <router-link href="#" to="/shoppingcart" class="link-dark"
           ><font-awesome-icon :icon="['fas', 'shopping-cart']" />
           <span class="Cart-count primary-color" style="display: inline">{{
             parentSpanNumbers
-          }}</span></a
+          }}</span></router-link
         >
       </li>
     </ul>

@@ -1094,6 +1094,8 @@ iframe {
   <footer>
     <Footer></Footer>
   </footer>
+  <!-- 加入置頂按鈕 -->
+  <topBtn :inScrollTop="scrollTop" :inIsScrollTop="isScrollTop"></topBtn>
 </template>
 
 <script>
@@ -1102,6 +1104,7 @@ import Breadcrumb from "@/components/Breadcrumb.vue";
 import Pagination from "@/components/Pagination.vue";
 import ProductCard from "@/components/ProductCard.vue";
 import Footer from "@/components/Footer.vue";
+import topBtn from "@/components/topBtn.vue";
 export default {
   name: "FoodProduct",
 
@@ -1111,6 +1114,7 @@ export default {
     Pagination,
     ProductCard,
     Footer,
+    topBtn,
   },
   data() {
     return {
@@ -1159,6 +1163,8 @@ export default {
         //   src: require("@/assets/img/food/food1-2.png"),
         // },
       ],
+      scrollTop: 0,
+      isScrollTop: false,
     };
   },
   methods: {

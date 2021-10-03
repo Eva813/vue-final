@@ -539,7 +539,7 @@
       <div class="row row-cols-lg-3 row-cols-md-2 row-cols-2 product-section">
         <div
           class="product-item gap-1"
-          v-for="item in sideMenuProducts"
+          v-for="(item, key) in sideMenuProducts"
           :key="item.title"
         >
           <div class="card product-card">
@@ -549,7 +549,12 @@
               </a>
               <div
                 class="btn card-btn in-card-btn"
-                @click="addToCart(item), triggerPanel(), goto('cartPanel')"
+                @click="
+                  addToCart(item),
+                    triggerPanel(),
+                    goto('cartPanel'),
+                    postShopingCart(item, key)
+                "
               >
                 加入購物車
               </div>
@@ -787,6 +792,8 @@ export default {
       showLimit: [],
       scrollTop: 0,
       isScrollTop: false,
+      getShoppingCart: [],
+      cartKey: 0,
     };
   },
   methods: {
@@ -869,7 +876,8 @@ export default {
           JSON.stringify(this.shoppingCart)
         );
       }
-      console.log(this.shoppingCart);
+
+      //console.log(this.shoppingCart);
     },
     totalPrice(theFoodPrice) {
       let cartPrice = localStorage.getItem("totalPrice");
@@ -992,6 +1000,34 @@ export default {
       this.showLimit = rearArr;
       this.sideMenuProducts = this.sideMenuProducts.slice(trimStart, trimEnd);
     },
+    postShopingCart(item, key) {
+      let getData = this.getShoppingCart;
+      let cartArray = [];
+      console.log(getData);
+      getData.forEach((getItem, i) => {
+        if (getItem.title !== item.title) {
+          let data = item;
+        } else if (getItem.title === item.title) {
+          item[key].inCart += 1;
+          axios
+            .post("http://localhost:3000/cart", item)
+            .then((response) => console.log(response))
+            .catch((error) => console.log(error));
+        }
+        axios
+          .post("http://localhost:3000/cart", data)
+          .then((response) => {
+            return response;
+          })
+          .catch((error) => console.log(error));
+      });
+
+      //POST請求
+      axios
+        .post("http://localhost:3000/cart", item)
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error));
+    },
   },
   watch: {},
   computed: {},
@@ -999,7 +1035,7 @@ export default {
     this.emitter.on("getNavId", (Navdata) => {
       this.getNavId = Navdata;
     });
-    console.log(this.getNavId);
+    //console.log(this.getNavId);
   },
   mounted() {
     //讓數字在更新之後，仍然存取到資料
@@ -1013,6 +1049,17 @@ export default {
         if ((this.sideMenuProducts = [])) {
           this.sideMenuProducts = response.data;
         }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    axios
+      .get("http://localhost:3000/cart")
+      .then((response) => {
+        this.getShoppingCart = response.data;
+
+        //console.log(this.getShoppingCart);
       })
       .catch((err) => {
         console.log(err);

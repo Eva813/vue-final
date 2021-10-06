@@ -847,6 +847,7 @@ export default {
         };
         // 將數量推回陣列中
         this.shoppingCart.push(cartContent);
+
         // 重新寫入 localStorage
         localStorage.setItem(
           "productsInCart",
@@ -1001,28 +1002,6 @@ export default {
       this.sideMenuProducts = this.sideMenuProducts.slice(trimStart, trimEnd);
     },
     postShopingCart(item, key) {
-      let getData = this.getShoppingCart;
-      let cartArray = [];
-      console.log(getData);
-      getData.forEach((getItem, i) => {
-        if (getItem.title !== item.title) {
-          let data = item;
-        } else if (getItem.title === item.title) {
-          item[key].inCart += 1;
-          axios
-            .post("http://localhost:3000/cart", item)
-            .then((response) => console.log(response))
-            .catch((error) => console.log(error));
-        }
-        axios
-          .post("http://localhost:3000/cart", data)
-          .then((response) => {
-            return response;
-          })
-          .catch((error) => console.log(error));
-      });
-
-      //POST請求
       axios
         .post("http://localhost:3000/cart", item)
         .then((response) => console.log(response))
@@ -1053,7 +1032,6 @@ export default {
       .catch((err) => {
         console.log(err);
       });
-
     axios
       .get("http://localhost:3000/cart")
       .then((response) => {

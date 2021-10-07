@@ -1,6 +1,11 @@
 <style lang="scss" scoped>
 @import "~@/assets/all.scss";
-
+.a {
+  color: red;
+}
+.b {
+  color: blue;
+}
 .time-line {
   counter-reset: test 0;
   position: relative;
@@ -394,6 +399,8 @@
 
 <template>
   <header class="mb-4">
+    <h1 class="a b">Blue</h1>
+    <h1 class="b a">Planet</h1>
     <Navbar></Navbar>
   </header>
   <section class="mb-4">
@@ -429,7 +436,7 @@
         <div class="col-12">
           <div
             class="cart-item-container"
-            v-for="(item, index) in cartItems"
+            v-for="(item, index) in getCartItems"
             :key="item.productId"
           >
             <div class="row cart-item justify-content-center">
@@ -453,7 +460,7 @@
                       />
                     </button>
                   </span>
-                  <input type="number" v-model.number="item.inCart" />
+                  <input type="number" v-model.number="item.amount" />
                   <span class="input-group-btn">
                     <button type="button" class="btn" @click="addBtn(index)">
                       <font-awesome-icon
@@ -465,7 +472,7 @@
                 </div>
               </div>
               <div class="col-12 col-md-2 item-total">
-                <span>NT${{ item.price * item.count }}</span>
+                <span>NT${{ item.price * item.amount }}</span>
               </div>
               <div class="col-12 col-md-1 item-operate text-center">
                 <span>
@@ -602,6 +609,7 @@
 </template>
 
 <script>
+const axios = require("axios");
 import Navbar from "@/components/Navbar.vue";
 import Footer from "@/components/Footer.vue";
 import componentB from "@/components/Component-b.vue";
@@ -619,6 +627,7 @@ export default {
       text: "原始資料",
       isShow: false,
       isShowBtn: true,
+      //cartItems 一開始用來存放localStorage的資料
       cartItems: [],
       itemList: [
         {
@@ -653,22 +662,24 @@ export default {
       changeIndex: 0,
       scrollTop: 0,
       isScrollTop: false,
+      getCartItems: [],
     };
   },
   methods: {
     addBtn(addIndex) {
       this.changeIndex = addIndex;
-      //console.log(btnIndex);
-      this.itemList[addIndex].count++;
+
+      this.getCartItems[addIndex].amount++;
     },
     minusBtn(minusIndex) {
       this.changeIndex = minusIndex;
-      let count = this.itemList[minusIndex].count;
+      let count = this.getCartItems[minusIndex].amount;
+      console.log(count);
       //console.log(count);
       if (count <= 1) {
         count = 1;
       } else {
-        this.itemList[minusIndex].count--;
+        this.getCartItems[minusIndex].amount--;
       }
     },
     deleteBtn(deleteIndex) {
@@ -679,8 +690,8 @@ export default {
     },
     getSubTotalPrice() {
       let totalPrice = 0;
-      this.itemList.forEach((o) => {
-        totalPrice += o.count * o.price;
+      this.getCartItems.forEach((o) => {
+        totalPrice += o.amount * o.price;
       });
       return totalPrice;
     },
@@ -696,6 +707,15 @@ export default {
   },
   mounted() {
     this.cartItems = JSON.parse(localStorage.getItem("productsInCart")) || [];
+    axios
+      .get("https://4511-1-169-71-198.ngrok.io/cart")
+      .then((response) => {
+        this.getCartItems = response.data;
+        console.log(this.getCartItems);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
   computed: {},
   created() {

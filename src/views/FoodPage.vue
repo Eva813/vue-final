@@ -918,10 +918,10 @@ export default {
       //console.log(e.target.id);
       this.checkTitle(e);
       this.sideMenuProducts = this.products.filter(function (item) {
-        if (e.target.id !== item.subCategory) {
+        if (e.target.id !== item.sub_category) {
           return item.category === e.target.id;
         } else {
-          return item.subCategory === e.target.id;
+          return item.sub_category === e.target.id;
         }
       });
     },
@@ -1002,8 +1002,16 @@ export default {
       this.sideMenuProducts = this.sideMenuProducts.slice(trimStart, trimEnd);
     },
     postShopingCart(item, key) {
-      axios
-        .post("http://localhost:3000/cart", item)
+      //console.log(item);
+      // url = "https://4511-1-169-71-198.ngrok.io/cart" + item.id;
+      axios({
+        method: "put",
+        url: "https://4511-1-169-71-198.ngrok.io/cart/" + item.id,
+        //API要求的資料
+        data: {
+          item,
+        },
+      })
         .then((response) => console.log(response))
         .catch((error) => console.log(error));
     },
@@ -1022,22 +1030,12 @@ export default {
     // this.shoppingCart =
     //   JSON.parse(localStorage.getItem("productsInCart")) || [];
     axios
-      .get("http://localhost:3000/products")
+      .get("https://4511-1-169-71-198.ngrok.io/products")
       .then((response) => {
         this.products = response.data;
         if ((this.sideMenuProducts = [])) {
           this.sideMenuProducts = response.data;
         }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    axios
-      .get("http://localhost:3000/cart")
-      .then((response) => {
-        this.getShoppingCart = response.data;
-
-        //console.log(this.getShoppingCart);
       })
       .catch((err) => {
         console.log(err);

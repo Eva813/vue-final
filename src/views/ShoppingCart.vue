@@ -1,11 +1,6 @@
 <style lang="scss" scoped>
 @import "~@/assets/all.scss";
-.a {
-  color: red;
-}
-.b {
-  color: blue;
-}
+
 .time-line {
   counter-reset: test 0;
   position: relative;
@@ -399,8 +394,6 @@
 
 <template>
   <header class="mb-4">
-    <h1 class="a b">Blue</h1>
-    <h1 class="b a">Planet</h1>
     <Navbar></Navbar>
   </header>
   <section class="mb-4">
@@ -479,7 +472,7 @@
                   <font-awesome-icon
                     class="del-icon"
                     :icon="['fas', 'trash-alt']"
-                    @click="deleteBtn(index)"
+                    @click="deleteBtn(item, index)"
                 /></span>
               </div>
             </div>
@@ -588,7 +581,11 @@
                   >NT${{ getSubTotalPrice() + getShipFee() }}</span
                 >
               </div>
-              <a class="btn btn-success mb-3 btn-checkout">前往結帳</a>
+              <router-link
+                class="btn btn-success mb-3 btn-checkout"
+                to="/customerform"
+                >前往結帳</router-link
+              >
             </div>
           </div>
         </div>
@@ -668,22 +665,31 @@ export default {
   methods: {
     addBtn(addIndex) {
       this.changeIndex = addIndex;
-
       this.getCartItems[addIndex].amount++;
     },
     minusBtn(minusIndex) {
       this.changeIndex = minusIndex;
       let count = this.getCartItems[minusIndex].amount;
-      console.log(count);
-      //console.log(count);
+
       if (count <= 1) {
         count = 1;
       } else {
         this.getCartItems[minusIndex].amount--;
       }
     },
-    deleteBtn(deleteIndex) {
-      this.cartItems.splice(deleteIndex, 1);
+    deleteBtn(item, deleteIndex) {
+      console.log(item);
+      this.getCartItems.splice(deleteIndex, 1);
+      axios({
+        method: "delete",
+        url: "https://4511-1-169-71-198.ngrok.io/cart/" + item.id,
+        //API要求的資料
+        data: {
+          deleteIndex,
+        },
+      })
+        .then((response) => console.log(response))
+        .catch((error) => console.log(error));
     },
     handDomShow(key) {
       this[key] = !this[key];
@@ -711,7 +717,7 @@ export default {
       .get("https://4511-1-169-71-198.ngrok.io/cart")
       .then((response) => {
         this.getCartItems = response.data;
-        console.log(this.getCartItems);
+        //console.log(this.getCartItems);
       })
       .catch((err) => {
         console.log(err);

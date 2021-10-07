@@ -553,7 +553,7 @@
                   addToCart(item),
                     triggerPanel(),
                     goto('cartPanel'),
-                    postShopingCart(item, key)
+                    putShopingCart(item, key)
                 "
               >
                 加入購物車
@@ -1001,7 +1001,7 @@ export default {
       this.showLimit = rearArr;
       this.sideMenuProducts = this.sideMenuProducts.slice(trimStart, trimEnd);
     },
-    postShopingCart(item, key) {
+    putShopingCart(item, key) {
       //console.log(item);
       // url = "https://4511-1-169-71-198.ngrok.io/cart" + item.id;
       axios({
@@ -1012,7 +1012,9 @@ export default {
           item,
         },
       })
-        .then((response) => console.log(response))
+        .then((response) => {
+          console.log(response.data);
+        })
         .catch((error) => console.log(error));
     },
   },

@@ -677,7 +677,7 @@ export default {
       this.getCartItems[addIndex].amount++;
       axios({
         method: "put",
-        url: "https://4511-1-169-71-198.ngrok.io/cart/" + item.id,
+        url: "https://eva-final-project.herokuapp.com/cart/" + item.id,
         data: {
           item,
         },
@@ -699,7 +699,7 @@ export default {
 
       axios({
         method: "delete",
-        url: "https://4511-1-169-71-198.ngrok.io/cart/" + item.id,
+        url: "https://eva-final-project.herokuapp.com/cart/" + item.id,
         data: {
           item,
         },
@@ -713,7 +713,7 @@ export default {
       this.getCartItems.splice(deleteIndex, 1);
       axios({
         method: "delete",
-        url: "https://4511-1-169-71-198.ngrok.io/cart/" + item.id,
+        url: "https://eva-final-project.herokuapp.com/cart/" + item.id,
         //API要求的資料
         data: {
           item,
@@ -748,7 +748,7 @@ export default {
     this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
     // this.cartItems = JSON.parse(localStorage.getItem("productsInCart")) || [];
     axios
-      .get("https://4511-1-169-71-198.ngrok.io/cart")
+      .get("https://eva-final-project.herokuapp.com/cart")
       .then((response) => {
         this.getCartItems = response.data;
         //console.log(this.getCartItems);

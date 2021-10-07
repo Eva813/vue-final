@@ -1006,7 +1006,7 @@ export default {
       // url = "https://4511-1-169-71-198.ngrok.io/cart" + item.id;
       axios({
         method: "put",
-        url: "https://4511-1-169-71-198.ngrok.io/cart/" + item.id,
+        url: "https://eva-final-project.herokuapp.com/cart/" + item.id,
         //API要求的資料
         data: {
           item,
@@ -1032,7 +1032,7 @@ export default {
     // this.shoppingCart =
     //   JSON.parse(localStorage.getItem("productsInCart")) || [];
     axios
-      .get("https://4511-1-169-71-198.ngrok.io/products")
+      .get("https://eva-final-project.herokuapp.com/products")
       .then((response) => {
         this.products = response.data;
         if ((this.sideMenuProducts = [])) {

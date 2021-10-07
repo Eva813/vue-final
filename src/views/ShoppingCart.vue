@@ -394,7 +394,7 @@
 
 <template>
   <header class="mb-4">
-    <Navbar></Navbar>
+    <Navbar v-bind:parentSpanNumbers="spanNumbers"></Navbar>
   </header>
   <section class="mb-4">
     <div class="container">
@@ -446,7 +446,11 @@
               <div class="col-12 col-md-2 item-quantity text-center">
                 <div class="counter-form d-flex">
                   <span class="input-group-btn">
-                    <button type="button" class="btn" @click="minusBtn(index)">
+                    <button
+                      type="button"
+                      class="btn"
+                      @click="minusBtn(item, index)"
+                    >
                       <font-awesome-icon
                         class="btn-icon"
                         :icon="['fas', 'minus']"
@@ -455,7 +459,11 @@
                   </span>
                   <input type="number" v-model.number="item.amount" />
                   <span class="input-group-btn">
-                    <button type="button" class="btn" @click="addBtn(index)">
+                    <button
+                      type="button"
+                      class="btn"
+                      @click="addBtn(item, index)"
+                    >
                       <font-awesome-icon
                         class="btn-icon"
                         :icon="['fas', 'plus']"
@@ -660,14 +668,26 @@ export default {
       scrollTop: 0,
       isScrollTop: false,
       getCartItems: [],
+      spanNumbers: 0,
     };
   },
   methods: {
-    addBtn(addIndex) {
+    addBtn(item, addIndex) {
       this.changeIndex = addIndex;
       this.getCartItems[addIndex].amount++;
+      axios({
+        method: "put",
+        url: "https://4511-1-169-71-198.ngrok.io/cart/" + item.id,
+        data: {
+          item,
+        },
+      })
+        .then((response) => {
+          //console.log(response.data);
+        })
+        .catch((error) => console.log(error));
     },
-    minusBtn(minusIndex) {
+    minusBtn(item, minusIndex) {
       this.changeIndex = minusIndex;
       let count = this.getCartItems[minusIndex].amount;
 
@@ -676,19 +696,32 @@ export default {
       } else {
         this.getCartItems[minusIndex].amount--;
       }
+
+      axios({
+        method: "delete",
+        url: "https://4511-1-169-71-198.ngrok.io/cart/" + item.id,
+        data: {
+          item,
+        },
+      })
+        .then((response) => {
+          // console.log(response.data);
+        })
+        .catch((error) => console.log(error));
     },
     deleteBtn(item, deleteIndex) {
-      console.log(item);
       this.getCartItems.splice(deleteIndex, 1);
       axios({
         method: "delete",
         url: "https://4511-1-169-71-198.ngrok.io/cart/" + item.id,
         //API要求的資料
         data: {
-          deleteIndex,
+          item,
         },
       })
-        .then((response) => console.log(response))
+        .then((response) => {
+          //console.log(response)
+        })
         .catch((error) => console.log(error));
     },
     handDomShow(key) {
@@ -712,7 +745,8 @@ export default {
     },
   },
   mounted() {
-    this.cartItems = JSON.parse(localStorage.getItem("productsInCart")) || [];
+    this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
+    // this.cartItems = JSON.parse(localStorage.getItem("productsInCart")) || [];
     axios
       .get("https://4511-1-169-71-198.ngrok.io/cart")
       .then((response) => {

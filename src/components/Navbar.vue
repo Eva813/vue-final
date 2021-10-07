@@ -385,9 +385,9 @@ nav {
         /></a>
       </li>
       <li class="icon-group-item">
-        <a href="#" class="link-dark"
+        <router-link href="#" class="link-dark" to="/signin"
           ><font-awesome-icon :icon="['fas', 'user']"
-        /></a>
+        /></router-link>
       </li>
       <li class="icon-group-item">
         <router-link href="#" to="/shoppingcart" class="link-dark"

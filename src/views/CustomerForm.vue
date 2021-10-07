@@ -4,6 +4,7 @@
 .time-line {
   counter-reset: test 0;
   position: relative;
+  margin-top: 85px;
   li {
     list-style: none;
     float: left;
@@ -271,7 +272,7 @@
                   />
                 </button>
               </span> -->
-              <input type="text" v-model.number="item.count" />
+              <input type="text" v-model.number="item.amount" />
               <!-- <span class="input-group-btn">
                 <button type="button" class="btn" @click="addBtn(index)">
                   <font-awesome-icon class="btn-icon" :icon="['fas', 'plus']" />
@@ -280,7 +281,7 @@
             </div>
           </div>
           <div class="col-xs-12 col-sm-2 item-total text-center">
-            <span>NT$</span><span>{{ item.price * item.count }}</span>
+            <span>NT$</span><span>{{ item.price * item.amount }}</span>
           </div>
           <!-- <div class="col-xs-12 col-sm-1 item-operate text-center">
             <span>
@@ -377,7 +378,12 @@
     <div class="footer container">
       <div class="row">
         <div class="col-sm-6">
-          <a class="btn btn-link text-start" href="">&lt; 返回購物車</a>
+          <router-link
+            class="btn btn-link text-start"
+            href=""
+            to="/shoppingcart"
+            >&lt; 返回購物車</router-link
+          >
         </div>
         <div class="col-sm-6">
           <a class="btn btn-success mb-3 btn-checkout">提交訂單</a>
@@ -389,6 +395,7 @@
 </template>
 
 <script>
+const axios = require("axios");
 import Navbar from "@/components/Navbar.vue";
 import TopBtn from "@/components/topBtn.vue";
 export default {
@@ -432,6 +439,17 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    axios
+      .get("https://4511-1-169-71-198.ngrok.io/cart")
+      .then((response) => {
+        this.itemList = response.data;
+        //console.log(this.getCartItems);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

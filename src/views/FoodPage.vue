@@ -363,6 +363,12 @@
 .Panel-leave-active {
   transition: all 0.3 ease;
 }
+.loader {
+  z-index: 500;
+  position: absolute;
+  top: 220px;
+  right: 114px;
+}
 </style>
 
 
@@ -537,6 +543,7 @@
         </div>
       </div>
       <div class="row row-cols-lg-3 row-cols-md-2 row-cols-2 product-section">
+        <Loader v-if="showLoader" class="loader"></Loader>
         <div
           class="product-item gap-1"
           v-for="(item, key) in sideMenuProducts"
@@ -616,7 +623,6 @@
       </div>
     </div>
   </transition>
-
   <Pagination></Pagination>
 
   <footer>
@@ -634,6 +640,7 @@ import Breadcrumb from "@/components/Breadcrumb.vue";
 import Pagination from "@/components/Pagination.vue";
 import Footer from "@/components/Footer.vue";
 import topBtn from "@/components/topBtn.vue";
+import Loader from "@/components/Loader.vue";
 export default {
   name: "FoodPage",
   components: {
@@ -642,6 +649,7 @@ export default {
     Pagination,
     Footer,
     topBtn,
+    Loader,
   },
 
   data() {
@@ -794,6 +802,7 @@ export default {
       isScrollTop: false,
       getShoppingCart: [],
       cartKey: 0,
+      showLoader: true,
     };
   },
   methods: {
@@ -916,6 +925,7 @@ export default {
     },
     getMenuItem(e) {
       //console.log(e.target.id);
+
       this.checkTitle(e);
       this.sideMenuProducts = this.products.filter(function (item) {
         if (e.target.id !== item.sub_category) {
@@ -1031,6 +1041,7 @@ export default {
     this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
     // this.shoppingCart =
     //   JSON.parse(localStorage.getItem("productsInCart")) || [];
+
     axios
       .get("https://eva-final-project.herokuapp.com/products")
       .then((response) => {
@@ -1038,6 +1049,7 @@ export default {
         if ((this.sideMenuProducts = [])) {
           this.sideMenuProducts = response.data;
         }
+        this.showLoader = false;
       })
       .catch((err) => {
         console.log(err);

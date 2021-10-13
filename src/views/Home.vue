@@ -102,7 +102,7 @@
 
 <template>
   <header>
-    <Navbar></Navbar>
+    <Navbar v-bind:parentSpanNumbers="spanNumbers"></Navbar>
 
     <div class="banner mb-5">
       <Agile></Agile>
@@ -122,7 +122,7 @@
     </div>
     <!-- //:food="food" 綁定傳入的props -->
     <ProductCard :ifood="food"> </ProductCard>
-    <Pagination></Pagination>
+    <Pagination @emitcurrentPage="getPage"></Pagination>
   </section>
   <section class="container section-video d-flex justify-content-center mb-5">
     <div class="player-container">
@@ -246,6 +246,9 @@ export default {
       showPanel: true,
       scrollTop: 0,
       isScrollTop: false,
+      spanNumbers: 0,
+      currentPage: 1,
+      perPage: 4,
     };
   },
   methods: {
@@ -262,23 +265,27 @@ export default {
       }
     },
     toTop() {
-      window.scrollTo(0, top);
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    },
+    filterItems() {
+      let start = (this.currentPage - 1) * this.prePage;
+      let end = this.currentPage * this.prePage;
+      const resultItem = this.list.slice(start, end);
+      return resultItem;
+    },
+    getPage(data1, data2) {
+      console.log(data1, data2);
+      this.currentPage = data1;
+      this.prePage = data2;
     },
   },
   mounted() {
     window.addEventListener("scroll", this.scrollFunction, true);
-
-    // axios
-    //   .get("http://localhost:3000/products")
-    //   .then((response) => {
-    //     this.products = response.data;
-    //     if ((this.sideMenuProducts = [])) {
-    //       this.sideMenuProducts = response.data;
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
   },
 };
 </script>

@@ -143,12 +143,22 @@
   background-color: #35cc62;
   width: 100%;
 }
+.success {
+  height: 500px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .success-title {
+    margin: 400px auto;
+  }
+}
 </style>
 <template>
   <Navbar></Navbar>
   <section>
     <div class="signin-form container justify-content-center">
-      <div class="row">
+      <div class="row" v-if="hideLogin">
         <div class="col-sm-12">
           <div class="form">
             <div class="tab-header">
@@ -197,16 +207,17 @@
                     <Field
                       class="form-control"
                       type="password"
-                      name="password"
+                      name="密碼"
                       rules="required|min:9"
                       placeholder="密碼"
                       v-model="user.password"
+                      ref="password"
                       :class="{
-                        'is-invalid': errors['password'],
-                        'is-valid': !errors['password'] && user.password != '',
+                        'is-invalid': errors['密碼'],
+                        'is-valid': !errors['密碼'] && user.password != '',
                       }"
                     />
-                    <ErrorMessage name="password" class="invalid-feedback" />
+                    <ErrorMessage name="密碼" class="invalid-feedback" />
                     <span v-if="score === 1" class="password-span">week</span>
                     <span v-if="score === 2" class="password-span">secure</span>
                     <span v-if="score === 3" class="password-span">strong</span>
@@ -214,6 +225,16 @@
                       :password="user.password"
                       @score="onScore"
                     />
+                    <Field
+                      class="form-control"
+                      type="password"
+                      name="確認密碼"
+                      rules="confirmed:@密碼"
+                      placeholder="再次輸入密碼"
+                      v-model="user.passwordAgain"
+                      data-vv-as="password"
+                    />
+                    <ErrorMessage name="確認密碼" class="invalid-feedback" />
                   </div>
                   <div class="form-element">
                     <select class="form-option" name="sex" id="sex">
@@ -235,7 +256,7 @@
                     />
                   </div>
                   <div class="form-element">
-                    <button>立即加入！</button>
+                    <button @click="toggle">立即加入！</button>
                   </div>
                 </div>
               </Form>
@@ -275,7 +296,11 @@
         </div>
       </div>
     </div>
+    <div class="success" v-if="isShowSuccess">
+      <h5 class="success-title">完成註冊啦!!!!!</h5>
+    </div>
   </section>
+
   <footer>
     <Footer></Footer>
   </footer>
@@ -300,9 +325,12 @@ export default {
         name: "",
         email: "",
         password: null,
+        passwordAgain: null,
         date: "",
       },
       score: null,
+      isShowSuccess: false,
+      hideLogin: true,
     };
   },
   methods: {
@@ -313,6 +341,16 @@ export default {
       console.log(payload.score); // from 0 to 4
       console.log(payload.strength); // one of : 'risky', 'guessable', 'weak', 'safe' , 'secure'
       this.score = payload.score;
+    },
+    // checkPassword(value, [target]) {
+    //   if (value === ctx.form[target]) {
+    //     return true;
+    //   }
+    //   return "Passwords must match";
+    // },
+    toggle() {
+      this.isShowSuccess = !this.isShowSuccess;
+      this.hideLogin = !this.hideLogin;
     },
   },
 };

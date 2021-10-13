@@ -61,6 +61,7 @@
     }
   }
 }
+
 .inner-catagory {
   position: static;
   //display: none;
@@ -95,7 +96,7 @@
     }
   }
 }
-
+//篩選下拉式選單
 .product-list-select {
   display: flex;
   position: absolute;
@@ -206,6 +207,11 @@
     }
   }
 }
+
+.product-list-select.hide {
+  display: none;
+}
+
 .product-section {
   z-index: -1;
 }
@@ -495,7 +501,7 @@
     <div class="product-list-section">
       <div class="title-part clearfix">
         <h2>{{ titleText }}</h2>
-        <div class="product-list-select clearfix">
+        <div class="product-list-select clearfix" :class="{ hide: hidden }">
           <div class="sort-section">
             <ul class="sort-section-list">
               <li>
@@ -803,6 +809,7 @@ export default {
       getShoppingCart: [],
       cartKey: 0,
       showLoader: true,
+      hidden: true,
     };
   },
   methods: {
@@ -1050,6 +1057,7 @@ export default {
           this.sideMenuProducts = response.data;
         }
         this.showLoader = false;
+        this.hidden = false;
       })
       .catch((err) => {
         console.log(err);

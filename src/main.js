@@ -17,7 +17,7 @@ import {
 
 // 匯入 vee-validate 相關規則
 
-import { required, email, min } from '@vee-validate/rules';
+import { required, email, min, confirmed } from '@vee-validate/rules';
 
 // 匯入多國語系的功能
 
@@ -36,6 +36,7 @@ library.add(faUserSecret, faShoppingCart, faUser, faComments, faSearch, faChevro
 defineRule('required', required);
 defineRule('email', email);
 defineRule('min', min);
+defineRule("confirmed", confirmed);
 // 設定 vee-validate 全域規則
 configure({
   generateMessage: localize({ zh_TW: zhTW }), // 載入繁體中文語系

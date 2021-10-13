@@ -70,7 +70,11 @@ export default {
       }
     },
     toTop() {
-      window.scrollTo(0, top);
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
     },
   },
   mounted() {

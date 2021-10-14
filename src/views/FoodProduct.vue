@@ -547,8 +547,7 @@ iframe {
 
 <template>
   <header>
-    <Navbar :parentSpanNumbers="spanNumbers">
-    </Navbar>
+    <Navbar v-bind:parentSpanNumbers="productSpanNumbers"> </Navbar>
 
     <Breadcrumb class="navbar-breadcrumb"></Breadcrumb>
   </header>
@@ -1174,7 +1173,7 @@ export default {
       productData: [],
       imgSrc: "",
       productId: 0,
-      spanNumbers:0,
+      productSpanNumbers: 0,
     };
   },
   methods: {
@@ -1187,6 +1186,13 @@ export default {
     addBtn() {
       let putId = this.productId;
       this.quantity++;
+      //處理上方number的數字
+      let productNumbers = localStorage.getItem("cartNumbers");
+      //取得的productNumbers 型別是string，所以要轉為數字
+      productNumbers = parseInt(productNumbers);
+      localStorage.setItem("cartNumbers", productNumbers + 1);
+      this.productSpanNumbers = productNumbers + 1;
+      //將產品存入
       axios({
         method: "put",
         url: "https://eva-final-project.herokuapp.com/cart/" + putId,
@@ -1195,16 +1201,35 @@ export default {
         },
       })
         .then((response) => {
-          //console.log(response.data);
+          console.log(response.data);
         })
         .catch((error) => console.log(error));
     },
     minusBtn() {
+      let deleteId = this.productId;
+      //處理上方number的數字
+      let productNumbers = localStorage.getItem("cartNumbers");
+      //取得的productNumbers 型別是string，所以要轉為數字
+      productNumbers = parseInt(productNumbers);
+      localStorage.setItem("cartNumbers", productNumbers - 1);
+      this.productSpanNumbers = productNumbers - 1;
+
       if (this.quantity <= 0) {
         this.quantity = 0;
       } else {
         this.quantity--;
       }
+      axios({
+        method: "delete",
+        url: "https://eva-final-project.herokuapp.com/cart/" + deleteId,
+        data: {
+          deleteId,
+        },
+      })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => console.log(error));
     },
   },
   computed: {
@@ -1213,7 +1238,8 @@ export default {
     },
   },
   mounted() {
-    this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
+    this.productSpanNumbers =
+      JSON.parse(localStorage.getItem("cartNumbers")) || 0;
     //取得從商品列表中傳入的商品id
     let id = this.$route.params.id;
     this.productId = this.$route.params.id;

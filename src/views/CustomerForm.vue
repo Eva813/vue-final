@@ -218,7 +218,7 @@
 
 <template>
   <header class="mb-4">
-    <Navbar></Navbar>
+    <Navbar :parentSpanNumbers="spanNumbers"></Navbar>
   </header>
   <section class="mb-4">
     <div class="container">
@@ -438,11 +438,13 @@ export default {
           count: 1,
         },
       ],
+      spanNumbers: 0,
     };
   },
   mounted() {
+    this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
     axios
-      .get("https://4511-1-169-71-198.ngrok.io/cart")
+      .get("https://eva-final-project.herokuapp.com/cart")
       .then((response) => {
         this.itemList = response.data;
         //console.log(this.getCartItems);

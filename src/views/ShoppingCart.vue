@@ -394,7 +394,7 @@
 
 <template>
   <header class="mb-4">
-    <Navbar v-bind:parentSpanNumbers="spanNumbers"></Navbar>
+    <Navbar v-bind:parentSpanNumbers="cartSpanNumbers"></Navbar>
   </header>
   <section class="mb-4">
     <div class="container">
@@ -668,7 +668,7 @@ export default {
       scrollTop: 0,
       isScrollTop: false,
       getCartItems: [],
-      spanNumbers: 0,
+      cartSpanNumbers: 0,
     };
   },
   methods: {
@@ -680,7 +680,7 @@ export default {
       //取得的productNumbers 型別是string，所以要轉為數字
       productNumbers = parseInt(productNumbers);
       localStorage.setItem("cartNumbers", productNumbers + 1);
-      this.spanNumbers = productNumbers + 1;
+      this.cartSpanNumbers = productNumbers + 1;
       axios({
         method: "put",
         url: "https://eva-final-project.herokuapp.com/cart/" + item.id,
@@ -701,7 +701,7 @@ export default {
       //取得的productNumbers 型別是string，所以要轉為數字
       productNumbers = parseInt(productNumbers);
       localStorage.setItem("cartNumbers", productNumbers - 1);
-      this.spanNumbers = productNumbers - 1;
+      this.cartSpanNumbers = productNumbers - 1;
       if (count <= 1) {
         count = 1;
       } else {
@@ -756,7 +756,7 @@ export default {
     },
   },
   mounted() {
-    this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
+    this.cartSpanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
     // this.cartItems = JSON.parse(localStorage.getItem("productsInCart")) || [];
     axios
       .get("https://eva-final-project.herokuapp.com/cart")

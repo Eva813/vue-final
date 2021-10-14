@@ -3,6 +3,8 @@ import Home from '@/views/Home.vue'
 import ColumnPage from '@/views/ColumnPage'
 import MemberPage from '@/views/MemberPage'
 import AnnouncePage from '@/views/AnnouncePage'
+import foodpage from '@/views/FoodPage'
+import foodproduct from '@/views/FoodProduct'
 
 const routes = [
   {
@@ -20,13 +22,21 @@ const routes = [
   },
   {
     path: '/foodpage',
-    name: '新頁面',
-    component: () => import('../views/FoodPage')
+    name: 'foodpage',
+    component: foodpage
+    // children:[
+    //   {
+    //     path: '/foodproduct',
+    //     name: '產品頁面',
+    //     component: () => import('../views/FoodProduct')
+    //   },
+    // ]
   },
   {
-    path: '/foodproduct',
-    name: '產品頁面',
-    component: () => import('../views/FoodProduct')
+    path: '/foodproduct/:id',
+    name: 'foodproduct',
+    component: foodproduct,
+
   },
   {
     path: '/signin',
@@ -69,7 +79,8 @@ const routes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
+  // routes: [{ path: "/foodproduct/:id", component: foodproduct }]
 })
 
 export default router

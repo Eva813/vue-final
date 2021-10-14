@@ -675,6 +675,12 @@ export default {
     addBtn(item, addIndex) {
       this.changeIndex = addIndex;
       this.getCartItems[addIndex].amount++;
+      //處理上方number的數字
+      let productNumbers = localStorage.getItem("cartNumbers");
+      //取得的productNumbers 型別是string，所以要轉為數字
+      productNumbers = parseInt(productNumbers);
+      localStorage.setItem("cartNumbers", productNumbers + 1);
+      this.spanNumbers = productNumbers + 1;
       axios({
         method: "put",
         url: "https://eva-final-project.herokuapp.com/cart/" + item.id,
@@ -690,7 +696,12 @@ export default {
     minusBtn(item, minusIndex) {
       this.changeIndex = minusIndex;
       let count = this.getCartItems[minusIndex].amount;
-
+      //處理上方number的數字
+      let productNumbers = localStorage.getItem("cartNumbers");
+      //取得的productNumbers 型別是string，所以要轉為數字
+      productNumbers = parseInt(productNumbers);
+      localStorage.setItem("cartNumbers", productNumbers - 1);
+      this.spanNumbers = productNumbers - 1;
       if (count <= 1) {
         count = 1;
       } else {

@@ -156,6 +156,7 @@
 </template>
 
 <script>
+const axios = require("axios");
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
 import Navbar from "@/components/Navbar.vue";
@@ -278,14 +279,25 @@ export default {
       return resultItem;
     },
     getPage(data1, data2) {
-      console.log(data1, data2);
+      // console.log(data1, data2);
       this.currentPage = data1;
       this.prePage = data2;
     },
   },
   mounted() {
     window.addEventListener("scroll", this.scrollFunction, true);
-    this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
+    this.spanNumbers = parseInt(localStorage.getItem("cartNumbers")) || 0;
+
+    axios
+      .get("https://eva-final-project.herokuapp.com/products")
+      .then((response) => {
+        this.food = response.data;
+        console.log(this.food);
+        // this.showLoader = false;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   },
 };
 </script>

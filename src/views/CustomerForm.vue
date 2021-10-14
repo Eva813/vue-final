@@ -442,7 +442,7 @@ export default {
     };
   },
   mounted() {
-    this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
+    this.spanNumbers = parseInt(localStorage.getItem("cartNumbers")) || 0;
     axios
       .get("https://eva-final-project.herokuapp.com/cart")
       .then((response) => {

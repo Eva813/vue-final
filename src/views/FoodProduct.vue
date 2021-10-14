@@ -1190,8 +1190,13 @@ export default {
       let productNumbers = localStorage.getItem("cartNumbers");
       //取得的productNumbers 型別是string，所以要轉為數字
       productNumbers = parseInt(productNumbers);
-      localStorage.setItem("cartNumbers", productNumbers + 1);
-      this.productSpanNumbers = productNumbers + 1;
+      if (productNumbers) {
+        localStorage.setItem("cartNumbers", productNumbers + 1);
+        this.productSpanNumbers = productNumbers + 1;
+      } else {
+        localStorage.setItem("cartNumbers", 1);
+        this.productSpanNumbers = 1;
+      }
       //將產品存入
       axios({
         method: "put",
@@ -1239,9 +1244,11 @@ export default {
   },
   mounted() {
     this.productSpanNumbers =
-      JSON.parse(localStorage.getItem("cartNumbers")) || 0;
+      parseInt(localStorage.getItem("cartNumbers")) || 0;
+
     //取得從商品列表中傳入的商品id
     let id = this.$route.params.id;
+    console.log(id);
     this.productId = this.$route.params.id;
     axios({
       method: "get",

@@ -1049,10 +1049,10 @@ export default {
   },
   mounted() {
     //讓數字在更新之後，仍然存取到資料
-    this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
+    this.spanNumbers = parseInt(localStorage.getItem("cartNumbers")) || 0;
     // this.shoppingCart =
     //   JSON.parse(localStorage.getItem("productsInCart")) || [];
-
+   
     axios
       .get("https://eva-final-project.herokuapp.com/products")
       .then((response) => {

@@ -17,7 +17,7 @@
 
 <template>
   <header>
-    <Navbar></Navbar>
+    <Navbar v-bind:parentSpanNumbers="spanNumbers"></Navbar>
   </header>
   <section class="member-benefits">
     <div class="benefits-img">
@@ -84,7 +84,11 @@ export default {
     return {
       scrollTop: 0,
       isScrollTop: false,
+      spanNumbers: 0,
     };
+  },
+  mounted() {
+    this.spanNumbers = parseInt(localStorage.getItem("cartNumbers")) || 0;
   },
 };
 </script>

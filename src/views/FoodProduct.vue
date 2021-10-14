@@ -23,7 +23,7 @@
     }
   }
 }
-.active > img {
+.thumbnail-section .active {
   opacity: 1;
   box-shadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.5);
 }
@@ -556,34 +556,39 @@ iframe {
       <div class="col-lg-12 col-xl-6">
         <div class="product-gallery">
           <div class="thumbnail-section">
-            <div
-              v-for="(product, index) in productImg"
-              :key="product.id"
-              @click="changeImg(index)"
-              :class="[
-                'product-small-img',
-                activeImage == index ? 'active' : '',
-              ]"
-            >
+            <div>
               <!-- //放入index作為取得的序號 -->
-              <img :src="product.img" alt="productImg" />
+              <img
+                :src="productData.src"
+                alt="productImg"
+                data-index="0"
+                @click="changeImg($event)"
+                :class="['product-small-img', activeImage == 0 ? 'active' : '']"
+              />
+              <img
+                :src="productData.src2"
+                alt="productImg"
+                data-index="1"
+                @click="changeImg($event)"
+                :class="['product-small-img', activeImage == 1 ? 'active' : '']"
+              />
             </div>
           </div>
           <div class="img-container">
-            <img :src="currentImage" alt="商品圖示" />
+            <img :src="imgSrc" alt="商品圖示" />
           </div>
         </div>
       </div>
       <div class="col-lg-12 col-xl-6">
         <div class="product-info">
-          <h1 class="product-title">七分卡-番茄紅燒牛肉湯麵</h1>
+          <h1 class="product-title">{{ productData.title }}</h1>
           <div class="promotion-text">
             <p class="promotion-text-tag">
               [會員限定] 全店，POPOLA會員 無限次數 全館冷凍滿3600元 免運
             </p>
           </div>
           <div class="price-box">
-            <p class="price fw-bold">NT$158</p>
+            <p class="price fw-bold">{{ productData.price }}</p>
           </div>
           <!-- RATING - Form -->
           <!-- <div class="rating-box">
@@ -1099,6 +1104,7 @@ iframe {
 </template>
 
 <script>
+const axios = require("axios");
 import Navbar from "@/components/Navbar.vue";
 import Breadcrumb from "@/components/Breadcrumb.vue";
 import Pagination from "@/components/Pagination.vue";
@@ -1107,7 +1113,6 @@ import Footer from "@/components/Footer.vue";
 import TopBtn from "@/components/topBtn.vue";
 export default {
   name: "FoodProduct",
-
   components: {
     Navbar,
     Breadcrumb,
@@ -1165,11 +1170,17 @@ export default {
       ],
       scrollTop: 0,
       isScrollTop: false,
+      productData: [],
+      imgSrc: "",
     };
   },
   methods: {
-    changeImg(smallImg) {
-      this.activeImage = smallImg;
+    changeImg(e) {
+      let imgIndex = e.target.getAttribute("data-index");
+      let src = e.target.src;
+      this.activeImage = imgIndex;
+
+      this.imgSrc = src;
     },
     addBtn() {
       this.quantity++;
@@ -1183,9 +1194,29 @@ export default {
     },
   },
   computed: {
-    currentImage() {
-      return this.productImg[this.activeImage].img;
+    currentImage(e) {
+      return e.target.src;
     },
+  },
+  mounted() {
+    let id = this.$route.params.id;
+    console.log(id);
+
+    axios({
+      method: "get",
+      url: "https://eva-final-project.herokuapp.com/products/" + id,
+      //API要求的資料
+      data: {
+        id,
+      },
+    })
+      .then((response) => {
+        // $route.params.id
+        // console.log(response.data);
+        this.productData = response.data;
+        this.imgSrc = response.data.src;
+      })
+      .catch((error) => console.log(error));
   },
 };
 </script>

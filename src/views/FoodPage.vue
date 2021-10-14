@@ -557,9 +557,13 @@
         >
           <div class="card product-card">
             <div class="card-top">
-              <a class="card-img-link" href="#">
+              <router-link
+                class="card-img-link"
+                href="#"
+                :to="{ path: `/foodproduct/${item.id}` }"
+              >
                 <img :src="item.src" class="card-img-top" alt="product-img" />
-              </a>
+              </router-link>
               <div
                 class="btn card-btn in-card-btn"
                 @click="

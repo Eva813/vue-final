@@ -547,7 +547,8 @@ iframe {
 
 <template>
   <header>
-    <Navbar></Navbar>
+    <Navbar :parentSpanNumbers="spanNumbers">
+    </Navbar>
 
     <Breadcrumb class="navbar-breadcrumb"></Breadcrumb>
   </header>
@@ -1172,6 +1173,8 @@ export default {
       isScrollTop: false,
       productData: [],
       imgSrc: "",
+      productId: 0,
+      spanNumbers:0,
     };
   },
   methods: {
@@ -1179,11 +1182,22 @@ export default {
       let imgIndex = e.target.getAttribute("data-index");
       let src = e.target.src;
       this.activeImage = imgIndex;
-
       this.imgSrc = src;
     },
     addBtn() {
+      let putId = this.productId;
       this.quantity++;
+      axios({
+        method: "put",
+        url: "https://eva-final-project.herokuapp.com/cart/" + putId,
+        data: {
+          putId,
+        },
+      })
+        .then((response) => {
+          //console.log(response.data);
+        })
+        .catch((error) => console.log(error));
     },
     minusBtn() {
       if (this.quantity <= 0) {
@@ -1199,9 +1213,10 @@ export default {
     },
   },
   mounted() {
+    this.spanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
+    //取得從商品列表中傳入的商品id
     let id = this.$route.params.id;
-    console.log(id);
-
+    this.productId = this.$route.params.id;
     axios({
       method: "get",
       url: "https://eva-final-project.herokuapp.com/products/" + id,

@@ -7,7 +7,11 @@
 <template>
   <div class="container d-flex mb-3 justify-content-around">
     <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1">
-      <div class="col items-card" v-for="item in ifood" :key="item.title">
+      <div
+        class="col items-card"
+        v-for="(item, key) in ifood.slice(0, 4)"
+        :key="item.title"
+      >
         <div class="card product-card align-items-center">
           <div class="card-top">
             <router-link class="card-img-link" to="/foodproduct">
@@ -15,7 +19,12 @@
             </router-link>
             <div
               class="btn card-btn"
-              @click="addToCart(item), triggerPanel(), pushData()"
+              @click="
+                addToCart(item),
+                  triggerPanel(),
+                  pushData(),
+                  putShopingCart(item, key)
+              "
             >
               加入購物車
             </div>
@@ -138,6 +147,22 @@ export default {
       // console.log(element);
       // var top = element.offsetTop;
       window.scrollTo(0, top);
+    },
+    putShopingCart(item, key) {
+      //console.log(item);
+      // url = "https://4511-1-169-71-198.ngrok.io/cart" + item.id;
+      axios({
+        method: "put",
+        url: "https://eva-final-project.herokuapp.com/cart/" + item.id,
+        //API要求的資料
+        data: {
+          item,
+        },
+      })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => console.log(error));
     },
   },
 };

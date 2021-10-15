@@ -121,7 +121,7 @@
       <h1 class="title mb-4 fw-normal">美食生活</h1>
     </div>
     <!-- //:food="food" 綁定傳入的props -->
-    <ProductCard :ifood="food"> </ProductCard>
+    <ProductCard :ifood="food" @sendSpanNumbers="onClickChild"> </ProductCard>
     <Pagination @emitcurrentPage="getPage"></Pagination>
   </section>
   <section class="container section-video d-flex justify-content-center mb-5">
@@ -139,7 +139,7 @@
       <h1 class="title mb-4 fw-normal">美妝保養</h1>
     </div>
     <!-- //:food="food" 綁定傳入的props -->
-    <ProductCard :ifood="food"> </ProductCard>
+    <ProductCard :ifood="food" @sendSpanNumbers="getSpanNumbers"> </ProductCard>
     <Pagination></Pagination>
   </section>
   <section class="product-link mb-5">
@@ -283,6 +283,10 @@ export default {
       this.currentPage = data1;
       this.prePage = data2;
     },
+    getSpanNumbers(value) {
+      //console.log(value); // someValue
+      this.spanNumbers = value;
+    },
   },
   mounted() {
     window.addEventListener("scroll", this.scrollFunction, true);
@@ -292,7 +296,7 @@ export default {
       .get("https://eva-final-project.herokuapp.com/products")
       .then((response) => {
         this.food = response.data;
-        console.log(this.food);
+
         // this.showLoader = false;
       })
       .catch((err) => {

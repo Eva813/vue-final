@@ -756,7 +756,7 @@ export default {
     },
   },
   mounted() {
-    // this.cartSpanNumbers = JSON.parse(localStorage.getItem("cartNumbers")) || 0;
+    this.cartSpanNumbers = parseInt(localStorage.getItem("cartNumbers")) || 0;
     // this.cartItems = JSON.parse(localStorage.getItem("productsInCart")) || [];
     axios
       .get("https://eva-final-project.herokuapp.com/cart")

@@ -43,6 +43,7 @@
 </template>
 
 <script>
+const axios = require("axios");
 export default {
   props: ["ifood"],
   data() {
@@ -56,6 +57,7 @@ export default {
     addToCart(foods) {
       this.cartNumbers(foods);
       this.totalPrice(foods);
+      this.clickAddCart();
     },
     cartNumbers(theFood) {
       let productNumbers = localStorage.getItem("cartNumbers");
@@ -70,6 +72,9 @@ export default {
         this.spanNumbers = 1;
       }
       this.setItems(theFood);
+    },
+    clickAddCart() {
+      this.$emit("sendSpanNumbers", this.spanNumbers);
     },
     setItems(theFood) {
       const cacheCarID = []; // 暫存 ID 放置處
@@ -140,7 +145,6 @@ export default {
       this.emitter.emit("getData", this.shoppingCart);
       // this.emitter.emit("go", this.goto());
       this.emitter.emit("getPanel", this.showPanel);
-      console.log(this.showPanel);
     },
     goto() {
       // var element = this.$refs[refName];
@@ -160,7 +164,7 @@ export default {
         },
       })
         .then((response) => {
-          console.log(response.data);
+          //console.log(response.data);
         })
         .catch((error) => console.log(error));
     },

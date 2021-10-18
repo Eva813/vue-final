@@ -32,7 +32,7 @@
 
 <template>
   <header>
-    <Navbar></Navbar>
+    <Navbar v-bind:parentSpanNumbers="spanNumbers"></Navbar>
   </header>
   <section class="columns">
     <div class="colums-container" v-for="item in columnData" :key="item.id">
@@ -82,6 +82,7 @@ export default {
     return {
       scrollTop: 0,
       isScrollTop: false,
+      spanNumbers: 0,
       columnData: [
         {
           id: 1,
@@ -122,6 +123,9 @@ export default {
         },
       ],
     };
+  },
+  mounted() {
+    this.spanNumbers = parseInt(localStorage.getItem("cartNumbers")) || 0;
   },
 };
 </script>

@@ -418,6 +418,7 @@
 
   span {
     width: 400px;
+    margin-top: 14px;
   }
   .tab-section-title {
     position: relative;
@@ -490,16 +491,17 @@ iframe {
   .review-summary-bar-star {
     display: inline-block;
     margin-right: 10px;
+    margin-top: 14px;
   }
   .progress {
     width: 600px;
     height: 13px;
     background-color: transparent;
+    padding: 17px;
   }
   .progress-bar {
     background-color: rgb(245, 198, 131);
     color: #333;
-    padding: 5px 0;
     border-radius: 0.25em;
   }
 }
@@ -520,9 +522,18 @@ iframe {
     color: #ffc500;
     letter-spacing: 0.6px;
     word-break: break-word;
+    position: relative;
   }
 }
 
+.star-rating__current {
+  position: absolute;
+  top: 0;
+}
+.star-rating__current {
+  overflow: hidden;
+  white-space: nowrap;
+}
 ///相關產品 卡片區
 .relevant-products {
   .section-title {
@@ -612,7 +623,13 @@ iframe {
           </div>
 
           <div class="button">
-            <button class="btn-add-to-cart" type="submit">加入購物車</button>
+            <button
+              class="btn-add-to-cart"
+              type="submit"
+              @click="putShopingCart(item, key)"
+            >
+              加入購物車
+            </button>
             <div class="wishList-btn">
               <a
                 class=""
@@ -960,31 +977,43 @@ iframe {
                 </div>
                 <!-- 顧客留言 -->
                 <div class="review-comments">
-                  <div class="row mb-5">
+                  <div
+                    class="row mb-5"
+                    v-for="(item, key) in evaluationArr"
+                    :key="item.userName"
+                  >
                     <div class="col-3">
                       <div class="review-comment-author d-flex">
-                        <img src="@/assets/img/user.png" alt="" />
+                        <img :src="item.avatar" alt="評論者頭像" />
                         <div class="review-comment-author-info">
                           <div class="review-comment-author-info-name">
-                            C****u
+                            {{ item.userName }}
                           </div>
                           <div class="review-comment-author-info-date">
-                            May 18, 2021
+                            {{ item.evaluateDate }}
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="col-8">
                       <div class="review-comment-stars">
+                        <!-- <font-awesome-icon :icon="['fas', 'star']" /> -->
+                        <span v-for="n in max">&star;</span>
+                        <div
+                          class="star-rating__current"
+                          :style="{ width: getRating + '%' }"
+                        >
+                          <span v-for="n in item.score">&starf;</span>
+                        </div>
+                        <div>{{ item.score }}</div>
+                        <!-- <font-awesome-icon :icon="['fas', 'star']" />
                         <font-awesome-icon :icon="['fas', 'star']" />
                         <font-awesome-icon :icon="['fas', 'star']" />
-                        <font-awesome-icon :icon="['fas', 'star']" />
-                        <font-awesome-icon :icon="['fas', 'star']" />
-                        <font-awesome-icon :icon="['fas', 'star']" />
+                        <font-awesome-icon :icon="['fas', 'star']" /> -->
                       </div>
                     </div>
                   </div>
-                  <div class="row mb-5">
+                  <!-- <div class="row mb-5">
                     <div class="col-3">
                       <div class="review-comment-author d-flex">
                         <img src="@/assets/img/user.png" alt="" />
@@ -1080,7 +1109,7 @@ iframe {
                         <font-awesome-icon :icon="['fas', 'star']" />
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
               <Pagination></Pagination>
@@ -1174,6 +1203,9 @@ export default {
       imgSrc: "",
       productId: 0,
       productSpanNumbers: 0,
+      evaluationArr: [],
+      max: 5,
+      currentScore: 3,
     };
   },
   methods: {
@@ -1197,18 +1229,18 @@ export default {
         localStorage.setItem("cartNumbers", 1);
         this.productSpanNumbers = 1;
       }
-      //將產品存入
-      axios({
-        method: "put",
-        url: "https://eva-final-project.herokuapp.com/cart/" + putId,
-        data: {
-          putId,
-        },
-      })
-        .then((response) => {
-          //console.log(response.data);
-        })
-        .catch((error) => console.log(error));
+      // //將產品存入
+      // axios({
+      //   method: "put",
+      //   url: "https://eva-final-project.herokuapp.com/cart/" + putId,
+      //   data: {
+      //     putId,
+      //   },
+      // })
+      //   .then((response) => {
+      //     //console.log(response.data);
+      //   })
+      //   .catch((error) => console.log(error));
     },
     minusBtn() {
       let deleteId = this.productId;
@@ -1236,6 +1268,26 @@ export default {
         })
         .catch((error) => console.log(error));
     },
+    putShopingCart() {
+      let countNumbers = this.quantity;
+      let putId = this.productId;
+
+      axios({
+        method: "put",
+        url: "https://eva-final-project.herokuapp.com/cart/" + putId,
+        //API要求的資料
+        data: {
+          putId,
+        },
+      })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => console.log(error));
+    },
+    getRating() {
+      return (this.currentScore / this.max) * 100;
+    },
   },
   computed: {
     currentImage(e) {
@@ -1248,7 +1300,7 @@ export default {
 
     //取得從商品列表中傳入的商品id
     let id = this.$route.params.id;
-    console.log(id);
+
     this.productId = this.$route.params.id;
     axios({
       method: "get",
@@ -1263,6 +1315,22 @@ export default {
         // console.log(response.data);
         this.productData = response.data;
         this.imgSrc = response.data.src;
+      })
+      .catch((error) => console.log(error));
+    //取得評論區資訊
+    axios({
+      method: "get",
+      url: "http://localhost:3000/evaluations",
+      //API要求的資料
+    })
+      .then((response) => {
+        //console.log(response.data);
+        this.evaluationArr = response.data;
+        this.evaluationArr.forEach(function (item, i) {
+          console.log(i, item);
+          let value = item.score;
+          console.log(value);
+        });
       })
       .catch((error) => console.log(error));
   },

@@ -1,4 +1,4 @@
-<style lang="scss" scoped >
+git<style lang="scss" scoped >
 @import "~@/assets/all.scss";
 .announcement {
   .upper-part {
@@ -11,7 +11,7 @@
 </style>
 <template>
   <header>
-    <Navbar></Navbar>
+    <Navbar v-bind:parentSpanNumbers="spanNumbers"></Navbar>
   </header>
 
   <section class="announcement mb-4">
@@ -63,7 +63,11 @@ export default {
     return {
       scrollTop: 0,
       isScrollTop: false,
+      spanNumbers: 0,
     };
+  },
+  mounted() {
+    this.spanNumbers = parseInt(localStorage.getItem("cartNumbers")) || 0;
   },
 };
 </script>

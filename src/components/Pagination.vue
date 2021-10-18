@@ -67,8 +67,8 @@ export default {
     changePage(num) {
       console.log("num", num);
       this.currentPage = this.currentPage + num;
-      this.$emit("emitcurrentPage", this.currentPage);
-      this.$emit("emitperPage", this.perPage);
+      // this.$emit("emitcurrentPage", this.currentPage);
+      // this.$emit("emitperPage", this.perPage);
     },
     emitNum() {
       this.$emit("emitcurrentPage", this.currentPage);

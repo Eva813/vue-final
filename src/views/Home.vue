@@ -121,7 +121,7 @@
       <h1 class="title mb-4 fw-normal">美食生活</h1>
     </div>
     <!-- //:food="food" 綁定傳入的props -->
-    <ProductCard :ifood="food" @sendSpanNumbers="onClickChild"> </ProductCard>
+    <ProductCard :ifood="food" @sendSpanNumbers="getSpanNumbers"> </ProductCard>
     <Pagination @emitcurrentPage="getPage"></Pagination>
   </section>
   <section class="container section-video d-flex justify-content-center mb-5">
